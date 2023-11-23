@@ -1,121 +1,83 @@
 <div class="row">
-    <div class="col-sm-12">
-        <h1>Acreditados</h1>
-        <hr class="red">
+  <div class="col-sm-12">
+    <h1>Acreditados</h1>
+    <hr class="red">
+  </div>
+
+  <div class="card p-0">
+    <div class="card-header row" style="margin: 0px;">
+      <div class="col-sm-3">
+        <label for="busqueda" class="control-label">Búsqueda</label>
+        <input type="text" class="form-control" id="busqueda" placeholder="No. de Bien / Bien Descripción">
+      </div>
+      <div class="col-sm-2">
+      <li class="nav-item dropdown margin" (click)="showDropdownBienesSusceptibles()" (mouseleave)="hideDropdownBienesSusceptibles()">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Coordinación Regional
+            </a>
+            <ul class="dropdown-menu" [class.show]="isDropdownBienesSusceptibles">
+              <li><a class="dropdown-item" routerLink="">Opcion A</a></li>
+              <li><a class="dropdown-item" routerLink="">Opcion B</a></li>
+            </ul>
+      </li>
+      </div>
+      <div class="col-sm-3">
+        <li class="nav-item dropdown margin" (click)="showDropdownAtencionRegional()" (mouseleave)="hideDropdownAtencionRegional()">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Oficina de Atención Regional
+          </a>
+          <ul class="dropdown-menu" [class.show]="isDropdownAtencionRegional">
+            <li><a class="dropdown-item" routerLink="">Opcion A</a></li>
+          </ul>
+    </li>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" value="conSearch" style="margin-top: 31px;">Buscar</button>
+      </div>
+      <div class="col-sm-6 margin">
+        <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" title="Registrar Informe"
+          (click)="addInforme()">
+          <i id="circle" class="bi bi-plus-circle"> Agregar</i>
+        </button>
+      </div>
     </div>
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-body row" style="padding: 0px 5px;">
-                <div class="col-sm-3">
-                    <label for="busqueda" class="form-label">Búsqueda</label>
-                    <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
-                </div>
-                <div class="col-sm-7">
-                    <button class="btn btn-primary" title="Buscar" style="margin-top: 32px;"
-                        (click)="cambioSeleccion(1)">
-                        <em class="bi bi-search"></em>
-                    </button>
-                </div>
-                <div class="col-sm-2 text-end">
-                    <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
-                        [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
-                        <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
-                    </button>
-                </div>
-            </div>
+    <div class="col-md-12 contenido" *ngIf="accionDetalle == 1">
+      <div class="card-body">
+        <div class="row mb-2">
         </div>
-    </div>
-    <div class="col-sm-12">
-        <ul class="nav nav-underline">
-            <li class="nav-item" *ngFor="let item of listadoSolicitudes" (click)="cambioSeleccion(item.indice)"
-                [title]="item.title">
-                <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.titulo}}
-                    <span class="badge text-bg-secondary">{{item.noReg}}</span></a>
-            </li>
-        </ul>
-    </div>
-    <hr>
-    <div class="col-sm-12" *ngIf="tipoVista">
-        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
-            <table class="table table-hover">
-                <thead>
-                    <tr class="table-secondary">
-                        <th style="width: 40%;">Nombre solicitante</th>
-                        <th style="width: 30%;">Tipo de bien</th>
-                        <th style="width: 10%;">Fecha solicitud</th>
-                        <th style="width: 10%;">Proceso</th>
-                        <th style="width: 10%;">Estatus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal(dato)">
-                        <td>{{ dato.NombreSolicitante }}</td>
-                        <td>{{ dato.tipoBien }}</td>
-                        <td>{{ dato.fechaSolicitud }}</td>
-                        <td>{{ dato.proceso }}</td>
-                        <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
-                    </tr>
-                </tbody>
+
+        <div class="row">
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Bien Descripción</th>
+                  <th>Fecha Oper Recepción</th>
+                  <th>Coordinacion Regional Administracion</th>
+                  <th>Tipo de Bien</th>
+                  <th>Subtipo</th>
+                  <th>Valor proporcionado o por la transferente</th>
+                  <th>Observaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tablaDatosBien" [ngClass]="item.activo ?'table-success' : ''">
+                  <th>{{ item.no }}</th>
+                  <th>{{ item.bien }}</th>
+                  <th>{{ item.fecha }}</th>
+                  <th>{{ item.administracion }}</th>
+                  <th>{{ item.tipo }}</th>
+                  <th>{{ item.subtipo }}</th>
+                  <th>{{ item.valor }}</th>
+                  <th>{{ item.observaciones }}</th>
+                </tr>
+              </tbody>
             </table>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col-sm-12 row" *ngIf="!tipoVista">
-        <div class="col-sm-3 " *ngFor="let dato of listaDatos" title="Ver detalalle"
-            (click)="abrirCamvasPrincipal(dato)">
-            <div class="card card-container">
-                <div class="card-header">
-                    <label>Nombre solicitante: </label> <strong>{{dato.NombreSolicitante}}</strong>
-                </div>
-                <div class="card-body" style="overflow-y: scroll;">
-                    <div class="col-sm-12">
-                        <label>Tipo de bien: </label> <strong>{{dato.tipoBien}}</strong>
-                    </div>
-                    <div class="col-sm-12">
-                        <label>Fecha se solicitud: </label> <strong>{{dato.fechaSolicitud}}</strong>
-                    </div>
-                    <div class="col-sm-12">
-                        <label>Estatus: </label> <strong>{{dato.proceso}}</strong>
-                    </div>
-                    <hr>
-                    <div class="col-sm-12">
-                        <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
-                    </div>
-                </div>
-            </div>
-        </div>
+  </div>
 
-    </div>
 </div>
-
-<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
-    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>{{tituloSeleccionado}}</h1>
-        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-    </div>
-    <div class="offcanvas-body">
-        <sg-prevalidacion *ngIf="Seleccionado == 1" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-prevalidacion>
-        <sg-propuesta-del-bien *ngIf="Seleccionado == 2"  (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-propuesta-del-bien>
-        <sg-validacion *ngIf="Seleccionado === 3" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-validacion>
-        <sg-opinion-tecnica *ngIf="Seleccionado === 4" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-opinion-tecnica>
-        <sg-autorizacion *ngIf="Seleccionado === 5 || Seleccionado === 6 || Seleccionado === 7" [tipo]="Seleccionado" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-autorizacion>
-        <sg-nombramiento *ngIf="Seleccionado == 8" [tipo]="Seleccionado" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-nombramiento>
-        <sg-seguro-poliza [tipo]="Seleccionado"  *ngIf="Seleccionado == 9" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-seguro-poliza>
-        <sg-entrega *ngIf="Seleccionado == 10" [tipo]="Seleccionado" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-entrega>
-        <sg-remocion *ngIf="Seleccionado == 11"></sg-remocion>
-        <sg-siniestros *ngIf="Seleccionado == 12"></sg-siniestros>
-    </div>
-    <div class="offcanvas-footer">
-        <div class="text-end">
-            <!-- <button type="button" class="btn btn-print-modal"  (click)="imprimir()" *ngIf="Seleccionado">Imprimir&nbsp;<em class="bi bi-printer"></em> </button> &nbsp;&nbsp; -->
-            <button type="button" class="btn btn-positivo-modal" (click)="aprobar()">
-                {{ Seleccionado === 5 || Seleccionado === 6 ? 'Enviar a' + tipoAutorizacion : 'Aprobar'}}
-                &nbsp;<em class="bi bi-check-lg"></em>
-            </button>&nbsp;
-            <button type="button" class="btn btn-negativo-modal" (click)="rechazar()" *ngIf="Seleccionado != 5 && Seleccionado != 6" >Rechazar&nbsp;<em class="bi bi-backspace"></em> </button>&nbsp;
-            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado != 3 && Seleccionado != 5 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9  && Seleccionado != 10">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-        </div>
-    </div>
-</div>
-<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>

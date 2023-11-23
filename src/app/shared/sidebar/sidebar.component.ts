@@ -9,6 +9,14 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SidebarComponent {
   public menuItems: any[] = [
+    /*{ label: 'Acreditados', icon: 'bi bi-person-check-fill', route: '/content/solicitudes' },
+    { label: 'Propuestas', icon: 'bi bi-cart-plus', route: '/content/solicitudesindep' },
+    { label: 'Sesiones', icon: 'bi bi-cart', route: '/content/solicitudes2' },
+    { label: 'Bitacora', icon: 'bi bi-binoculars-fill', route: '/content/depositarias' },
+    { label: 'Catalogos', icon: 'bi bi-exclamation-circle', route: '/content/remocionsiniestro' },
+    { label: 'ADMIN', icon: 'bi bi-person-workspace', route: '/content/usuariosinternos' },
+    { label: 'Archivos', icon: 'bi bi-person-video3', route: '/content/usuariosexternos' },
+    { label: 'Atenciones', icon: 'bi bi-files', route: '/content/anexos' },*/
     { label: 'Inicio', icon: 'bi bi-house', route: '/content/solicitudes' },
     { label: 'Solicitudes uso INDEP', icon: 'bi bi-cart-plus', route: '/content/solicitudesindep' },
     { label: 'Solicitudes', icon: 'bi bi-cart', route: '/content/solicitudes2' },
@@ -25,6 +33,6 @@ export class SidebarComponent {
     { label: 'Configuración', icon: 'bi bi-gear', route: '/content/administracion' },
     { label: 'Descarga de Documentación de Depositarías', icon: 'bi bi-cloud-download', route: '/content/solicitudes-descarga' },
 
-
+  
   ];
 }

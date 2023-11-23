@@ -31,6 +31,19 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
+      /*{
+        path: 'acreditados',
+        data: {
+          title: 'acreditados',
+          breadcrumbs: [
+            {
+              text: 'acreditados',
+              active: true,
+            }
+          ],
+        },
+        component: AcreditadosComponent,
+      },*/
       {
         path: 'informemensual',
         data: {

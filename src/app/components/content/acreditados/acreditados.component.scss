@@ -1,58 +1,12 @@
-.nav-link {
-    color: black !important;
+.card {
+  border-bottom: none !important;
 }
-  
-.nav-link:hover {
-    color: #d8b133 !important;
-    cursor: pointer;
+.margin{
+  margin: 30px 0px 0px 0px;
 }
-
-
-.nav-link.active {
-    color: #9d2449 !important;
-  
+.dropdown-toggle{
+  color: #000 !important;
 }
-
-span{
-    font-style: bold;
+li {
+  list-style-type: none;
 }
-
-.card-container {
-    min-height: 300px !important;
-    max-height: 300px !important;
-    transition: box-shadow 0.3s ease; /* Transición para la sombra */
-}
-
-.card-container:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Aplica la sombra al pasar el mouse */
-}
-
-
-.tamano-estandar{
-    min-height: 600px;
-    max-height: 600px;
-    padding: 5px;
-}
-
-.tamano-estandar-caja{
-    min-height: 600px;
-    max-height: 600px;
-    border-radius: 5px; /* Radio de redondez de las esquinas */
-    border: 0.5px solid #bdbdbd; /* Borde de 2px de ancho y color #333 */
-    padding: 5px;
-}
-
-a {
- padding: 0px;
-}
-
-.btn-print-modal{
-    background-color: green;
-    color: #ffffff;
-}
-
-.badge.text-bg-secondary{
-    margin-top: 3px !important;
-    margin-bottom: 3px !important;
-}
-

@@ -60,6 +60,7 @@ import { BitacoraComponent } from './administracion/bitacora/bitacora.component'
 import { ContraprestacionComponent } from './administracion/contraprestacion/contraprestacion.component';
 import { ConfiguracionComponent } from './administracion/configuracion/configuracion.component';
 import { DiasAsuetoComponent } from './administracion/dias-asueto/dias-asueto.component';
+//import { AcreditadosComponent } from './acreditados/acreditados.component';
 
 /* Components */
 
