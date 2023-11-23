@@ -71,8 +71,10 @@ export class LoginComponent {
    
     if (data.user != '' && data.pass != '') {
        this.crearSesion();
-      this.toastrService.success('Inicio de seción corracta');
-      this.router.navigate(['/content/solicitudes']);
+      //this.toastrService.success('Inicio de sesión correcta');
+      //this.router.navigate(['/content/acreditados']);
+      this.router.navigate(['/content/buzon']);
+      
     } else {
       this.toastrService.error('Todos los campos son obligatorios',"Error al iniciar sesíon");
     }
