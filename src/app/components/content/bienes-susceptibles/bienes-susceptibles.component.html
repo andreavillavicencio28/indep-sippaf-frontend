@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Bienes Susceptibles</h1>
+    <hr class="red">
+  </div>
+
+  <div class="card p-0">
+    <div class="card-header row" style="margin: 0px;">
+      <div class="col-sm-3">
+        <label for="busqueda" class="control-label">Búsqueda</label>
+        <input type="text" class="form-control" id="busqueda" placeholder="No. de Bien / Bien Descripción">
+      </div>
+      <div class="col-sm-2">
+      <li class="nav-item dropdown margin" (click)="showDropdownBienesSusceptibles()" (mouseleave)="hideDropdownBienesSusceptibles()">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Coordinación Regional
+            </a>
+            <ul class="dropdown-menu" [class.show]="isDropdownBienesSusceptibles">
+              <li><a class="dropdown-item" routerLink="">Opcion A</a></li>
+              <li><a class="dropdown-item" routerLink="">Opcion B</a></li>
+            </ul>
+      </li>
+      </div>
+      <div class="col-sm-3">
+        <li class="nav-item dropdown margin" (click)="showDropdownAtencionRegional()" (mouseleave)="hideDropdownAtencionRegional()">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Oficina de Atención Regional
+          </a>
+          <ul class="dropdown-menu" [class.show]="isDropdownAtencionRegional">
+            <li><a class="dropdown-item" routerLink="">Opcion A</a></li>
+          </ul>
+    </li>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" value="conSearch" style="margin-top: 31px;">Buscar</button>
+      </div>
+      <div class="col-sm-6 margin">
+        <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" title="Registrar Informe"
+          (click)="addInforme()">
+          <i id="circle" class="bi bi-plus-circle"> Agregar</i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-12 contenido" *ngIf="accionDetalle == 1">
+      <div class="card-body">
+        <div class="row mb-2">
+        </div>
+
+        <div class="row">
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Bien Descripción</th>
+                  <th>Fecha Oper Recepción</th>
+                  <th>Coordinacion Regional Administracion</th>
+                  <th>Tipo de Bien</th>
+                  <th>Subtipo</th>
+                  <th>Valor proporcionado o por la transferente</th>
+                  <th>Observaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of tablaDatosBien" [ngClass]="item.activo ?'table-success' : ''">
+                  <th>{{ item.no }}</th>
+                  <th>{{ item.bien }}</th>
+                  <th>{{ item.fecha }}</th>
+                  <th>{{ item.administracion }}</th>
+                  <th>{{ item.tipo }}</th>
+                  <th>{{ item.subtipo }}</th>
+                  <th>{{ item.valor }}</th>
+                  <th>{{ item.observaciones }}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

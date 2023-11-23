@@ -1,0 +1,171 @@
+<sg-encabezado-detalle [tipoInforme]="'informe'"></sg-encabezado-detalle>
+<div class="row">
+  <div class="col-sm-9"></div>
+  <div class="col-sm-3">
+      <label for="anio" class="control-label">Año:</label>
+      <select class="form-select" aria-label="Default select example" id="anio" [(ngModel)]="anioSelect" (change)="changeAnio()">
+          <option>Elige un año</option>
+          <option *ngFor="let year of selectYear()" [value]="year"> {{ year }} </option>
+      </select>
+  </div>
+</div>
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+      <li class="nav-item">
+          <a class="nav-link" [class.active]="accionDetalle == 1" (click)="cambioAccionDetalle(1)"> Agua</a>
+      </li>
+  </ul>
+
+  <div class="col-md-12 contenido" *ngIf="accionDetalle == 1">
+      <div class="card-body">
+          <div class="row">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>No.</th>
+                          <th>Mes</th>
+                          <th>Estatus</th>
+                          <th>Fecha de Envío</th>
+                          <th>Tipo de Pago del Agua</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of dataInforme">
+                          <th>{{ item.id }}</th>
+                          <th>{{ item.mes }} </th>
+                          <th>{{ item.estatus }}</th>
+                          <th>{{ item.fh_envio }} </th>
+                          <th>{{ item.tipoInforme }}</th>
+                          <th>
+                              <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                  data-placement="top" title="Vista previa"
+                                  (click)="openVistaPrevia(item.id, '', item.mes, item. tipoInforme)" *ngIf="item.estatus != 'Pendiente'">
+                                  <em style="color: blue;" class="bi bi-eye"></em>
+                              </button>
+                              <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                  data-placement="top" title="Validar"
+                                  (click)="openVistaPrevia(item.id, 'pendientes', item.mes, item. tipoInforme)" *ngIf="item.estatus === 'Pendiente'">
+                                  <em style="color: blue;" class="bi bi-check2-circle"></em>
+                              </button>
+                          </th>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Offcanvas vista previa -->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showVistaPrevia" [class.offcanvas-bajar]="showPdf" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h4 class="modal-title" id="modal-basic-title"> Vista previa</h4>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="closeOffCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-md-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body" style="padding: 15px 15px;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Mes:</label>
+                            <span> {{mesInforme}} </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Año:</label>
+                            <span> 2023 </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Tipo Informe:</label>
+                            <span> {{tipoInforme}} </span>
+                        </div>
+                        <hr>
+
+                        <div class="col-sm-12" *ngIf="tipoInforme != 'Pendiente Pago'">
+                            <label for="" class="control-label">Estado de Pago:</label>
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                  <span> Mes pagado completamente</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-12" *ngIf="tipoInforme == 'Pendiente Pago'">
+                            <div class="col-sm-12">
+                                <label for="observaciones" class="control-label">Especifique: </label>
+                                <span> Falta pagar el total del mes correspondiente </span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer"  >
+        <div class="text-end btn-foot">
+            <button type="button" class="btn  btn-positivo-modal" style="margin-right: 0.5rem"
+                (click)="aprobar()">Aprobar</button>
+            <button type="button" class="btn  btn-negativo-modal" style="margin-right: 0.5rem" (click)="rechazar()">Rechazar</button>
+            <button class="btn btn-neutral-modal" (click)="verDocumento('Oficio', 'verDocumento')" title="Ver"
+            >Descargar
+              <i class="bi bi-cloud-download"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Offcanvas observaciones
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showObs" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-body">
+        <h1>{{tituloObs}}</h1>
+        <hr class="red" />
+        <div class="col-sm-12">
+            <label for="obs" class="form-label">Observaciones</label> bbbbbbbbbbbb
+            <textarea class="form-control" id="obs" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()">Aceptar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+            <button type="button" class="btn btn-negativo-modal" (click)="cerrarCamvasObs()">Cancelar &nbsp; <em
+                    class="bi bi-backspace"></em> </button> &nbsp;
+        </div>
+    </div>
+</div> -->
+
+<!-- Offcanvas pdf -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showPdf"  ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{documentoNombre }}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarPdf()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body" style=" overflow-y: hidden;">
+        <div class="row">
+            <div class="col-sm-12 centrar-contenido">
+                <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+        </div>
+    </div>
+
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showVistaPrevia"></div>
+
+<div class="offcanvas-backdrop fade show" ngtabindex="-1"  *ngIf=" showPdf"></div>

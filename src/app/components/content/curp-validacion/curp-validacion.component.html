@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-12">
+      <h1>Verificación de depositarios inactivos en la RENAPO</h1>
+      <hr class="red">
+    </div>
+  
+    <div class="card px-0">
+      <div class="card-header row" style="margin: 0px;">
+        <div class="col-sm-3">
+          <label for="busqueda" class="control-label">Búsqueda</label>
+          <input type="text" class="form-control" id="busqueda" placeholder="CURP por validar">
+        </div>
+        
+        <div class="col-sm-3">
+          <button type="button" class="btn btn-primary" value="conSearch" style="margin-top: 25px;">Buscar</button>
+        </div>
+      </div>
+      <div class="mx-auto mt-3">
+        <h3>Clave de CURP válida</h3>
+      </div>
+      <hr>
+      <div class="ms-3 mb-0">
+        <h5>Validación masiva CURP</h5>
+        <label class="fw-bold"> Resultado</label>  
+      </div>
+      <hr>
+      <div class="col-md-12 contenido" >
+        <div class="row m-2">
+            <div class="col-md-6"> 
+                <label class="text-danger"> CURPS validados</label>
+            </div>
+          
+          <div class="col-md-6 text-end">
+            <label> Fecha validación: 06/11/2023</label>
+          </div>
+        </div>  
+          <div class="row mx-3">
+            <div class="px-0">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Nombramiento</th>
+                    <th>CURP</th>
+                    <th>Nombre</th>
+                    <th>Válido</th>
+                    <th>Resultado RENAPO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of tablaDatosBien" [ngClass]="item.activo ?'table-success' : ''">
+                    <th>{{ item.no }}</th>
+                    <th>{{ item.nombramiento }}</th>
+                    <th>{{ item.curp }}</th>
+                    <th>{{ item.nombre }}</th>
+                    <th>{{ item.valido }} <i class="bi bi-x-circle-fill" style="color: red;"></i></th>
+                    <th>{{ item.resultado }}</th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+    
+      </div>
+    </div>
+  
+  </div>
+  

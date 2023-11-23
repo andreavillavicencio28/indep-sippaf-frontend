@@ -1,0 +1,295 @@
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="col-sm-12">
+        <div class="card" style="padding: 5px;">
+            <div class="card-body row" style="padding: 15px 15px;">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" >
+                      <a class="nav-link active"  >Detalle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="abrirFirma()">Firma </a>
+                    </li>
+                  </ul>
+                  <div class="row"  style="margin-top: 15px;">
+                  
+                    <sg-detalle-solicitud [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-solicitud>
+                    <sg-detalle-prevalidacion [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-prevalidacion>
+                    <sg-detalle-bien [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-bien>
+                  </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario"   [class.show]="showEditar" [class.bajar]="showDetalle"  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cerrarEditar()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link" [class.active]="accion == 1" (click)="cambioAccion(1)">Búsqueda de bienes</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" [class.active]="accion == 2" (click)="cambioAccion(2)">Bienes seleccionados
+                                <span class="badge"  [ngClass]="listaBienesSeleccionados.length > 0? 'text-bg-primary' : 'text-bg-light'" >{{listaBienesSeleccionados.length}}</span></a>
+                            </li>
+                          </ul>
+
+                          <div class="row" *ngIf="accion == 1" style="margin-top: 15px;">
+                            <div class="col-sm-3">
+                                <label for="nombre" class="form-label">Id bien:</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Id bien">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="primerapellido" class="form-label">Tipo:</label>
+                                <input type="text" class="form-control" id="primerapellido" placeholder="Tipo">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="segundoapellido" class="form-label">Almacen SIAP:</label>
+                                <input type="text" class="form-control" id="segundoapellido" placeholder="Almacen SIAP">
+                            </div>
+                            <div class="col-sm-3" style="display: flex; align-items: end;">
+                                <button id="searchButton" class="btn btn-primary mergen-boton-top-25"  (click)="buscarBienes()">
+                                    <em class="bi bi-search"></em> Buscar
+                                </button>
+                            </div>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mostrarMensaje">
+                                Busca y selecciona el bien del cual quieras ver el detalle.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="ocultarMensaje()"></button>
+                              </div>
+                            <hr>
+                            <div class="col-sm-6 " *ngFor="let dato of listaBienes; let i = index" title="Ver detalalle" (click)="abrirDetalle(dato,i, true)">
+                                <div class="card card-container" >
+                                    <div class="card-header">
+                                      <label for="nombre" class="form-label">Tipo del bien: </label>
+                                      <span> {{dato.t_bien}}</span>
+                                    </div>
+                                    <div class="card-body" style="overflow-y: scroll;">
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Subtipo del bien:  </label>
+                                          <span>  {{dato.subtipo}}</span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Dirección:  </label>
+                                          <span>  {{dato.b_numero}},  {{dato.ubicacion_almacen}}</span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Descripción: </label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <span> {{dato.b_descripcion}}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="col-sm-12">
+                                            <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                          </div>
+                          <div class="row" *ngIf="accion == 2" style="margin-top: 15px;">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mostrarMensaje">
+                                Selecciona el bien del cual quieras ver el detalle.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="ocultarMensaje()"></button>
+                            </div>
+                            <div class="col-sm-6 " *ngFor="let dato of listaBienesSeleccionados; let i = index" title="Ver detalalle"  (click)="abrirDetalle(dato,i, false)" >
+                                <div class="card card-container" >
+                                    <div class="card-header">
+                                      <label for="nombre" class="form-label">Tipo del bien: </label>
+                                      <span> {{dato.t_bien}}</span>
+                                    </div>
+                                    <div class="card-body" style="overflow-y: scroll;">
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Subtipo del bien: </label>
+                                          <span>{{dato.subtipo}}</span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Dirección: </label>
+                                          <span>{{dato.b_numero}}, {{dato.ubicacion_almacen}}</span>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label for="nombre" class="form-label">Descripción: </label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <span>{{dato.b_descripcion}}</span>
+                                        </div>
+                                        <hr>
+                                        <div class="col-sm-12">
+                                            <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer ">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="guardarSeleccionBien()">Guardar  &nbsp; <em class="bi bi-check-lg"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle"  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Detalle del bien</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="carouselExample" class="carousel slide" *ngIf="listaImagenes.length > 0">
+                    <div class="carousel-inner">
+                      <div class="carousel-item" [class.active]="i === indiceActivoImagenes" *ngFor="let datos of listaImagenes; let i = index">
+                        <img [src]="datos.imagen" class="d-block w-100" alt="..." style="width: 100%; height: 350px;">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" (click)="cambiarImagen(-1)">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" (click)="cambiarImagen(1)">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-sm-12">
+              <label for="nombre" class="form-label">Tipo del bien: </label>
+              <span> {{objetoDetalle.t_bien}}</span>
+            </div>
+            <div class="col-sm-12">
+              <label for="nombre" class="form-label">Subtipo del bien: </label>
+              <span> {{objetoDetalle.subtipo}}</span>
+            </div>
+            <div class="col-sm-12">
+              <label for="nombre" class="form-label">Dirección: </label>
+              <span> {{objetoDetalle.b_numero}}, {{objetoDetalle.ubicacion_almacen}}</span>
+            </div>
+            <div class="col-sm-12">
+              <label for="nombre" class="form-label">Descripción: </label>
+            </div>
+            <div class="col-sm-12">
+              <span> {{objetoDetalle.b_descripcion}}</span>
+            </div>
+            <!-- <div class="col-sm-12">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupFile01" style="display: none;">Upload</label>
+                    <input type="file" class="form-control" id="inputGroupFile01">
+                  </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="offcanvas-footer row">
+        <div class="text-end">
+            <!-- <button type="button" class="btn btn-positivo-modal"  *ngIf="accionBien && showEditar" (click)="asignarBien()">Adjuntar información bien &nbsp;<em class="bi bi-clipboard2-plus"></em> </button>&nbsp; -->
+            <button type="button" class="btn btn-positivo-modal"  *ngIf="accionBien && showEditar" (click)="asignarBien()">Asignar bien &nbsp;<em class="bi bi-clipboard2-plus"></em> </button>&nbsp;
+            <button type="button" class="btn btn-negativo-modal"  *ngIf="!accionBien && showEditar"  (click)="quitarBien()">Quitar bien &nbsp;<em class="bi bi-clipboard2-minus"></em> </button>&nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showObs"  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{tituloObs}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cerrarCamvasObs()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <label for="obs" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="obs" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()" *ngIf="tipoAccion">Aprobar  &nbsp; <em class="bi bi-check-lg"></em> </button> &nbsp;
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()" *ngIf="!tipoAccion">Rechazar  &nbsp; <em class="bi bi-check-lg"></em> </button> &nbsp;
+         </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirma" ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h1>Firma</h1>
+    <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+        (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+</div>
+<div class="offcanvas-body">
+    <div class="row">
+        <div class="col-sm-12 row" [formGroup]="FormularioConfirma">
+            <div class="col-sm-8">
+                <label for="cert" class="control-label">Certificado (.cer):</label>
+                <div class="input-group">
+                    <label for="cert" class="control-label" style="display: none">Certificado (.cer):</label>
+                    <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert"
+                        id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
+                    <label for="fileCertificate" class="control-label" style="display: none">Certificado
+                        (.cer):</label>
+                    <input type="file" style="display: none" id="fileCertificate" accept=".cer"
+                        (change)="onCertFileChange($event)" formControlName="key">
+                    <span class="input-group-btn" style="vertical-align: bottom">
+                        <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate"
+                            onclick="document.getElementById('fileCertificate').click();">Buscar</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <label for="key" class="control-label">Clave privada (.key):</label>
+                <div class="input-group">
+                    <label for="key" class="control-label" style="display: none">Clave privada (.key):</label>
+                    <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key"
+                        id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
+                    <label for="filePrivateKey" class="control-label" style="display: none">Clave privada
+                        (.key):</label>
+                    <input type="file" style="display: none" id="filePrivateKey" accept=".key"
+                        (change)="onKeyFileChange($event)" formControlName="cer">
+                    <span class="input-group-btn" style="vertical-align: bottom">
+                        <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey"
+                            onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8">
+                <label for="contra" class="control-label">Contraseña de clave privada:</label>
+                <input type="password" class="form-control" id="contra" placeholder="Contraseña"
+                    formControlName="contra">
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+</div>
+<div class="offcanvas-footer">
+    <div class="text-end">
+        <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+                class="bi bi-check-lg"></em> </button> &nbsp;
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="offcanvas-backdrop fade show" *ngIf="showDetalle || showEditar  ||  showObs || showFirma"></div>
+
+<!-- <div class="offcanvas-backdrop fade show" *ngIf="showEditar  ||  showObs || showFirma"></div> -->

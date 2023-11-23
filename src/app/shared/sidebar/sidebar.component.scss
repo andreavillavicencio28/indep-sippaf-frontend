@@ -1,0 +1,41 @@
+  nav {
+    width: 45px;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    top: 59px; /* Agrega "px" u otra unidad de medida aquí */
+    left: 0;
+   
+    transition: 0.3s;
+    float: left;
+    z-index: 900;
+    display: flex;
+    height: 100vh;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-bottom: 150px;
+    overflow-y: scroll;
+    min-height: 800px;
+    padding-right: 5px;
+  }
+  
+  li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  li:hover {
+    background-color: #444;
+  }
+  
+  .icon {
+    margin-right: 10px;
+  }
+  
+  .active {
+    background-color: #555;
+  }
+

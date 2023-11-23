@@ -1,0 +1,192 @@
+<sg-encabezado-detalle [tipoInforme]="'informe'"></sg-encabezado-detalle>
+<div class="row">
+    <div class="col-sm-9"></div>
+    <div class="col-sm-3">
+        <label for="anio" class="control-label">Año:</label>
+        <select class="form-select" aria-label="Default select example" id="anio" [(ngModel)]="anioSelect" (change)="changeAnio()">
+            <option>Elige un año</option>
+            <option *ngFor="let year of selectYear()" [value]="year"> {{ year }} </option>
+        </select>
+    </div>
+</div>
+<div class="col-md-12">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" [class.active]="accionDetalle == 1" (click)="cambioAccionDetalle(1)"> Informe
+                Mensual</a>
+        </li>
+    </ul>
+
+    <div class="col-md-12 contenido" *ngIf="accionDetalle == 1">
+        <div class="card-body">
+            <div class="row">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Mes</th>
+                            <th>Estatus</th>
+                            <th>Fecha de Envío</th>
+                            <th>Tipo de Informe</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dataInforme">
+                            <th>{{ item.id }}</th>
+                            <th>{{ item.mes }} </th>
+                            <th>{{ item.estatus }}</th>
+                            <th>{{ item.fh_envio }} </th>
+                            <th>{{ item.tipoInforme }}</th>
+                            <th>
+                                <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                    data-placement="top" title="Vista previa"
+                                    (click)="openVistaPrevia(item.id, '', item.mes, item. tipoInforme)" *ngIf="item.estatus != 'Pendiente'">
+                                    <em style="color: blue;" class="bi bi-eye"></em>
+                                </button>
+                                <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                    data-placement="top" title="Validar"
+                                    (click)="openVistaPrevia(item.id, 'pendientes', item.mes, item. tipoInforme)" *ngIf="item.estatus === 'Pendiente'">
+                                    <em style="color: blue;" class="bi bi-check2-circle"></em>
+                                </button>
+
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Offcanvas vista previa -->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showVistaPrevia" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h4 class="modal-title" id="modal-basic-title"> Vista previa </h4>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="closeOffCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-md-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body" style="padding: 15px 15px;">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Mes:</label>
+                            <span> {{mesInforme}} </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Año:</label>
+                            <span> 2023 </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="control-label">Tipo Informe:</label>
+                            <span> {{tipoInforme}} </span>
+                        </div>
+                        <hr>
+
+                        <div class="col-sm-12" *ngIf="tipoInforme != 'Siniestro'">
+                            <label for="" class="control-label">Estado físico:</label>
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="defaultCheck1" type="radio" value="1"
+                                        id="defaultCheck1" checked>
+                                    <label class="form-check-label control-label" for="defaultCheck1">
+                                        Declaro que el bien se encuentra en las mismas condiciones que lo recibí,
+                                        salvo
+                                        el deterioro normal causado por el transcurso del
+                                        tiempo.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-sm-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input " type="radio" name="Check1"
+                                            id="flexRadioSinCURP" [value]="1" checked>
+                                        <label class="form-check-label control-label" for="flexRadioSinCURP"> Bueno
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Check1" id="flexRadioSinCURP"
+                                            [value]="2" disabled>
+                                        <label class="form-check-label control-label" for="flexRadioSinCURP">
+                                            Regular
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Check1" id="flexRadioSinCURP"
+                                            [value]="3" disabled>
+                                        <label class="form-check-label control-label" for="flexRadioSinCURP"> Malo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-4">
+                                <label for="" class="control-label">Uso que se le da al bien: </label>
+                                <br>
+                                <span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                                    unknown printer took a galley of type and scrambled it to make a type specimen
+                                    book.</span>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-12" *ngIf="tipoInforme == 'Siniestro'">
+                            <div class="col-sm-12">
+                                <label for="observaciones" class="control-label">Especifique: </label>
+                                <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ligula odio, a vehicula diam placerat in. Etiam maximus purus at mauris dictum aliquet. Pellentesque ullamcorper vehicula ex, sed elementum libero vestibulum in. Nulla ut vehicula nibh. Aenean vulputate sit amet sem eu rhoncus. Sed hendrerit, risus a pulvinar pellentesque, sem mauris pulvinar erat, nec imperdiet lorem augue sit amet neque. Praesent suscipit ex vel neque sagittis pretium. Donec ligula lacus, tincidunt non commodo sed, pellentesque nec metus. Fusce eget rhoncus erat, non hendrerit tortor. </span>
+                            </div>
+
+                            <div class="col-sm-12 mt-3">
+                                <label for="observaciones" class="control-label">Uso que se le da al bien: </label>
+                                <span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. In faucibus ligula odio, a vehicula diam placerat in. Etiam maximus purus at mauris dictum aliquet. </span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer" *ngIf="showButton">
+        <div class="text-end btn-foot">
+            <button type="button" class="btn  btn-positivo-modal" style="margin-right: 0.5rem"
+                (click)="aprobar()">Aprobar</button>
+            <button type="button" class="btn  btn-negativo-modal" (click)="rechazar()">Rechazar</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- Offcanvas observaciones -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showObs" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-body">
+        <h1>{{tituloObs}}</h1>
+        <hr class="red" />
+        <div class="col-sm-12">
+            <label for="obs" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="obs" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()">Aceptar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+            <button type="button" class="btn btn-negativo-modal" (click)="cerrarCamvasObs()">Cancelar &nbsp; <em
+                    class="bi bi-backspace"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showVistaPrevia || showVistaPrevia || showObs"></div>

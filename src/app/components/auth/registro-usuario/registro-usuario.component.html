@@ -1,0 +1,113 @@
+<div class="row">
+  <sg-wizard [listaPasos]="listaPasos" (valorIndice)="recibeIndice($event)"></sg-wizard>
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <div class="col-sm-10">
+          <div class="card" style="padding: 15px;">
+            <div class="card-body row" *ngIf="Indice == 0">
+              <div class="col-sm-12 row" [formGroup]="FormularioTipoRegistro">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio"  id="flexRadioConCURP" 
+                          formControlName="firma" [value]="true">
+                    <label class="form-check-label" for="flexRadioConCURP">
+                      Con firma electrónica
+                    </label>
+                  </div>
+                </div>
+    
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio"  id="flexRadioSinCURP"  
+                           formControlName="firma" [value]="false">
+                    <label class="form-check-label" for="flexRadioSinCURP">
+                      Sin firma electrónica
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="col-sm-12 row" *ngIf="FormularioTipoRegistro.get('firma')?.value" [formGroup]="FormularioConfirma">
+                  <div class="col-sm-6">
+                    <label for="cert" class="control-label">Certificado (.cer):</label>
+                    <div class="input-group">
+                      <label for="cert" class="control-label" style="display: none" >Certificado (.cer):</label>
+                      <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert" id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
+                      <label for="fileCertificate" class="control-label" style="display: none" >Certificado (.cer):</label>
+                      <input type="file" style="display: none" id="fileCertificate" accept=".cer" (change)="onCertFileChange($event)" formControlName="key">
+                      <span class="input-group-btn" style="vertical-align: bottom">
+                        <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate" onclick="document.getElementById('fileCertificate').click();">Buscar</button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6"></div>
+                  <div class="col-sm-6">
+                    <label for="key" class="control-label">Clave privada (.key):</label>
+                    <div class="input-group">
+                      <label for="key" class="control-label" style="display: none" >Clave privada (.key):</label>
+                      <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key" id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
+                      <label for="filePrivateKey" class="control-label" style="display: none" >Clave privada (.key):</label>
+                      <input type="file" style="display: none" id="filePrivateKey" accept=".key" (change)="onKeyFileChange($event)" formControlName="cer">
+                      <span class="input-group-btn" style="vertical-align: bottom">
+                        <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey" onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-sm-6"></div>
+                  <div class="col-sm-6">
+                    <label for="contra" class="control-label">Contraseña de clave privada:</label>
+                    <input type="password" class="form-control" id="contra" placeholder="Contraseña" formControlName="contra">
+                  </div>
+                  <div class="col-sm-6"></div>
+                  <div class="col-sm-6">
+                    <label for="rfc" class="control-label">RFC:</label>
+                    <input type="password" class="form-control" id="rfc" placeholder="RFC" formControlName="rfc">
+                  </div>
+                  <div class="col-sm-6"></div>
+                  <div class="col-sm-6">
+                    <button class="btn btn-primary boton-derecho" (click)="validarFirma()">Validar</button>
+                  </div>
+              </div>
+              <div class="col-sm-12 row" *ngIf="!FormularioTipoRegistro.get('firma')?.value" [formGroup]="FormularioSinFirma">
+                <p>
+                  Es necesario realizar algunas verificaciones antes de crear tu cuenta de usuario, ingresa tu RFC para poder realizar esta validación.
+                </p>
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label for="RFC" class="control-label">RFC*:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="RFC" placeholder="INGRESA TU RFC" formControlName="rfc">
+                      <button class="btn btn-outline btn-primary" type="button" id="button-addon2" value="conSearch" (click)="validarRfc()">
+                        Validar
+                      </button>
+                    </div>
+                    <div class="col-sm-6"></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body row" *ngIf="Indice == 1">
+              
+            </div>
+            <div class="card-body row" *ngIf="Indice == 2">
+              
+            </div>
+            <div class="card-body row" *ngIf="Indice == 3">
+              
+            </div>
+            <div class="card-body row" *ngIf="Indice == 4">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12" style=" margin-bottom: 10px; ">
+      <button class="btn btn-secundary boton-izquierdo" (click)="atras()" *ngIf="Indice > 0 && Indice != IndiceMax ">Atras</button>
+      <button class="btn btn-primary boton-derecho" (click)="siguiente()" *ngIf="Indice < IndiceMax-1">Siguiente</button>
+      <button class="btn btn-primary boton-derecho" (click)="confirmar()" *ngIf="Indice == IndiceMax -1">Enviar registro</button>
+      <button class="btn btn-primary boton-derecho" *ngIf="Indice == IndiceMax">ir al inicio</button>
+    </div>
+</div>

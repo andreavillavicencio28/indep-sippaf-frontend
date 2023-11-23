@@ -1,0 +1,35 @@
+<div class="row">
+  <div style="margin-top: 10px;"></div>
+    <div class="col-md-12 hidden-xs">
+        <ul class="wizard-steps">
+          <!-- <li class="wizardbar-item"  *ngFor="let pasos of listaPasos; let i = index"  [class.activo]="i == inicio && i != (listaPasos.length -1)"  
+                                        [class.completed]="i < inicio || (i == (listaPasos.length -1) &&  i == inicio)" 
+                                        [ngClass]="i == (listaPasos.length -1) ? 'wizardbar-item-final' : 'wizardbar-item'">
+            <h5 *ngIf="i != (listaPasos.length -1)" >Paso {{i + 1}}</h5>
+            <span *ngIf="i != (listaPasos.length -1)">{{pasos}}</span>
+
+            <div class="spacio-wizardbar-item-final" *ngIf="i == (listaPasos.length -1)"></div>
+            <em class="bi bi-check-circle icono-wizardbar-item-final" *ngIf="i == (listaPasos.length -1)"> </em>
+          </li> -->
+
+
+           <li class="wizardbar-item"  *ngFor="let pasos of lista; let i = index"  (click)="cambio(i)"
+            [class.activo]="pasos.activo && !pasos.final" 
+            [class.completed]="(pasos.completado && !pasos.activo) || (pasos.final && pasos.activo)"
+            [ngClass]="pasos.final? 'wizardbar-item-final' : 'wizardbar-item'">
+
+              <h5 *ngIf="!pasos.final" >Paso {{i + 1}}</h5>
+              <span *ngIf="!pasos.final">{{pasos.titulo}}</span>
+
+              <div class="spacio-wizardbar-item-final" *ngIf="pasos.final"></div>
+              <em class="bi bi-check-circle icono-wizardbar-item-final" *ngIf="pasos.final"> </em>
+          </li> 
+
+          
+        </ul>
+      </div>
+</div>
+<div class="col-md-12">
+  <p class="titulo-principal">{{lista[indiceActual].titulo}}</p>
+  <hr class="red" *ngIf="lista.length != 0">
+</div>

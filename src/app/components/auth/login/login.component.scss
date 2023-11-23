@@ -1,0 +1,44 @@
+
+
+.background-container {
+    background-image: url("../../../../assets/imgen/fondoGobierno3.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+  }
+
+
+.recuperar {
+    color: rgba(175, 189, 228, 0.932);
+    text-decoration: none;
+    margin-top: 14px;
+    cursor: pointer;
+}
+
+.recuperar:hover {
+    color:  rgba(67, 111, 233, 0.932);
+}
+
+.container-accion {
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.bg-login-image{
+
+    /* background: url("../../../../../assets/img/portada-villa-2023-4.png"); */
+    background-position: center;
+    background-size: cover;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.tamaño-contenedor {
+    max-width: none;
+}
+
+.separacion{
+    margin-top: 60px;
+}

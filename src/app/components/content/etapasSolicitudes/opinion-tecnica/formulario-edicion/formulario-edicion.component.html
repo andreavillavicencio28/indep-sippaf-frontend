@@ -1,0 +1,60 @@
+<div class="row">
+    <div style="margin-top: 10px;"></div>
+    <div class="col-md-12">
+        <div class="card-body row">
+            <div class="col-sm-12">
+                <label for="averiguacion" class="form-label">No. de averiguación previa / Carpeta de
+                    investigación:</label>
+                <input type="number" class="form-control" id="averiguacion" placeholder="12345">
+            </div>
+            <div class="col-sm-6">
+                <label for="nombre" class="form-label">Nombre de la entidad que transfiere:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Folio">
+            </div>
+
+            <div class="col-sm-6">
+                <label for="aseguramiento" class="form-label">Fecha del acuerdo del aseguramiento:</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="transferencia" ngbDatepicker
+                        #a="ngbDatepicker" id="transferencia" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="recepcion" class="form-label">Fecha de entrega recepción:</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="transferencia" ngbDatepicker
+                        #r="ngbDatepicker" id="transferencia" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="r.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="transferencia" class="form-label">Fecha de acta de transferencia:</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="transferencia" ngbDatepicker
+                        #t="ngbDatepicker" id="transferencia" />
+                    <button class="btn btn-outline-secondary bi bi-calendar3" (click)="t.toggle()"
+                        type="button"></button>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="v_bien" class="form-label">Valor del bien:</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="v_bien" placeholder="12345">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="v_menaje" class="form-label">Valor del menaje:</label>
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="v_menaje" placeholder="12345">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

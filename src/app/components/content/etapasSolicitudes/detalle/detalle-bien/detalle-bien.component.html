@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-12 valoresCentrados title">
+    <h5>
+      Datos del bien
+      <button type="button" class="btn btn-link btn-title" (click)="mostrarDetalle()" data-toggle="tooltip" data-placement="top" title="Ver detalle">
+        <i class="bi bi-caret-left-fill" *ngIf="verDetalle"></i>
+        <i class="bi bi-caret-right-fill" *ngIf="!verDetalle"></i>
+      </button>
+    </h5>
+
+  </div>
+  <hr>
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">Tipo Bien: </label>
+    <span> Blindado</span>
+  </div>
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">Bien SIAB (ID del Bien): </label>
+    <span> 1851726</span>
+  </div>
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">Estatus: </label>
+    <span> ND.</span>
+  </div>
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">CR O OAR: </label>
+    <span> Noreste</span>
+  </div>
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">Descripción: </label>
+    <span> Vehículo Blindado, JEEP, GRAND CHEROKEE, 2012, número de serie 1C4RJFDJ5CC196997, Color negro, sin placas de circulación.</span>
+  </div>
+
+
+
+  <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="verDetalle"  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h1>Aqui se muestra todo el detalle</h1>
+      <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  </div>
+
+  <div class="offcanvas-backdrop fade show" *ngIf="verDetalle "></div>
+
+</div>

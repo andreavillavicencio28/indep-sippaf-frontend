@@ -1,0 +1,44 @@
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="col-sm-12">
+        <div class="card" style="padding: 5px;">
+            <div class="card-body row" style="padding: 15px 15px;">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" >
+                      <a class="nav-link active">Detalle</a>
+                    </li>
+                  </ul>
+                  <div class="row"  style="margin-top: 15px;">
+                    <sg-detalle-solicitud [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-solicitud>
+                    <sg-detalle-prevalidacion [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-prevalidacion>
+                    <sg-detalle-bien [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-bien>
+                    <sg-detalle-opinion-tenica [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-opinion-tenica>
+                    <!-- <sg-detalle-nombramiento [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-nombramiento> -->
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showObs"  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{tituloObs}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close" (click)="cerrarCamvasObs()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <label for="obs" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="obs" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()" *ngIf="tipoAccion">Aprobar  &nbsp; <em class="bi bi-check-lg"></em> </button> &nbsp;
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()" *ngIf="!tipoAccion">Rechazar  &nbsp; <em class="bi bi-check-lg"></em> </button> &nbsp;
+         </div>
+    </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showObs"></div>

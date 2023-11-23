@@ -1,0 +1,169 @@
+<div class="row">
+    <div style="margin-top: 10px;"></div>
+    <div class="col-md-12">
+        <div class="card-body row">
+            <ng-container *ngIf="tipoNombramiento === 'productiva'">
+                <div class="col-sm-6">
+                    <label for="n_nombramiento" class="form-label">Número de nombramiento:</label>
+                    <input type="text" class="form-control" id="n_nombramiento" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_nombramiento" class="form-label">Fecha de nombramiento:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_nombramiento" ngbDatepicker
+                            #a="ngbDatepicker" id="f_nombramiento" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="acta_administrativa" class="form-label">No. Acta Administrativa de transferencia
+                        :</label>
+                    <input type="text" class="form-control" id="acta_administrativa" placeholder="Folio">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_acta_administrativa" class="form-label">Fecha de No. De Acta Administrativa de
+                        transferencia :</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_acta_administrativa" ngbDatepicker
+                            #a="ngbDatepicker" id="f_nombramiento" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="cantidad_mensual" class="form-label">Cantidad mensual :</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="cantidad_mensual" placeholder="12345">
+                    </div>
+                </div>
+                <div class="col-sm-6" >
+                    <label for="impuesto" class="form-label">Impuesto :</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="impuesto" placeholder="12345">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="n_cuenta" class="form-label">Número de cuenta:</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="n_cuenta" placeholder="12345">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="n_banco" class="form-label">Nombre del Banco:</label>
+                    <input type="text" class="form-control" id="n_banco" placeholder="Nombre del banco">
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="tipoNombramiento === 'comodato'">
+                <div class="col-sm-6">
+                    <label for="n_nombramiento" class="form-label">Número de nombramiento:</label>
+                    <input type="text" class="form-control" id="n_nombramiento" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_nombramiento" class="form-label">Fecha de nombramiento:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_nombramiento" ngbDatepicker
+                            #a="ngbDatepicker" id="f_nombramiento" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="acta_administrativa" class="form-label">No. Acta Administrativa de transferencia
+                        :</label>
+                    <input type="text" class="form-control" id="acta_administrativa" placeholder="Folio">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_acta_administrativa" class="form-label">Fecha de No. De Acta Administrativa de
+                        transferencia :</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_acta_administrativa" ngbDatepicker
+                            #a="ngbDatepicker" id="f_nombramiento" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="oficio_fgr" class="form-label">Oficio FGR :</label>
+                    <input type="text" class="form-control" id="oficio_fgr" placeholder="Oficio FGR">
+                </div>
+    
+                <div class="col-sm-6">
+                    <label for="f_oficio_fgr" class="form-label">Fecha oficio FGR :</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_oficio_fgr" ngbDatepicker
+                            #a="ngbDatepicker" id="f_oficio_fgr" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <label for="n_dgcram" class="form-label">Nombre DGCRAM :</label>
+                    <input type="text" class="form-control" id="n_dgcram" placeholder="Nombre DGCRAM">
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="tipoNombramiento === 'blindado'">
+                <div class="col-sm-6">
+                    <label for="asunto_nombramiento" class="form-label">Asunto del nombramiento:</label>
+                    <input type="text" class="form-control" id="asunto_nombramiento" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="n_nombramiento" class="form-label">Número de nombramiento:</label>
+                    <input type="text" class="form-control" id="n_nombramiento" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="n_oficio" class="form-label">Número de oficio:</label>
+                    <input type="text" class="form-control" id="n_oficio" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_oficio" class="form-label">Fecha de oficio:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_oficio" ngbDatepicker
+                            #a="ngbDatepicker" id="f_oficio" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="a.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="oficio_referencia" class="form-label">Oficio de referencia:</label>
+                    <input type="text" class="form-control" id="oficio_referencia" placeholder="12345">
+                </div>
+                <div class="col-sm-6">
+                    <label for="f_oficio_referencia" class="form-label">Fecha de oficio de referencia:</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="f_oficio_referencia" ngbDatepicker
+                            #b="ngbDatepicker" id="f_oficio_referencia" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="b.toggle()"
+                            type="button"></button>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="vgd" class="form-label">VGD:</label>
+                    <input type="text" class="form-control" id="vgd" placeholder="VGD">
+                </div>
+                <div class="col-sm-6">
+                    <label for="dcn" class="form-label">DCN:</label>
+                    <input type="text" class="form-control" id="dcn" placeholder="DCN">
+                </div>
+                <div class="col-sm-6">
+                    <label for="debi" class="form-label">DEBI:</label>
+                    <input type="text" class="form-control" id="debi" placeholder="DEBI">
+                </div>
+                <div class="col-sm-6">
+                    <label for="cab" class="form-label">CAB:</label>
+                    <input type="text" class="form-control" id="cab" placeholder="CAB">
+                </div>
+
+            </ng-container>
+        </div>
+    </div>
+</div>

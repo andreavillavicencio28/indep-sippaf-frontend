@@ -1,0 +1,45 @@
+  <nav class="navbar navbar-expand-lg bg-body-tertiary color-menu justify-content-end">
+        <div class="container-fluid tamaño-contenedor ">
+            <a class="navbar-brand" routerLink="/content/inicio">
+                <img src="../../../assets/imgen/logo_gob.png" alt="Logo" width="100" height="30" class="d-inline-block align-text-top">
+              </a>
+            <button class="navbar-toggler" type="button" (click)="showDropdownToggler()"  data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list icono"  style="color: aliceblue;"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent" [class.show]="isDropdownToggler" *ngIf="datosSesionService.datosUsuarioSubject$| async as datos"  >
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="datos.token != null">
+
+                <li class="nav-item">
+                  <a class="nav-link"  aria-expanded="false" routerLink="/content/buzon"> Buzón (3)</a>
+                </li>
+                <!-- <li class="nav-item dropdown" (click)="showDropdownAdmin()" (mouseleave)="hideDropdownAdmin()" *ngIf="datos.rol == 'Admin'">
+                  <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    Administración
+                  </a>
+                  <ul class="dropdown-menu" [class.show]="isDropdownAdmin">
+                    <li><a class="dropdown-item" routerLink="/content/usuarios">Usuarios</a></li>
+                    <li><a class="dropdown-item">Roles</a></li>
+                    <li><a class="dropdown-item" routerLink="/content/estados">Estados</a></li>
+                  </ul>
+                </li> -->
+
+                <li class="nav-item dropdown" (click)="showDropdownSalir()" (mouseleave)="hideDropdownSalir()">
+                    <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="datos.token != null">
+                        <i class="bi bi-person-bounding-box"></i> &nbsp;  {{datos.nombreUsuario}}
+                    </a>
+                    <ul class="dropdown-menu" [class.show]="isDropdownSalir"  *ngIf="datos.token != null">
+                        <li><a class="dropdown-item" style="cursor:auto;">  {{datos.nombre}} </a></li>
+                        <li><a class="dropdown-item" style="cursor: auto;"> {{datos.rol}} </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" (click)="logout()">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+              </ul>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="datos.token == null">
+                <li class="nav-item">
+                  <a class="nav-link"  aria-expanded="false" routerLink="/auth/login"> Inicia sesión</a>
+                </li>
+              </ul>
+            </div>
+        </div>
+  </nav>

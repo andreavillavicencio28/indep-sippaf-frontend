@@ -1,0 +1,160 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Solicitudes Uso INDEP</h1>
+    <hr class="red">
+  </div>
+
+  <div class="col-md-12">
+    <div class="col-sm-10">
+      <div class="card" style="padding: 15px;">
+        <div class="card-body row">
+          <div class="card" style="padding: 15px;">
+            <div class="row">
+              <h3>INDEP</h3>
+                <hr>
+                <div class="col-sm-12 row" >
+                  <div class="col-sm-6">
+                    <label for="EntidadFederativa" class="form-label">Lugar de la solicitud:</label>
+                    <select class="form-select" aria-label="Default select example" id="EntidadFederativa" readonly>
+                        <option selected value="1">Estado de  Mexico</option>
+                        <option value="2">Estado de  Mexico</option>
+                        <option value="3">Ciudad de Mexico</option>
+                        <option value="4">Tlaxcala</option>
+                        <option value="5">Hidalgo</option>
+                        <option value="6">Veracruz</option>
+                        <option value="7">Guerrero</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="date" class="form-label">Fecha de registro: </label>
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                          #d="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px;">
+            <div class="row">
+              <h3>Datos generales</h3>
+                <hr>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="RFC" class="control-label">RFC*:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="RFC" placeholder="Ingrese su RFC">
+                      <button class="btn btn-outline btn-primary" type="button" id="button-addon2" >
+                        Validar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label">Nombre o razón solcial:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Ingrese nombre o razón social">
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px;">
+            <div class="row">
+              <h3>Datos generales del representante legal</h3>
+                <hr>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label">Nombre o razón social:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Ingrese nombre o razón social">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label">Apellido paterno:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Ingrese su apellido paterno">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label class="control-label">Apellido materno:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Ingrese su apellido materno">
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 15px;">
+            <div class="row">
+              <h3>Datos del bien</h3>
+                <hr>
+
+                <label class="control-label mb-3">¿Cuenta con el número de registro institucional?</label>
+
+                <div class="col-sm-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="DB" id="Sí" checked>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Sí
+                    </label>
+                  </div>
+                </div>
+  
+                <div class="col-sm-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="DB" id="No">
+                    <label class="form-check-label">
+                      No
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6 mt-2">
+                <div class="form-group">
+                  <div class="input-group mt-2">
+                    <input type="text" class="form-control" placeholder="Ingrese su número de registro institucional">
+                  </div>
+                </div>
+              </div>
+              <hr>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="exampleFormControlTextarea1" class="form-label">Descripción y características del bien requerido:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+              <hr>
+            </div>
+          
+
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="exampleFormControlTextarea1" class="form-label">Justificación del uso que se dará al bien:</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary boton-derecho mb-2" (click)="siguiente()" *ngIf="Indice < IndiceMax-1">Siguiente</button>
+    </div>
+  </div>      
+</div>

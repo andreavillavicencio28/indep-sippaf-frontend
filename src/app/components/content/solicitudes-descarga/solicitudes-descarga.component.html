@@ -1,0 +1,187 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Descarga Documentación</h1>
+        <hr class="red">
+    </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                value="1" [(ngModel)]="tipoBusqueda" (change)="changeTipoBusqueda()">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Autorización solicitud
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                                value="2" [(ngModel)]="tipoBusqueda" (change)="changeTipoBusqueda()">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Tipo servicio
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                    <div class="col-3"></div>
+
+                    <div class="col-sm-3">
+                        <label for="periodo" class="control-label">Desde:</label>
+                        <input type="date" class="form-control" id="desde" placeholder="desde">
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="periodo" class="control-label">Hasta:</label>
+                        <input type="date" class="form-control" id="desde" placeholder="desde">
+                    </div>
+
+                    <div class="col-3"></div>
+                    <div class="col-3"></div>
+
+
+                    <div class="col-sm-3">
+                        <label for="tipoObligacion" class="control-label">Tipo de archivo:</label>
+                        <select class="form-select" aria-label="Default select example" id="tipoObligacion"
+                            [(ngModel)]="tipoObligacionSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let item of tipoObligacion" [value]="item">
+                                {{ item }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="tipoBien" class="control-label">Tipo del bien:</label>
+                        <select class="form-select" aria-label="Default select example" id="tipoBien"
+                            [(ngModel)]="tipoBienSelect" (change)="changeTipoBienSelect()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let tipo of tipoBien" [value]="tipo">
+                                {{ tipo }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="subTipoBien" class="control-label">Subtipo del bien:</label>
+                        <select class="form-select" aria-label="Default select example" id="subTipoBien"
+                            [(ngModel)]="subTipoBienSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let subtipo of subTipoBien" [value]="subtipo">
+                                {{ subtipo }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="subSubTipoBien" class="control-label">Sub subtipo del bien:</label>
+                        <select class="form-select" aria-label="Default select example" id="subSubTipoBien"
+                            [(ngModel)]="subSubTipoBienSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let subSubtipo of subSubTipoBien" [value]="subSubtipo">
+                                {{ subSubtipo }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="tipoSolicitante" class="control-label">Tipo de solicitante:</label>
+                        <select class="form-select" aria-label="Default select example" id="tipoSolicitante"
+                            [(ngModel)]="tipoSolicitanteSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let solicitante of tipoSolicitante" [value]="solicitante">
+                                {{ solicitante }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="tipoDepositaria" class="control-label">Tipo de depositaría:</label>
+                        <select class="form-select" aria-label="Default select example" id="tipoDepositaria"
+                            [(ngModel)]="tipoDepositariaSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let depositaria of tipoDepositaria" [value]="depositaria">
+                                {{ depositaria }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="estatusSolicitud" class="control-label">Estatus de la Solicitud:</label>
+                        <select class="form-select" aria-label="Default select example" id="estatusSolicitud"
+                            [(ngModel)]="estatusSolicitudSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let estatus of estatusSolicitud" [value]="estatus">
+                                {{ estatus }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="etapa" class="control-label">Etapa:</label>
+                        <select class="form-select" aria-label="Default select example" id="etapa"
+                            [(ngModel)]="etapaSelect" (change)="changePago()">
+                            <option>Elige una opción</option>
+                            <option *ngFor="let item of etapa" [value]="item">
+                                {{ item }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-12 mt-2">
+                        <button class="btn btn-primary boton-derecho " type="button" id="button-addon2" title="Buscar"
+                            (click)="busquedaNombramientos()">
+                            <em class="bi bi-search"></em> Buscar
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="showResultZsearch">
+            <div class="row">
+                <sg-paginador></sg-paginador>
+                <div class="col-sm-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-secondary">
+                                <th style="width: 10%;">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                        [(ngModel)]="masterSelectedServicios" (change)="checkUncheckAll()">
+                                </th>
+                                <th>Núm. solicitud</th>
+                                <th>Solicitante</th>
+                                <th>Bien</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of dataTable">
+                                <td>
+                                    <input class="form-check-input" type="checkbox" value="" id="{{item.id}}"
+                                        [(ngModel)]="item.isSelected" (change)="isAllSelected()">
+                                </td>
+                                <td>{{ item.solicitud }}</td>
+                                <td>{{ item.solicitante }}</td>
+                                <td>{{ item.tipoBien }}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="descargaArchivos()"
+                        *ngIf="showBtnDescarga">
+                        &nbsp;<em class="bi bi-arrow-bar-down"></em>
+                        Descargar
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

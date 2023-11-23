@@ -1,0 +1,437 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row" style="padding: 15px 15px;">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 1"
+                                (click)="cambioAccionDetalle(1)">Detalle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 2" (click)="cambioAccionDetalle(2)">
+                                Anexos </a>
+                        </li>
+                    </ul>
+
+                    <div class="row mt-1" *ngIf="accionDetalle == 1">
+                        <div class="card-body">
+                            <sg-detalle-solicitud [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-solicitud>
+                            <sg-detalle-prevalidacion [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-prevalidacion>
+                            <sg-detalle-bien [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-bien>
+                            <sg-detalle-opinion-tenica [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-opinion-tenica>
+                            <sg-detalle-nombramiento [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-nombramiento>
+                            <sg-detalle-entrega-bien [id_solicitud]="id_solicitud"
+                                [solicitante]="solicitante"></sg-detalle-entrega-bien>
+                        </div>
+                    </div>
+
+                    <div class="row" class="mt-2" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 35%;">Tipo Documento</th>
+                                        <th style="width: 25%;">Tipo de firma</th>
+                                        <th style="width: 35%;" class="valoresCentrados">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of documentosCarga">
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.nombreDocumento}}</td>
+                                        <td>Electrónica</td>
+                                        <td class="valoresCentrados">
+                                            <button class="btn btn-link" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-title="Firmar" title="Firmar"
+                                                (click)="openFirma(item.nombreDocumento)">
+                                                <i class="bi bi-laptop"></i>
+                                            </button>
+                                            <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button class="btn btn-link"
+                                                (click)="descargarDocumento(item.nombreDocumento)" title="Descargar">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                            <button class="btn btn-link"
+                                                (click)="cargarDocumento(item.nombreDocumento, 'cargarDocumento')"
+                                                title="Cargar documento">
+                                                <i class="bi bi-upload"></i>
+                                            </button>
+                                            <button class="btn btn-link"
+                                                (click)="eliminarDocumento(item.nombreDocumento)" title="Eliminar">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal observaciones -->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showObs" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-body">
+        <h1>{{tituloObs}}</h1>
+        <hr class="red" />
+        <div class="col-sm-12">
+            <label for="obs" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="obs" rows="6"></textarea>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()">Aceptar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+            <button type="button" class="btn btn-negativo-modal" (click)="cerrarCamvasObs()">Cancelar &nbsp; <em
+                    class="bi bi-backspace"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+<!-- Modal edicion -->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditar" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarEditar()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card-body">
+            <div class="row p-1">
+                <div class="col-sm-6">
+                    <label for="fh_remocion" class="control-label">Fecha de remoción:</label>
+                    <div class="input-group">
+                        <input class="form-control" type="date" placeholder="yyyy-mm-dd" name="fh_remocion"
+                            id="fh_remocion" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="ordenRemocion" class="control-label">Causa remoción:</label>
+                    <select class="form-select" name="ordenRemocion" id="ordenRemocion">
+                        <option value="">Elija una opción</option>
+                        <option *ngFor="let item of selectOrdenRemocion" value="item.id">
+                            {{item.descripcion}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-sm-12 mt-3">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                            [(ngModel)]="showPrimasNoDevengadas" (change)="primasNoDevengadas">
+                        <label class="form-check-label control-label" for="exampleCheck1">Primas no devengadas</label>
+                    </div>
+
+                </div>
+                <div class="col-sm-6" *ngIf="showPrimasNoDevengadas">
+                    <label for="importePrimasNoDevengadas" class="control-label">Importe primas no devengadas:</label>
+                    <input type="text" class="form-control" placeholder="12345" aria-label="Username"
+                        aria-describedby="basic-addon1" id="importePrimasNoDevengadas">
+                </div>
+
+                <div class="col-sm-12 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
+                            (change)="primeraNotificacionDatos()">
+                        <label class="form-check-label control-label" for="inlineCheckbox1">Primera notificación</label>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="notificacionPrim">
+                    <div class="col-sm-6">
+                        <label for="fh_primNotificacion" class="control-label">Fecha de primera notificación:</label>
+                        <div class="input-group">
+                            <input class="form-control" type="date" placeholder="yyyy-mm-dd" name="fh_primNotificacion"
+                                id="fh_primNotificacion" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="OfPrimeraNotificacion" class="control-label">Número de oficio de primera
+                            notificación:</label>
+                        <input type="text" class="form-control" placeholder="12345" aria-label="Username"
+                            aria-describedby="basic-addon1" id="OfPrimeraNotificacion">
+                    </div>
+
+                    <div class="col-sm-6 mt-2">
+                        <label for="inputGroupFile04" class="control-label">Cargar archivo:</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile04"
+                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="obs" class="control-label">Observaciones de primera notificación:</label>
+                        <textarea class="form-control" id="obs" rows="3"></textarea>
+                    </div>
+
+                </ng-container>
+
+
+                <div class="col-sm-12 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"
+                            (change)="segundaNotificacionDatos()">
+                        <label class="form-check-label control-label" for="inlineCheckbox2">Segunda notificación</label>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="notificacionSeg">
+                    <div class="col-sm-6">
+                        <label for="fh_segNotificacion" class="control-label">Fecha de segunda notificación:</label>
+                        <div class="input-group">
+                            <input class="form-control" type="date" placeholder="yyyy-mm-dd" name="fh_segNotificacion"
+                                id="fh_segNotificacion" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="OfSegundaNotificacion" class="control-label">Número de oficio de segunda
+                            notificación:</label>
+                        <input type="text" class="form-control" placeholder="12345" aria-label="Username"
+                            aria-describedby="basic-addon1" id="OfSegundaNotificacion">
+                    </div>
+
+                    <div class="col-sm-6 mt-2">
+                        <label for="fileSecondNot" class="control-label">Cargar archivo:</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="fileSecondNot"
+                                aria-describedby="inputFileSecondNot" aria-label="Upload">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="obsSecondNot" class="control-label">Observaciones segunda notificación:</label>
+                        <textarea class="form-control" id="obsSecondNot" rows="3"></textarea>
+                    </div>
+                </ng-container>
+
+
+                <div class="col-sm-12 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"
+                            (change)="changeVisitaVerificacion()">
+                        <label class="form-check-label control-label" for="inlineCheckbox3">Visita de
+                            verificación</label>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="visitaVerificacion">
+                    <div class="col-sm-6">
+                        <label for="fh_visitaVerif" class="control-label">Fecha de visita de verificación:</label>
+                        <div class="input-group">
+                            <input class="form-control" type="date" placeholder="yyyy-mm-dd" name="fh_visitaVerif"
+                                id="fh_visitaVerif" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="obsVisitaVer" class="control-label">Observaciones visita de verificación:</label>
+                        <textarea class="form-control" id="obsVisitaVer" rows="3"></textarea>
+                    </div>
+
+                </ng-container>
+
+                <div class="col-sm-12 mt-3">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4" (change)="changeAdeudosContraprestacion()">
+                        <label class="form-check-label control-label" for="inlineCheckbox4">Adeudos de
+                            contraprestación</label>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="adeudosContraprestacion">
+                    <div class="col-sm-12 mb-2">
+                        <label for="importeGarantia" class="control-label">Importe de garantía:</label>
+                        <input type="text" class="form-control" placeholder="12345" aria-label="Username"
+                            aria-describedby="basic-addon1" id="importeGarantia">
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                value="option1" checked>
+                            <label class="control-label" for="exampleRadios1">
+                                Incosteable / incobrable
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                value="option2">
+                            <label class="control-label" for="exampleRadios2">
+                                Abandono
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                value="option3">
+                            <label class="control-label" for="exampleRadios3">
+                                Testimonio
+                            </label>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="guardarEdicion()">Guardar &nbsp; <em
+                    class="bi bi-backspace"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal firma -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirma" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Firma</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12 row" [formGroup]="FormularioConfirma">
+                <div class="col-sm-8">
+                    <label for="cert" class="control-label">Certificado (.cer):</label>
+                    <div class="input-group">
+                        <label for="cert" class="control-label" style="display: none">Certificado (.cer):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert"
+                            id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
+                        <label for="fileCertificate" class="control-label" style="display: none">Certificado
+                            (.cer):</label>
+                        <input type="file" style="display: none" id="fileCertificate" accept=".cer"
+                            (change)="onCertFileChange($event)" formControlName="key">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate"
+                                onclick="document.getElementById('fileCertificate').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="key" class="control-label">Clave privada (.key):</label>
+                    <div class="input-group">
+                        <label for="key" class="control-label" style="display: none">Clave privada (.key):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key"
+                            id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
+                        <label for="filePrivateKey" class="control-label" style="display: none">Clave privada
+                            (.key):</label>
+                        <input type="file" style="display: none" id="filePrivateKey" accept=".key"
+                            (change)="onKeyFileChange($event)" formControlName="cer">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey"
+                                onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="contra" class="control-label">Contraseña de clave privada:</label>
+                    <input type="password" class="form-control" id="contra" placeholder="Contraseña"
+                        formControlName="contra">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+<!-- Modal vista previa -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Vista previa</h1>
+
+        <div>
+            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+        </div>
+
+    </div>
+    <div class="offcanvas-body">
+        <div class="row" *ngIf="tipoModal === 'verDocumento'">
+            <p>Documento</p>
+
+        </div>
+
+        <div class="row" *ngIf="tipoModal === 'cargarDocumento'">
+            <div class="col-sm-12">
+                <label for="formFile" class="form-label"><i class="bi bi-upload"></i></label>
+                <input class="form-control" type="file" id="formFile">
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal carga documento -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showCargaDocumento" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1 style="visibility: hidden;">Titulo</h1>
+
+        <button type="button" class="btn btn-negativo-modal boton-derecho" data-bs-dismiss="offcanvas"
+            aria-label="Close" (click)="cerrarCargaDocumentos()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <label for="formFile" class="form-label"><em class="bi bi-upload"></em></label> -->
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="uploadDocumento()">&nbsp; <em
+                    class="bi bi-check-lg"></em> Subir
+            </button> &nbsp;
+        </div>
+
+    </div>
+
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showObs || showFirma || showEditar"></div>

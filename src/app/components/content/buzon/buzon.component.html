@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Buzón</h1>
+    <hr class="red">
+  </div>
+  <div class="card">
+    <div class="row">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1"
+                value="leido" [(ngModel)]="busqueda" (change)="changeTipoBusqueda()">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Mensajes leídos
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <label for="periodo" class="control-label">Desde:</label>
+            <input type="date" class="form-control" id="desde" placeholder="desde">
+          </div>
+          <div class="col-sm-3">
+            <label for="periodo" class="control-label">Hasta:</label>
+            <input type="date" class="form-control" id="desde" placeholder="desde">
+          </div>
+          <div class="col-sm-12 mt-2">
+            <button class="btn btn-primary boton-derecho " type="button" id="button-addon2" title="Buscar"
+              (click)="busquedaMensajes()">
+              <em class="bi bi-search"></em> Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row m-0 p-0">
+    <div class="col-sm-12">
+      <table class="table table-hover m-0">
+        <thead>
+          <tr class="table-secondary">
+            <th>No.</th>
+            <th>Mensaje</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataTabla">
+            <td> {{item.id}} </td>
+            <td> {{item.mensaje}} </td>
+            <td> {{item.fecha}} </td>
+            <td>
+              <button type="button" class="btn btn-link" [title]=" item.leido ? 'Leído' : 'No leído' "
+                (click)="marcarLeido(item.id)">
+                <i class="bi bi-envelope-open" *ngIf="item.leido"></i>
+                <i class="bi bi-envelope" *ngIf="!item.leido"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
