@@ -62,6 +62,11 @@ import { ConfiguracionComponent } from './administracion/configuracion/configura
 import { DiasAsuetoComponent } from './administracion/dias-asueto/dias-asueto.component';
 //import { AcreditadosComponent } from './acreditados/acreditados.component';
 
+import { PropuestasComponent } from './propuestas/propuestas.component';
+import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
+import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/detalle-propuesta.component';
+
+
 /* Components */
 
 // import * as adminComponets from './components';
@@ -92,6 +97,9 @@ import { DiasAsuetoComponent } from './administracion/dias-asueto/dias-asueto.co
     UsuariosComponent,
     EstadosComponent,
     SolicitudesComponent,
+    PropuestasComponent,
+    ValidacionProComponent,
+    DetallePropuestaComponent,
     PropuestaDelBienComponent,
     PrevalidacionComponent,
     ValidacionComponent,

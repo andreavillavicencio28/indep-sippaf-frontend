@@ -26,6 +26,8 @@ import { SolicitudesDescargaComponent } from './solicitudes-descarga/solicitudes
 import { CurpValidacionComponent } from './curp-validacion/curp-validacion.component';
 
 
+import { PropuestasComponent } from './propuestas/propuestas.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -338,6 +340,19 @@ const routes: Routes = [
           ],
         },
         component: CurpValidacionComponent,
+      },
+      {
+        path: 'propuestas',
+        data: {
+          title: 'Propuestas',
+          breadcrumbs: [
+            {
+              text: 'propuestas',
+              active: true,
+            }
+          ],
+        },
+        component: PropuestasComponent,
       },
 
      ],

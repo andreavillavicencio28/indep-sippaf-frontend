@@ -1,0 +1,215 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Propuestas de pago</h1>
+        <hr class="red">
+    </div>
+    <!--------->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row" style="padding: 0px 5px;">
+                <div class="col-sm-9 text-end">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;">
+                        Generar Reporte PDF
+                    </button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;">
+                        Generar Reporte Excel
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
+                        (click)="agregarArchivo()">
+                        <em class="bi bi-plus-lg"></em>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----Busqueda---->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row" style="padding: 0px 5px;">
+                <div class="col-sm-3">
+                    <label for="busqueda" class="form-label">Búsqueda</label>
+                    <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
+                </div>
+                <div class="col-sm-3" text-end>
+                    <label for="busqueda" class="form-label">Fecha inicio/Fecha fin</label>
+                    <input type="text" class="form-control" id="fecha" placeholder="Fecha inicio-Fecha Fin">
+                </div>
+                <div class="col-sm-2" text-end>
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
+                        (click)="cambioSeleccion(1)">
+                        <em class="bi bi-search"></em>
+                    </button>
+                </div>
+                
+                    
+                <!---
+                <div class="col-sm-2 text-end">
+                    <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
+                        [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
+                        <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
+                    </button>
+                </div>
+                ---->
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <ul class="nav nav-underline">
+            <li class="nav-item" *ngFor="let item of listadoSolicitudes" (click)="cambioSeleccion(item.indice)"
+                [title]="item.title">
+                <a class="nav-link " [class.active]="item.activo" aria-current="page">{{item.titulo}}
+                    <span class="badge text-bg-secondary">{{item.noReg}}</span></a>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div class="col-sm-12" *ngIf="tipoVista">
+        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-secondary">
+                        <th style="width: 40%;">Id Propuesta</th>
+                        <th style="width: 40%;">Remitente de propuesta</th>
+                        <th style="width: 40%;">Fecha recepcion</th>
+                        <th style="width: 40%;">Fecha propuesta</th>
+                        <th style="width: 40%;">Tipo propuesta</th>
+                        <th style="width: 40%;">Monto MXN</th>
+                        <th style="width: 40%;">Monto USD</th>
+                        <th style="width: 40%;">Propuesta Dacion</th>
+                        <th style="width: 20%;">Pagos</th>
+                        <th style="width: 40%;">Plazo Solicitado</th>
+                        <th style="width: 20%;">Capturista</th>
+                        <th style="width: 40%;">Fecha captura</th>
+                        <th style="width: 40%;">Id Responsable caso</th>
+                        <th style="width: 40%;">N° Volante</th>
+                        <th style="width: 10%;">Estatus</th>
+                        <th style="width: 30%;">Tipo atención</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal(dato)">
+                        <td>{{ dato.NombreSolicitante }}</td>
+                        <td>{{ dato.tipoBien }}</td>
+                        <td>{{ dato.fechaSolicitud }}</td>
+                        <td>{{ dato.proceso }}</td>
+                        <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-12 row" *ngIf="!tipoVista">
+        <div class="col-sm-3 " *ngFor="let dato of listaDatos" title="Ver detalalle"
+            (click)="abrirCamvasPrincipal(dato)">
+            <div class="card card-container">
+                <div class="card-header">
+                    <label>Nombre solicitante: </label> <strong>{{dato.NombreSolicitante}}</strong>
+                </div>
+                <div class="card-body" style="overflow-y: scroll;">
+                    <div class="col-sm-12">
+                        <label>Tipo de bien: </label> <strong>{{dato.tipoBien}}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Fecha se solicitud: </label> <strong>{{dato.fechaSolicitud}}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Estatus: </label> <strong>{{dato.proceso}}</strong>
+                    </div>
+                    <hr>
+                    <div class="col-sm-12">
+                        <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{tituloSeleccionado}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        
+        <sg-validacionPro *ngIf="Seleccionado == 1" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-validacionPro>
+
+
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <!-- <button type="button" class="btn btn-print-modal"  (click)="imprimir()" *ngIf="Seleccionado">Imprimir&nbsp;<em class="bi bi-printer"></em> </button> &nbsp;&nbsp; -->
+            <!---
+            <button type="button" class="btn btn-positivo-modal" (click)="aprobar()">
+                {{ Seleccionado === 5 || Seleccionado === 6 ? 'Enviar a' + tipoAutorizacion : 'Aprobar'}}
+                &nbsp;<em class="bi bi-check-lg"></em>
+            </button>&nbsp;
+            <button type="button" class="btn btn-negativo-modal" (click)="rechazar()" *ngIf="Seleccionado != 5 && Seleccionado != 6" >Rechazar&nbsp;<em class="bi bi-backspace"></em> </button>&nbsp;
+            ----->
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado != 3 && Seleccionado != 5 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9  && Seleccionado != 10">Generar oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado != 3 && Seleccionado != 5 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9  && Seleccionado != 10">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+
+        </div>
+    </div>
+</div>
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>
+
+
+
+<!-- OffCanvas Agregar Archivo -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarArchivo" [class.offcanvas-bajar]=""
+  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h1>Nueva Propuesta</h1>
+    <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="seccionAdd" class="control-label">Sección:</label>
+            <select class="form-select" aria-label="Default select example" id="seccionAdd">
+              <option>Elige una opción</option>
+              <option >
+                
+              </option>
+            </select>
+          </div>
+          <div class="col.sm-6"></div>
+          <div class="col-sm-6">
+            <label for="subseccionAdd" class="control-label">Subsección:</label>
+            <select class="form-select" aria-label="Default select example" id="subseccionAdd">
+              <option>Elige una opción</option>
+              <option >
+                
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarArchivo()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
