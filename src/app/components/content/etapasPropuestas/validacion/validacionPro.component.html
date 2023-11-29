@@ -91,56 +91,128 @@
             <div class="col-sm-12">
                 <div class="card" style="padding: 5px;">
                     <div class="card-body row" style="padding: 15px 15px;">
-                        <div class="col-md-12">
-                            <label for="nombre" class="form-label">RFC:</label>
-                            <span> PERJ920701AB1</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nombre:</label>
-                            <span> Juan</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">CURP:</label>
-                            <span> PEGJ920701HDFRRR00</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Apellido paterno:</label>
-                            <span> Pérez</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Apellido materno:</label>
-                            <span> Garcia</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Nacionalídad:</label>
-                            <span> Mexicana</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Fecha de Nacimiento:</label>
-                            <span> 01/07/1992</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Lugar de Nacimiento:</label>
-                            <span> Ciudad de México</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Teléfono fijo:</label>
-                            <span> (55) 1234-5678</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Teléfono móvil:</label>
-                            <span> 55-9876-5432</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Correo electrónico:</label>
-                            <span> juan.perez@example.com</span>
-                        </div>
+                        <h5>
+                            Validación de Registro de Propuesta
+                        </h5>
                     </div>
+                    <tbody>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <h3><span> Propuesta {{ datosPropuesta.IdPropuesta }}</span></h3>
+                                    <h3><span>{{ datosPropuesta.RemitentePro }}</span></h3>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th  class="col-sm-6">
+                                <div>
+                                    <label for="pagoCompra" class="form-label">Pago o Compra&nbsp;</label>
+                                    <span> {{ datosPropuesta.pagoCompra }}</span>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaRecepcion" class="form-label">Fecha de recepcion en el INDEP&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaRecepcion}}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="remitentePro" class="form-label">Remitente propuesta:&nbsp;</label>
+                                    <span>{{ datosPropuesta.RemitentePro }}</span>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaPropuesta" class="form-label">Fecha recepción de coordinación de recuperación de cartera y activos&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaPropuesta }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraMXN" class="form-label">Monto de propuesta con letra pesos&nbsp;</label>
+                                    <span>{{ datosPropuesta.montoletraMXN }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaDocumentos" class="form-label">Fecha del documento&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaDocumentos }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraUSD" class="form-label">Monto propuesta con letra dólares&nbsp;</label>
+                                    <span>{{ datosPropuesta.montoletraUSD }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="tipoCartera" class="form-label">Tipo cartera automatico del acreditado&nbsp;</label>
+                                    <span>{{ datosPropuesta.tipoCartera }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="plazaSoli" class="form-label">Plazo solicitado&nbsp;</label>
+                                    <span>{{ datosPropuesta.plazaSoli }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoMXN" class="form-label">Monto propuesta pesos&nbsp;</label>
+                                    <span> {{datosPropuesta.montoMXN}} </span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="NumVolante" class="form-label">Númenro de volante&nbsp;</label>
+                                    <span> {{datosPropuesta.NumVolante}} </span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraUSD" class="form-label">Monto propuesta dólares&nbsp;</label>
+                                    <span> {{datosPropuesta.montoletraUSD}} </span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <span for="capturo" class="from-label">Capturó:</span>
+                                    <span id="capturo" class="form-label">Andrea Villavicencio</span>
+                                    <span for="fecha" class="form-label">Fecha:</span>
+                                    <span id="fecha" class="form-label">22/02/2023</span>
+                                    <span for="hora" class="form-label">Hora:</span>
+                                    <span id="hora" class="form-label">12:23:34</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <hr>
+                        <div class="col-sm-6">
+                            <label for="cometarios" class="control-label">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" cols="45" rows="5"></textarea>
+                        </div>    
+                    </tbody>                    
                 </div>                     
             </div>
         </div>

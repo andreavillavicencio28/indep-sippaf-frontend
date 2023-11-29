@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CONSTANTES } from 'src/app/shared/constantes/constantes';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
+import { datosPropuesta, documentos } from '../detalle-solicitud/datosPropuesta'
 
 @Component({
   selector: 'sg-validacionPro',
@@ -15,6 +16,8 @@ export class ValidacionProComponent {
   @Input() id_solicitud: number = 0;
   @Input() solicitante = '';
 
+  datosPropuesta = datosPropuesta;
+  
   observaciones: boolean = false;
   accionEditar: boolean = false;
   tipoAccion: boolean = false;
@@ -145,8 +148,17 @@ export class ValidacionProComponent {
   }
 
   guardarCambios() {
-    this.showEditar = false;
-    this.toastrService.success("Se guardó correctamente la prevalidación");
+    this.confirmarModalService.abriraModal('Al guardar esta información se marcara como tarea completada').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.showEditar = false;
+        this.toastrService.success("Se guardó correctamente la información");
+  
+      }
+
+    });
+   // this.showEditar = false;
+   // this.toastrService.success("Se guardó correctamente la prevalidación");
   
   }
   documentosCarga = [

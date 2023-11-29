@@ -72,8 +72,7 @@ export class LoginComponent {
     if (data.user != '' && data.pass != '') {
        this.crearSesion();
        this.toastrService.success('Inicio de sesión correcta');
-       //this.router.navigate(['/content/acreditados']);
-       this.router.navigate(['/content/propuestas']);
+       this.router.navigate(['/content/acreditados']);
        //this.router.navigate(['/content/solicitudes']);
       
     } else {

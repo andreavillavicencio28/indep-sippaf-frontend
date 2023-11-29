@@ -347,7 +347,7 @@ const routes: Routes = [
           title: 'Propuestas',
           breadcrumbs: [
             {
-              text: 'propuestas',
+              text: 'Propuestas',
               active: true,
             }
           ],

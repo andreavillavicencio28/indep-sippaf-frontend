@@ -1,5 +1,6 @@
 export const datosPropuesta = {
     IdPropuesta:'001',
+    IdAcreditado:'203890',
     RemitentePro: 'Juan Pérez',
     pagoCompra:'Pago',
     fechaRecepcion: '01/05/2022',
@@ -12,7 +13,7 @@ export const datosPropuesta = {
     fechaDocumentos: '01/05/2022',
     propuestaDACION:'1,000',
     pagos:'5',
-    plazaSoli:'15,000',
+    plazaSoli:'15',
     capturista:'Maria Rosales',
     fechaCaptura:'01/05/2022',
     idResponsable:'002',

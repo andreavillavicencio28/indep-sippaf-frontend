@@ -32,14 +32,14 @@
         <div class="card">
             <div class="card-body row" style="padding: 0px 5px;">
                 <div class="col-sm-3">
+                    <label for="busqueda" class="form-label">Fecha inicio-Fecha fin</label>
+                    <input type="text" class="form-control" id="fecha" placeholder="Fecha inicio-Fecha Fin">
+                </div>
+                <div class="col-sm-3">
                     <label for="busqueda" class="form-label">Búsqueda</label>
                     <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
                 </div>
-                <div class="col-sm-3" text-end>
-                    <label for="busqueda" class="form-label">Fecha inicio/Fecha fin</label>
-                    <input type="text" class="form-control" id="fecha" placeholder="Fecha inicio-Fecha Fin">
-                </div>
-                <div class="col-sm-2" text-end>
+                <div class="col-sm-2">
                     <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
                         (click)="cambioSeleccion(1)">
                         <em class="bi bi-search"></em>
@@ -74,7 +74,7 @@
                 <thead>
                     <tr class="table-secondary">
                         <th style="width: 40%;">Id Propuesta</th>
-                        <th style="width: 40%;">Remitente de propuesta</th>
+                        <th style="width: 40%;">Acreditado</th>
                         <th style="width: 40%;">Fecha recepcion</th>
                         <th style="width: 40%;">Fecha propuesta</th>
                         <th style="width: 40%;">Tipo propuesta</th>
@@ -187,6 +187,7 @@
                         <select class="form-select" aria-label="Default select example" id="seccionAdd">
                             <option>Selecciona Acreditado</option>
                             <option >001 Juan Perez </option>
+                            <option >002 Cristina Leon </option>
                         </select>
                 </div>
                 <div class="col-sm-6">
@@ -254,19 +255,20 @@
                 <div class="col-sm-6">
                     <label for="subseccionAdd" class="control-label">Asignación</label>
                     <select class="form-select" aria-label="Default select example" id="subseccionAdd">
-                        <option selected value="1">Values</option>
+                        <option></option>
+                        <option selected value="1">Roberto</option>
                     </select>
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="capturo" class="control-label">Capturó:</label>
-                    <label id="capturo" class="control-label">Andrea Villavicencio</label>
+                    <label for="capturo" class="form-label">Capturó:</label>
+                    <label id="capturo" class="form-label">Andrea Villavicencio</label>
                     <br>
-                    <label for="fecha" class="control-label">Fecha:</label>
-                    <label id="fecha" class="control-label">22/02/2023</label>
+                    <label for="fecha" class="form-label">Fecha:</label>
+                    <label id="fecha" class="form-label">22/02/2023</label>
                     <br>
-                    <label for="hora" class="control-label">Hora:</label>
-                    <label id="hora" class="control-label">12:23:34</label>
+                    <label for="hora" class="form-label">Hora:</label>
+                    <label id="hora" class="form-label">12:23:34</label>
                 </div>
             </div>
         </div>

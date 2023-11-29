@@ -18,7 +18,7 @@ export class SidebarComponent {
     { label: 'Archivos', icon: 'bi bi-person-video3', route: '/content/usuariosexternos' },
     { label: 'Atenciones', icon: 'bi bi-files', route: '/content/anexos' },*/
     { label: 'Inicio', icon: 'bi bi-house', route: '/content/solicitudes' },
-    { label: 'Solicitudes uso INDEP', icon: 'bi bi-cart-plus', route: '/content/solicitudesindep' },
+    { label: 'Propuestas de Pago', icon: 'bi bi-pass-fill', route: '/content/propuestas' },
     { label: 'Solicitudes', icon: 'bi bi-cart', route: '/content/solicitudes2' },
     { label: 'Depositarias', icon: 'bi bi-binoculars-fill', route: '/content/depositarias' },
     { label: 'Remociones, Siniestros, Devoluciones, Mantenimiento con reconocimiento de gastos', icon: 'bi bi-exclamation-circle', route: '/content/remocionsiniestro' },
