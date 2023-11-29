@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { CONSTANTES } from 'src/app/shared/constantes/constantes';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
@@ -25,6 +26,8 @@ export class ValidacionProComponent {
   tituloObs: string = '';
   showDetalle: boolean = false;
   showFirma: boolean = false;
+  showCargaDocumento:boolean = false;
+  showGenerarOficio:boolean=false;
 
 
   objetoDetalle: any = {};
@@ -34,7 +37,11 @@ export class ValidacionProComponent {
   mostrarMensaje: boolean = true;
 
   documentoNombre: string = '';
+  FormularioConfirma !: FormGroup;
+  certFileName: string = "Ubicación del certificado";
+  keyFileName: string = "Ubicación de la llave privada";
 
+  
    //TODOS LOS COMPONENTES QUE REPRECENTEN  UN ESTATUS DEBERAN TENER ESTE OUTPUT
    @Output() respuestaCofirmarModal = new EventEmitter<boolean>();
 
@@ -43,6 +50,8 @@ export class ValidacionProComponent {
     private fb: FormBuilder,
     public toastrService: ToastrService
   ) {
+    this.crearFormularioConFirma();
+    this.FormularioConfirma.controls['rfc'].disable();
   }
 
    //TODOS LOS COMPONENTES QUE REPRECENTEN  UN ESTATUS DEBERAN TENER ESTAS FUNCONES
@@ -140,4 +149,171 @@ export class ValidacionProComponent {
     this.toastrService.success("Se guardó correctamente la prevalidación");
   
   }
+  documentosCarga = [
+    {
+      id: 1,
+      nombreDocumento: 'Acta de Hechos',
+    },
+    {
+      id: 2,
+      nombreDocumento: 'Archivo Notificación',
+    },
+    {
+      id: 3,
+      nombreDocumento: 'Acta de Transferencia',
+    },
+    {
+      id: 4,
+      nombreDocumento: 'Acuerdo de aseguramiento',
+    },
+    {
+      id: 5,
+      nombreDocumento: 'Anexo G',
+    },
+  ]
+
+  openFirma() {
+   // this.documentoNombre = nombre;
+    this.showFirma = true;
+  }
+
+  cerrarFirma() {
+    this.showFirma = false;
+  }
+
+  firmar() { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
+    let titulomsm = `Se firmó correctamente ${this.documentoNombre}`;
+    this.cerrarFirma();
+    this.toastrService.success(titulomsm);
+    console.log('firmar');
+
+  }
+
+  abrirPdf(documentoNombre: string = '') {
+    this.documentoNombre = documentoNombre;
+    this.showDetalle = true;
+  }
+
+  cargarDocumento(documentoNombre: string = '', accion: string) {
+    this.documentoNombre = documentoNombre
+    this.showCargaDocumento = true;
+  }
+
+  cerrarCargaDocumentos() {
+    this.showCargaDocumento = false;
+  }
+
+  uploadDocumento() {
+    this.toastrService.success(`Se ha subido el documento ${this.documentoNombre} exitosamente.`);
+    this.showCargaDocumento = false;
+  }
+
+  descargarDocumento(documento: string) { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
+    this.documentoNombre = documento;
+    let mensaje = `¿Estas seguro que quieres descargar el documento ${this.documentoNombre
+      }?`;
+    let titulomsm = `Se descargó correctamente la ${this.documentoNombre
+      }`;
+    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        // this.cerrarCamvasObs();
+        this.respuestaCofirmarModal.emit(true);
+        this.toastrService.success(titulomsm);
+      } else {
+        // El usuario canceló
+        // this.valorRespuestaComfirmarModal.emit(false);
+      }
+
+    });
+  }
+
+  descargarOficio(documento: string) { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
+    this.documentoNombre = documento;
+    let mensaje = `¿Estas seguro que quieres descargar el documento ${this.documentoNombre
+      }?`;
+    let titulomsm = `Se descargó correctamente la ${this.documentoNombre
+      }`;
+    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        // this.cerrarCamvasObs();
+        this.cerrarOficio();
+        this.respuestaCofirmarModal.emit(true);
+        this.toastrService.success(titulomsm);
+        
+      } else {
+        // El usuario canceló
+        //this.respuestaCofirmarModal.emit(false);
+      }
+
+    });
+  }
+
+
+  
+  eliminarDocumento(nombreDoc: string = '') {
+    //VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
+    this.documentoNombre = nombreDoc;
+    let mensaje = `¿Estas seguro que quieres eliminar el documento ${this.documentoNombre}?`;
+    let titulomsm = `Se eliminó correctamente el ${this.documentoNombre}`;
+    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        //  this.cerrarCamvasObs();
+        //  this.respuestaCofirmarModal.emit(true);
+        this.toastrService.success(titulomsm);
+      } else {
+        // El usuario canceló
+        //this.valorRespuestaComfirmarModal.emit(false);
+      }
+
+    });
+
+  }
+  crearFormularioConFirma() {
+    this.FormularioConfirma = this.fb.group({
+      key: [
+        '',
+        [Validators.required]
+      ],
+      cer: [
+        '',
+        [Validators.required]
+      ],
+      contra: [
+        '',
+        [Validators.required]
+      ],
+      rfc: [
+        '',
+        [
+          Validators.required, Validators.pattern(CONSTANTES.EXP_RFC)
+        ]
+      ]
+    });
+  }
+
+  onCertFileChange(event: any) {
+    this.certFileName = event.target.files[0].name;
+  }
+
+  onKeyFileChange(event: any) {
+    this.keyFileName = event.target.files[0].name;
+  }
+  openOficio() {
+    // this.documentoNombre = nombre;
+     this.showGenerarOficio = true;
+   }
+ 
+  cerrarOficio() {
+    //this.confirmarModalService.abriraModal('¿Seguro quieres salir?').subscribe(result => {
+    //  if (result) {
+        // El usuario aceptó
+        this.showGenerarOficio = false;
+    //  }
+
+   // });
+  }
+  
 }

@@ -2,14 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalConfig, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { datosEtapasSolicitud } from 'src/app/models/datosEtapasSolicitud.model';
+import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacionPro.component';
 
-import { PropuestaDelBienComponent } from '../etapasSolicitudes/propuesta-del-bien/propuesta-del-bien.component';
-import { OpinionTecnicaComponent } from '../etapasSolicitudes/opinion-tecnica/opinion-tecnica.component';
-import { PrevalidacionComponent } from '../etapasSolicitudes/prevalidacion/prevalidacion.component';
-import { ValidacionComponent } from '../etapasSolicitudes/validacion/validacion.component';
-import { AutorizacionComponent } from '../etapasSolicitudes/autorizacion/autorizacion.component';
-import { NombramientoComponent } from '../etapasSolicitudes/nombramiento/nombramiento.component';
-import { SeguroPolizaComponent } from '../etapasSolicitudes/seguro-poliza/seguro-poliza.component';
 @Component({
   selector: 'sg-propuesta',
   templateUrl: './propuestas.component.html',
@@ -32,7 +26,9 @@ export class PropuestasComponent {
   showCamvasPrincipal: boolean = false;
   datosNombramiento: any;
   tipoAutorizacion: string = '';
-
+  accion: number = 1; // accion de edicion
+  showEditar: boolean = false;
+  
   //Agergar archivo
   showAgregarArchivo: boolean = false;
 
@@ -40,15 +36,7 @@ export class PropuestasComponent {
 
 
   //Acciones de los componentes por estatus
-  @ViewChild(PropuestaDelBienComponent) propuestaDelBienComponent!: PropuestaDelBienComponent;
-  @ViewChild(OpinionTecnicaComponent) opinionTecnicaComponent!: OpinionTecnicaComponent;
-  @ViewChild(PrevalidacionComponent) prevalidacionComponent!: PrevalidacionComponent;
-  @ViewChild(ValidacionComponent) validacionComponent!: ValidacionComponent;
-  @ViewChild(AutorizacionComponent) autorizacionComponent!: AutorizacionComponent;
-  @ViewChild(NombramientoComponent) nombramientoComponent!: NombramientoComponent;
-  @ViewChild(SeguroPolizaComponent) seguroPolizaComponent!: SeguroPolizaComponent;
-
-
+  @ViewChild(ValidacionProComponent) ValidacionProComponent!: ValidacionProComponent;
   constructor(
     private toastrService : ToastrService,
   ) {
@@ -59,16 +47,16 @@ export class PropuestasComponent {
       // { indice: 1, titulo: 'Cancelados', activo: true, title: 'Solicitudes canceladas' ,noReg:25},
       // { indice: 2, titulo: 'Acción solicitante', activo: false, title: 'Solicitudes pendientes de acción del usuario' ,noReg:25},
       //=========================FIN ESTATUS ASIGNADOS A ACCION DEL USUARIO===============================
-      { indice: 1, titulo: 'Pre-validación', activo: false, title: '', noReg: 25 },
-      { indice: 2, titulo: 'Propuesta bien', activo: false, title: '', noReg: 30 },
-      { indice: 3, titulo: 'Validación', activo: false, title: '', noReg: 0 },
-      { indice: 4, titulo: 'Opinión técnica', activo: false, title: '', noReg: 15 },
-      { indice: 5, titulo: 'Aut. DEBI', activo: false, title: '', noReg: 1 },
-      { indice: 6, titulo: 'Aut. DCB', activo: false, title: '', noReg: 0 },
-      { indice: 7, titulo: 'Aut. DG', activo: false, title: '', noReg: 5 },
-      { indice: 8, titulo: 'Nombramiento', activo: false, title: '', noReg: 15 },
-      { indice: 9, titulo: 'Seguros', activo: false, title: '', noReg: 3 },
-      { indice: 10, titulo: 'Entrega', activo: false, title: '', noReg: 45 },
+      { indice: 1, titulo: 'Validación', activo: false, title: '', noReg: 14 },
+      { indice: 2, titulo: 'SIARAF', activo: false, title: '', noReg: 30 },
+      { indice: 3, titulo: 'SAEOG', activo: false, title: '', noReg: 0 },
+      { indice: 4, titulo: 'Juridico', activo: false, title: '', noReg: 15 },
+      { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
+      { indice: 6, titulo: 'SIAB', activo: false, title: '', noReg: 0 },
+      { indice: 7, titulo: 'Analisis', activo: false, title: '', noReg: 5 },
+      { indice: 8, titulo: 'COPER', activo: false, title: '', noReg: 15 },
+      { indice: 9, titulo: 'Acuerdos', activo: false, title: '', noReg: 3 },
+     // { indice: 10, titulo: 'Entrega', activo: false, title: '', noReg: 45 },
       // { indice: 11, titulo: 'Remoción', activo: false, title: '', noReg: 10 },
       // { indice: 12, titulo: 'Siniestros', activo: false, title: '', noReg: 5 },
 
@@ -103,39 +91,7 @@ export class PropuestasComponent {
   aprobar() {
     switch (this.Seleccionado) {
       case 1: {
-        this.prevalidacionComponent.aprobar();
-        break;
-      }
-      case 2: {
-        this.propuestaDelBienComponent.aprobar();
-        break;
-      }
-      case 3: {
-        this.validacionComponent.aprobar();
-        break;
-      }
-      case 4: {
-        this.opinionTecnicaComponent.aprobar();
-        break;
-      }
-      case 5: {
-        this.autorizacionComponent.aprobar();
-        break;
-      }
-      case 6: {
-        this.autorizacionComponent.aprobar();
-        break;
-      }
-      case 7: {
-        this.autorizacionComponent.aprobar();
-        break;
-      }
-      case 8: {
-        this.nombramientoComponent.aprobar();
-        break;
-      }
-      case 9: {
-        this.seguroPolizaComponent.aprobar();
+        this.ValidacionProComponent.aprobar();
         break;
       }
       default: {
@@ -144,42 +100,10 @@ export class PropuestasComponent {
     }
   }
 
-  rechazar() {
+  openOficio() {
     switch (this.Seleccionado) {
       case 1: {
-        this.prevalidacionComponent.rechazar();
-        break;
-      }
-      case 2: {
-        this.propuestaDelBienComponent.rechazar();
-        break;
-      }
-      case 3: {
-        this.validacionComponent.rechazar();
-        break;
-      }
-      case 4: {
-        this.opinionTecnicaComponent.rechazar();
-        break;
-      }
-      case 5: {
-        this.autorizacionComponent.rechazar();
-        break;
-      }
-      case 6: {
-        this.autorizacionComponent.rechazar();
-        break;
-      }
-      case 7: {
-        this.autorizacionComponent.rechazar();
-        break;
-      }
-      case 8: {
-        this.nombramientoComponent.rechazar();
-        break;
-      }
-      case 9: {
-        this.seguroPolizaComponent.rechazar();
+        this.ValidacionProComponent.openOficio();
         break;
       }
       default: {
@@ -191,23 +115,7 @@ export class PropuestasComponent {
   editar() {
     switch (this.Seleccionado) {
       case 1: {
-        this.prevalidacionComponent.editar();
-        break;
-      }
-      case 2: {
-        this.propuestaDelBienComponent.editar();
-        break;
-      }
-      case 4: {
-        this.opinionTecnicaComponent.editar();
-        break;
-      }
-      case 8: {
-        this.nombramientoComponent.editar();
-        break;
-      }
-      case 9: {
-        this.seguroPolizaComponent.editar();
+        this.ValidacionProComponent.editar();
         break;
       }
       default: {
@@ -242,45 +150,7 @@ export class PropuestasComponent {
 
     switch (this.Seleccionado) {
       case 1: {
-        this.tituloSeleccionado = 'Prevalidación';
-        break;
-      }
-      case 2: {
-        this.tituloSeleccionado = 'Propuesta del bien';
-        break;
-      }
-      case 3: {
         this.tituloSeleccionado = 'Validación';
-        break;
-      }
-      case 4: {
-        this.tituloSeleccionado = 'Opinión técnica';
-        break;
-      }
-      case 5: {
-        this.tipoAutorizacion = 'DCB'
-        this.tituloSeleccionado = 'Autorización DEBI';
-        break;
-      }
-      case 6: {
-        this.tipoAutorizacion = 'DGB'
-        this.tituloSeleccionado = 'Autorización DCB';
-        break;
-      }
-      case 7: {
-        this.tituloSeleccionado = 'Autorización DG';
-        break;
-      }
-      case 8: {
-        this.tituloSeleccionado = 'Nombramiento';
-        break;
-      }
-      case 9: {
-        this.tituloSeleccionado = 'Seguros';
-        break;
-      }
-      case 10: {
-        this.tituloSeleccionado = 'Entrega';
         break;
       }
       default: {
@@ -289,116 +159,130 @@ export class PropuestasComponent {
     }
 
     this.listaDatos = [{
-      NombreSolicitante: 'Juan Pérez',
-      tipoBien: 'Electrónico',
-      fechaSolicitud: '01/05/2022',
-      proceso: 'Aprobado',
-      imagen: '../../../../assets/imgen/portada-villa-2023-2.png',
-      estatus: 1
+      IdPropuesta:'001',
+      RemitentePro: 'Juan Pérez',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Maria Rosales',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'002',
+      NumVolante:'001',
+      estatus: 'Activo',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'María Rodríguez',
-      tipoBien: 'Mueble',
-      fechaSolicitud: '15/06/2022',
-      proceso: 'Pendiente',
-      imagen: 'url_imagen_2.jpg',
-      estatus: 2
+      IdPropuesta:'002',
+      RemitentePro: 'María Rodríguez',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'8,000',
+      montoUSD:'400',
+      propuestaDACION:'8000',
+      pagos:'5',
+      plazaSoli:'16,000',
+      capturista:'Jose Morales',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'007',
+      NumVolante:'002',
+      estatus: 'activo',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'Carlos López',
-      tipoBien: 'Vehículo',
-      fechaSolicitud: '10/07/2022',
-      proceso: 'Rechazado',
-      imagen: 'url_imagen_3.jpg',
-      estatus: 3
+      IdPropuesta:'003',
+      RemitentePro: 'Carlos López',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Elda Avila',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'004',
+      NumVolante:'003',
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'INDEP',
-      tipoBien: 'Electrodoméstico',
-      fechaSolicitud: '20/08/2022',
-      proceso: 'Aprobado',
-      imagen: '../../../../assets/imgen/portada-villa-2023-2.png',
-      estatus: 4
+      IdPropuesta:'004',
+      RemitentePro: 'INDEP',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Maria Rosales',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'002',
+      NumVolante:'004',
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'Laura Martínez',
-      tipoBien: 'Vehículo',
-      fechaSolicitud: '05/04/2022',
-      proceso: 'Aprobado',
-      imagen: 'url_imagen_5.jpg',
-      estatus: 5
+      IdPropuesta:'005',
+      RemitentePro: 'Laura Martínez',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Jose Morales',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'007',
+      NumVolante:'005',
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'Andrés Ramírez',
-      tipoBien: 'Herramientas',
-      fechaSolicitud: '12/07/2022',
-      proceso: 'Pendiente',
-      imagen: 'url_imagen_6.jpg',
-      estatus: 6
+      IdPropuesta:'006',
+      RemitentePro: 'Andrés Ramírez',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Elda Avila',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'004',
+      NumVolante:'006',
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
-      NombreSolicitante: 'Isabel Vega',
-      tipoBien: 'Ropa',
-      fechaSolicitud: '22/08/2022',
-      proceso: 'Rechazado',
-      imagen: 'url_imagen_7.jpg',
-      estatus: 7
-    },
-    {
-      NombreSolicitante: 'Miguel Torres',
-      tipoBien: 'Instrumento musical',
-      fechaSolicitud: '18/06/2022',
-      proceso: 'En revisión',
-      imagen: 'url_imagen_8.jpg',
-      estatus: 8
-    },
-    {
-      NombreSolicitante: 'Carmen López',
-      tipoBien: 'Arte',
-      fechaSolicitud: '30/09/2022',
-      proceso: 'Aprobado',
-      imagen: 'url_imagen_9.jpg',
-      estatus: 9
-    },
-    {
-      NombreSolicitante: 'Ricardo Fernández',
-      tipoBien: 'Equipo deportivo',
-      fechaSolicitud: '07/03/2022',
-      proceso: 'Pendiente',
-      imagen: 'url_imagen_10.jpg',
-      estatus: 10
-    },
-    {
-      NombreSolicitante: 'Patricia Gómez',
-      tipoBien: 'Libros',
-      fechaSolicitud: '14/05/2022',
-      proceso: 'Rechazado',
-      imagen: 'url_imagen_11.jpg',
-      estatus: 11
-    },
-    {
-      NombreSolicitante: 'Diego Ortega',
-      tipoBien: 'Electrodoméstico',
-      fechaSolicitud: '02/07/2022',
-      proceso: 'En revisión',
-      imagen: 'url_imagen_12.jpg',
-      estatus: 12
-    },
-    {
-      NombreSolicitante: 'Elena Navarro',
-      tipoBien: 'Mueble',
-      fechaSolicitud: '09/08/2022',
-      proceso: 'Aprobado',
-      imagen: 'url_imagen_13.jpg',
-      estatus: 13
-    },
-    {
-      NombreSolicitante: 'Luisa Sánchez',
-      tipoBien: 'Vehículo',
-      fechaSolicitud: '11/10/2022',
-      proceso: 'Pendiente',
-      imagen: 'url_imagen_14.jpg',
-      estatus: 14
+      IdPropuesta:'007',
+      RemitentePro: 'Isabel Vega',
+      fechaRecepcion: '01/05/2022',
+      fechaPropuesta: '01/05/2022',
+      tipoPropuesta:'Laboral',
+      montoMXN:'6,000',
+      montoUSD:'300',
+      propuestaDACION:'1,000',
+      pagos:'5',
+      plazaSoli:'15,000',
+      capturista:'Luis Gomez',
+      fechaCaptura:'01/05/2022',
+      idResponsable:'001',
+      NumVolante:'007',
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     }]
   }
 
@@ -411,11 +295,6 @@ export class PropuestasComponent {
   }
 
   cerrarCamvasPrincipal() {
-    switch (this.Seleccionado) {
-      case 8:
-        this.nombramientoComponent.tipoNombramiento = ''
-        break;
-    }
     this.showCamvasPrincipal = false;
   }
 
@@ -448,4 +327,5 @@ export class PropuestasComponent {
     this.showAgregarArchivo = false;
   }
 
+ 
 }

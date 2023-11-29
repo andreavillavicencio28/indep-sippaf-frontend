@@ -8,18 +8,77 @@
                             <a class="nav-link" [class.active]="accionDetalle == 1"
                                 (click)="cambioAccionDetalle(1)">Detalle</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 2"
+                                (click)="cambioAccionDetalle(2)">Documentos</a>
+                        </li>
                     </ul>
 
                     <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
                        <!-- <sg-detalle [tipo]="tipo"></sg-detalle>    -->
                        <sg-detalle-propuesta [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-propuesta>                   
                     </div>
+                    <!--------------------Documentacion-------------------->
+                    <div class="row" class="mt-2" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 35%;">Tipo Documento</th>
+                                        <th style="width: 25%;">Tipo de firma</th>
+                                        <th style="width: 35%;" class="valoresCentrados">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of documentosCarga">
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.nombreDocumento}}</td>
+                                        <td>Electrónica</td>
+                                        <td class="valoresCentrados">
+                                            <!--------
+                                            <button class="btn btn-link" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-title="Firmar" title="Firmar"
+                                                (click)="openFirma(item.nombreDocumento)">
+                                                <i class="bi bi-laptop"></i>
+                                            </button>
+                                             ------>
+                                            <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                           
+                                            <!---------
+                                            <button class="btn btn-link"
+                                                (click)="descargarDocumento(item.nombreDocumento)" title="Descargar">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                            --------->
+                                            <button class="btn btn-link"
+                                                (click)="cargarDocumento(item.nombreDocumento, 'cargarDocumento')"
+                                                title="Cargar documento">
+                                                <i class="bi bi-upload"></i>
+                                            </button>
+                                            <button class="btn btn-link"
+                                                (click)="eliminarDocumento(item.nombreDocumento)" title="Eliminar">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+<!---Formulario-----Editar----->
 <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditar" [class.bajar]="showObs" ngtabindex="-1"
     id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -32,15 +91,6 @@
             <div class="col-sm-12">
                 <div class="card" style="padding: 5px;">
                     <div class="card-body row" style="padding: 15px 15px;">
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center;">
-                                <p class="valoresCentrados">
-                                    I. Datos de la persona física solicitante
-                                </p>
-                            </div>
-                            <hr class="red">
-                        </div>
-
                         <div class="col-md-12">
                             <label for="nombre" class="form-label">RFC:</label>
                             <span> PERJ920701AB1</span>
@@ -90,373 +140,8 @@
                             <label for="nombre" class="form-label">Correo electrónico:</label>
                             <span> juan.perez@example.com</span>
                         </div>
-
-                        <div class="col-md-12 content-radio">
-                            <h5>Información correctos?</h5>
-                            <div class="form-check mr-1 ml-1">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                    id="flexRadioDefault1" (click)="mostrarObservaciones('si')">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                    id="flexRadioDefault2" (click)="mostrarObservaciones('no')">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12" *ngIf="observaciones">
-                            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    II. Domicilio Particular
-                                </p>
-                            </div>
-                            <hr class="red">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">CP:</label>
-                            <span> 67890</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Estado:</label>
-                            <span> CDMX</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Alcaldía o Municipio:</label>
-                            <span> Ciudad de México</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Colonia:</label>
-                            <span> Benito Juárez</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Calle:</label>
-                            <span> Calle de la Rosa</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">No. Exterior:</label>
-                            <span> 123</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">No. Interior:</label>
-                            <span> 4B</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Entre calles:</label>
-                            <span> Francisco I. Madero y Emiliano Zapata</span>
-                        </div>
-
-                        <div class="col-md-12 content-radio">
-                            <h5>Información correctos?</h5>
-                            <div class="form-check mr-1 ml-1">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
-                                    id="flexRadioDefault1" (click)="mostrarObservaciones('si')">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault2"
-                                    id="flexRadioDefault2" (click)="mostrarObservaciones('no')">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12" *ngIf="observaciones">
-                            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    III. Datos del bien solicitado
-                                </p>
-                            </div>
-                            <hr class="red">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Número de registro insitucional:</label>
-                            <span> 2364747324</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Tipo de bien:</label>
-                            <span> Inmueble</span>
-                        </div>
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    Ubicación del bien
-                                </p>
-                            </div>
-                            <hr class="red">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Estado:</label>
-                            <span> CDMX</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Alcaldía o Municipio::</label>
-                            <span> Ciudad de México</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Colonia:</label>
-                            <span> Benito Juárez</span>
-                        </div>
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    Datos del bien
-                                </p>
-                                <hr class="red">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Descripción y características del bien
-                                requerido:</label>
-                            <span> Datosdelbienw6564867486854878676846845648968</span>
-                        </div>
-
-                        <div class="col-md-12 content-radio">
-                            <h5>Información correctos?</h5>
-                            <div class="form-check mr-1 ml-1">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault3"
-                                    id="flexRadioDefault1" (click)="mostrarObservaciones('si')">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault3"
-                                    id="flexRadioDefault2" (click)="mostrarObservaciones('no')">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12" *ngIf="observaciones">
-                            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    IV. Datos para el uso del bien
-                                </p>
-                                <hr class="red">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <label for="nombre" class="form-label">Justificación que se le dara al bien:</label>
-                        </div>
-
-                        <div class="col-md-12">
-                            <span> Favor de indicar en las siguientes la justificación del uso que pretende dar al Bien
-                                que
-                                solicita</span>
-                        </div>
-
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    Domicilio Fiscal
-                                </p>
-                            </div>
-                            <hr class="red">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">CP:</label>
-                            <span> 67890</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Estado:</label>
-                            <span> CDMX</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Alcaldía o Municipio::</label>
-                            <span> Ciudad de México</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Colonia:</label>
-                            <span> Benito Juárez</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Calle:</label>
-                            <span> Calle de la Rosa</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">No. Exterior:</label>
-                            <span> 123</span>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">No. Interior:</label>
-                            <span> 4B</span>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="nombre" class="form-label">Entre calles:</label>
-                            <span> Francisco I. Madero y Emiliano Zapata</span>
-                        </div>
-
-                        <!-- <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                            <p>
-                                Bajo protesta de decir verdad, manifiesto que la información aqui declarada es verdadera
-                                y
-                                fiel
-                            </p>
-                            <p style="margin: 200px 0px 0px 0px;">
-                                Firma del Solicitante
-                            </p>
-                        </div> -->
-
-
-                        <div class="col-md-12 content-radio">
-                            <h5>Información correctos?</h5>
-                            <div class="form-check mr-1 ml-1">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault4"
-                                    id="flexRadioDefault1" (click)="mostrarObservaciones('si')">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault4"
-                                    id="flexRadioDefault2" (click)="mostrarObservaciones('no')">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12" *ngIf="observaciones">
-                            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center; margin: 13px 0px 0px 0px;">
-                                <p class="valoresCentrados">
-                                    V. Archivos adjuntos a la presente solicitud los siguientes:
-                                </p>
-                            </div>
-                        </div>
-
-                        <table class="table table-hover">
-                            <thead>
-                                <tr class="table-secondary">
-                                    <th style="width: 70%;">Documentos</th>
-                                    <th style="width: 30%;" class="valoresCentrados">Visualización</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Registro Federal de Contribuyentes</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Clave Única del Registro de Población (CURP)</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Comprobante de domicilio</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Identificación oficial con fotografía (INE, pasaporte, cédula profesional)</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Última declaración anual o escrito en el cual manifieste bajo protesta de decir
-                                        la
-                                        verdad que no está
-                                        obligado</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>En caso de ser extranjero deberá acreditar su estancia legal en el país y su
-                                        interés
-                                        juridico</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Currículum vitae (lugar y fecha de nacimiento, domicilio, particular actual,
-                                        ocupación, número
-                                        telefónico, etc.)</td>
-                                    <td class="valoresCentrados">
-                                        <button type="button" class="btn btn-link" value="conSearch" title="Ver">
-                                            <i class="bi bi-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="col-md-12 content-radio">
-                            <h5>Información correctos?</h5>
-                            <div class="form-check mr-1 ml-1">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault5"
-                                    id="flexRadioDefault1" (click)="mostrarObservaciones('si')">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                    Sí
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault5"
-                                    id="flexRadioDefault2" (click)="mostrarObservaciones('no')">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-12" *ngIf="observaciones">
-                            <label for="exampleFormControlTextarea1" class="form-label"> Observaciones</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
                     </div>
-                </div>
-
+                </div>                     
             </div>
         </div>
     </div>
@@ -467,28 +152,161 @@
         </div>
     </div>
 </div>
+<div class="offcanvas-backdrop fade show" *ngIf="showDetalle"></div>
+<div class="offcanvas-backdrop fade show" *ngIf="showEditar || showObs || showGenerarOficio"></div>
 
-<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showObs" ngtabindex="-1" id="offcanvasRight"
+
+
+
+<!-- Modal vista previa -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle" ngtabindex="-1" id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-body">
-        <h1>{{tituloObs}}</h1>
-        <hr class="red" />
-        <div class="col-sm-12">
-            <label for="obs" class="form-label">Observaciones</label>
-            <textarea class="form-control" id="obs" rows="6"></textarea>
+    <div class="offcanvas-header">
+        <h1>Vista previa</h1>
+        <div>
+            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
         </div>
     </div>
-    <div class="offcanvas-footer">
-        <div class="text-end">
-            <button type="button" class="btn btn-positivo-modal" (click)="cerrarCamvasObsConfirmar()">Aceptar &nbsp; <em
-                    class="bi bi-check-lg"></em> </button> &nbsp;
-            <button type="button" class="btn btn-negativo-modal" (click)="cerrarCamvasObs()">Cancelar &nbsp; <em
-                    class="bi bi-backspace"></em> </button> &nbsp;
+    <div class="offcanvas-body">
+        <div class="row" *ngIf="tipoModal === 'verDocumento'">
+            <p>Documento</p>
+        </div>
+        <div class="row" *ngIf="tipoModal === 'cargarDocumento'">
+            <div class="col-sm-12">
+                <label for="formFile" class="form-label"><i class="bi bi-upload"></i></label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
         </div>
     </div>
 </div>
 
 
-<div class="offcanvas-backdrop fade show" *ngIf="showDetalle"></div>
 
-<div class="offcanvas-backdrop fade show" *ngIf="showEditar || showObs"></div>
+
+<!-- Modal carga documento -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showCargaDocumento" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1 style="visibility: hidden;">Titulo</h1>
+        <button type="button" class="btn btn-negativo-modal boton-derecho" data-bs-dismiss="offcanvas"
+            aria-label="Close" (click)="cerrarCargaDocumentos()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <label for="formFile" class="form-label"><em class="bi bi-upload"></em></label> -->
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="uploadDocumento()">&nbsp; <em
+                    class="bi bi-check-lg"></em> Subir
+            </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+
+<!---Formulario-----OFICIO----->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showGenerarOficio" [class.bajar]="showObs" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>OFICIO</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarOficio()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                        <div class="col-sm-12 row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <p class="valoresCentrados">
+                                    Oficio N°
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-positivo-modal boton-derecho" title="Firmar"
+                (click)="openFirma()">
+                    Firmar Oficio&nbsp;<i class="bi bi-pen"></i>
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-negativo-modal boton-derecho" title="Descargar"
+                (click)="descargarOficio('Oficio')">
+                    Descargar&nbsp;<i class="bi bi-download"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal firma -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirma" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Firma</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12 row" [formGroup]="FormularioConfirma">
+                <div class="col-sm-8">
+                    <label for="cert" class="control-label">Certificado (.cer):</label>
+                    <div class="input-group">
+                        <label for="cert" class="control-label" style="display: none">Certificado (.cer):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert"
+                            id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
+                        <label for="fileCertificate" class="control-label" style="display: none">Certificado
+                            (.cer):</label>
+                        <input type="file" style="display: none" id="fileCertificate" accept=".cer"
+                            (change)="onCertFileChange($event)" formControlName="key">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate"
+                                onclick="document.getElementById('fileCertificate').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="key" class="control-label">Clave privada (.key):</label>
+                    <div class="input-group">
+                        <label for="key" class="control-label" style="display: none">Clave privada (.key):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key"
+                            id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
+                        <label for="filePrivateKey" class="control-label" style="display: none">Clave privada
+                            (.key):</label>
+                        <input type="file" style="display: none" id="filePrivateKey" accept=".key"
+                            (change)="onKeyFileChange($event)" formControlName="cer">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey"
+                                onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="contra" class="control-label">Contraseña de clave privada:</label>
+                    <input type="password" class="form-control" id="contra" placeholder="Contraseña"
+                        formControlName="contra">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>

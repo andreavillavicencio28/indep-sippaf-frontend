@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { datosSolicitud, documentos } from './datosSolicitud'
+import { datosPropuesta, documentos } from './datosPropuesta'
 
 @Component({
   selector: 'sg-detalle-propuesta',
@@ -10,12 +10,12 @@ export class DetallePropuestaComponent {
   @Input() id_solicitud: number = 0;
   @Input() solicitante: string = '';
 
-  showDetalleSolicitud: boolean = false;
+  showDetallePropuesta: boolean = false;
   showDocumento: boolean = false;
 
   nombreDocumento: string = '';
 
-  datosSolicitud = datosSolicitud;
+  datosPropuesta = datosPropuesta;
   documentos = documentos;
 
   constructor() {
@@ -24,12 +24,12 @@ export class DetallePropuestaComponent {
   }
 
   mostrarDetalle() {
-    this.showDetalleSolicitud = true;    
+    this.showDetallePropuesta = true;    
   }
 
   cerrarCanvas(tipo: string) {
     if (tipo === 'detalle') {
-      this.showDetalleSolicitud = false;
+      this.showDetallePropuesta = false;
     } else if (tipo === 'documento') {
       this.showDocumento = false;
     }

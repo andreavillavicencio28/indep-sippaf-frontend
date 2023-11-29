@@ -1,84 +1,77 @@
 <div class="row">
     <div class="col-md-12 valoresCentrados title">
         <h5>
-            Datos de la solicitud
+            Validación de Registro de Propuesta
+            <!---
             <button type="button" class="btn btn-link btn-title" (click)="mostrarDetalle()" data-toggle="tooltip" data-placement="top" title="Ver detalle">
-                <i class="bi bi-caret-left-fill" *ngIf=" showDetalleSolicitud"></i>
-                <i class="bi bi-caret-right-fill" *ngIf="! showDetalleSolicitud"></i>
+           
+                <i class="bi bi-caret-left-fill" *ngIf=" showDetallePropuesta"></i>
+                <i class="bi bi-caret-right-fill" *ngIf="! showDetallePropuesta"></i>
             </button>
+            ---->
         </h5>
     </div>
     <div class="col-sm-6">
-        <label for="id" class="form-label">ID:&nbsp;</label>
-        <span>{{ datosSolicitud.id }}</span>
+        <h3><span> Propuesta {{ datosPropuesta.IdPropuesta }}</span></h3>
+        <h3><span>{{ datosPropuesta.RemitentePro }}</span></h3>
     </div>
     <div class="col-sm-6  ">
-        <label for="ano" class="form-label">Año:&nbsp;</label>
-        <span> {{ datosSolicitud.ano }}</span>
+        <label for="pagoCompra" class="form-label">Pago o Compra&nbsp;</label>
+        <span> {{ datosPropuesta.pagoCompra }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="num_solicitud" class="form-label">Núm. de Solicitud:&nbsp;</label>
-        <span>{{ datosSolicitud.num_solicitud }}</span>
+        <label for="fechaRecepcion" class="form-label">Fecha de recepcion en el INDEP&nbsp;</label>
+        <span>{{ datosPropuesta.fechaRecepcion}}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="turno" class="form-label">Turno:&nbsp;</label>
-        <span>{{ datosSolicitud.turno }}</span>
+        <label for="remitentePro" class="form-label">Remitente propuesta:&nbsp;</label>
+        <span>{{ datosPropuesta.RemitentePro }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="debi" class="form-label">DEBI:&nbsp;</label>
-        <span>{{ datosSolicitud.debi }}</span>
+        <label for="fechaPropuesta" class="form-label">Fecha recepción de coordinación de recuperación de cartera y activos&nbsp;</label>
+        <span>{{ datosPropuesta.fechaPropuesta }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="cabi" class="form-label">CABI:&nbsp;</label>
-        <span>{{ datosSolicitud.cabi }}</span>
+        <label for="montoletraMXN" class="form-label">Monto de propuesta con letra pesos&nbsp;</label>
+        <span>{{ datosPropuesta.montoletraMXN }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="num_oficio" class="form-label">No. Oficio:&nbsp;</label>
-        <span>{{ datosSolicitud.num_oficio }}</span>
+        <label for="fechaDocumentos" class="form-label">Fecha del documento&nbsp;</label>
+        <span>{{ datosPropuesta.fechaDocumentos }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="f_oficio" class="form-label">Fecha oficio:&nbsp;</label>
-        <span>{{ datosSolicitud.f_oficio }}</span>
+        <label for="montoletraUSD" class="form-label">Monto propuesta con letra dólares&nbsp;</label>
+        <span>{{ datosPropuesta.montoletraUSD }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="f_recepcion_partes" class="form-label">Fecha Recepción O. PARTES:&nbsp;</label>
-        <span>{{ datosSolicitud.f_recepcion_partes }}</span>
+        <label for="tipoCartera" class="form-label">Tipo cartera automatico del acreditado&nbsp;</label>
+        <span>{{ datosPropuesta.tipoCartera }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="f_recepcion_atbad" class="form-label">Fecha Recepción ATBAD:&nbsp;</label>
-        <span>{{ datosSolicitud.f_recepcion_atbad }}</span>
+        <label for="plazaSoli" class="form-label">Plazo solicitado&nbsp;</label>
+        <span>{{ datosPropuesta.plazaSoli }}</span>
     </div>
     <div class="col-sm-6  ">
-        <label for="f_recepcion_dr" class="form-label">Fecha Recepción D. R.:&nbsp;</label>
-        <span> {{datosSolicitud.f_recepcion_dr}} </span>
+        <label for="montoMXN" class="form-label">Monto propuesta pesos&nbsp;</label>
+        <span> {{datosPropuesta.montoMXN}} </span>
     </div>
     <div class="col-sm-6  ">
-        <label for="solicitante" class="form-label">Solicitante:&nbsp;</label>
-        <span> {{datosSolicitud.solicitante}} </span>
+        <label for="NumVolante" class="form-label">Númenro de volante&nbsp;</label>
+        <span> {{datosPropuesta.NumVolante}} </span>
     </div>
     <div class="col-sm-6  ">
-        <label for="rep_legal" class="form-label">Representante legal:&nbsp;</label>
-        <span> {{datosSolicitud.rep_legal}} </span>
+        <label for="montoletraUSD" class="form-label">Monto propuesta dólares&nbsp;</label>
+        <span> {{datosPropuesta.montoletraUSD}} </span>
     </div>
-    <div class="col-sm-6  ">
-        <label for="cargo" class="form-label">Cargo:&nbsp;</label>
-        <span> {{datosSolicitud.cargo}} </span>
-    </div>
-    <div class="col-sm-6  ">
-        <label for="telefono" class="form-label">Teléfono:&nbsp;</label>
-        <span> {{datosSolicitud.telefono}} </span>
-    </div>
-    <div class="col-sm-6  ">
-        <label for="correo" class="form-label">Correo:&nbsp;</label>
-        <span> {{datosSolicitud.correo}} </span>
-    </div>
-    <div class="col-sm-6  ">
-        <label for="t_remitente" class="form-label">Tipo Remitente:&nbsp;</label>
-        <span> {{datosSolicitud.t_remitente}} </span>
-    </div>
-    <div class="col-sm-6  ">
-        <label for="via_solicitud" class="form-label">Vía de la Solicitud:&nbsp;</label>
-        <span> {{datosSolicitud.via_solicitud}} </span>
+    <div class="col-sm-6">
+        <label for="capturo" class="control-label">Capturó:</label>
+        <label id="capturo" class="control-label">Andrea Villavicencio</label>
+        <br>
+        <label for="fecha" class="control-label">Fecha:</label>
+        <label id="fecha" class="control-label">22/02/2023</label>
+        <br>
+        <label for="hora" class="control-label">Hora:</label>
+        <label id="hora" class="control-label">12:23:34</label>
     </div>
     <hr>
     <div class="col-sm-12">
@@ -86,12 +79,14 @@
             Observaciones:
         </h5>
         <p>
-            Para procesar su solicitud atienda los cambios que se solicitan.
+            Documentación completa
         </p>
     </div>
 </div>
 
-<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showDetalleSolicitud" [class.bajar]="showDocumento" ngtabindex="-1" id="offcanvasSolicitud" aria-labelledby="offcanvasRightLabel">
+
+<!-----------------
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showDetallePropuesta" [class.bajar]="showDocumento" ngtabindex="-1" id="offcanvasSolicitud" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h1>Detalle Solicitud</h1>
         <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
@@ -225,7 +220,7 @@
                                     Ubicación del bien
                                 </label>
                             </div>
-                            <!-- <hr> -->
+                            
                         </div>
                         <div class="col-md-6">
                             <label for="nombre" class="form-label">Estado:</label>
@@ -245,7 +240,7 @@
                                 <label class="valoresCentrados form-label">
                                     Datos del bien
                                 </label>
-                                <!-- <hr> -->
+                                
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -279,7 +274,7 @@
                                     Domicilio Fiscal
                                 </label>
                             </div>
-                            <!-- <hr> -->
+                            
                         </div>
 
                         <div class="col-md-6">
@@ -365,7 +360,9 @@
         </div>
     </div>
 </div>
+---------------->
 
+<!------------
 <div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDocumento" ngtabindex="-1"
     id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -376,10 +373,7 @@
     <div class="offcanvas-body">
         <div class="col-sm-12">
             <div class="col-sm-12">
-                <!-- <div class="card" style="padding: 5px;">
-                    <div class="card-body row" style="padding: 15px 15px;">
-                    </div>
-                </div> -->
+              
             </div>
         </div>
     </div>
@@ -392,6 +386,7 @@
 </div>
 
 
-<div class="offcanvas-backdrop fade show" *ngIf=" showDetalleSolicitud"></div>
+<div class="offcanvas-backdrop fade show" *ngIf=" showDetallePropuesta"></div>
 
 <div class="offcanvas-backdrop fade show" *ngIf="showDocumento"></div>
+------------>
