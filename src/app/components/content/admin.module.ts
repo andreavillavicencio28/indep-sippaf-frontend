@@ -11,12 +11,16 @@ import { AdminComponent } from './admin.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { PropuestasComponent } from './propuestas/propuestas.component';
 import { WizardComponent } from 'src/app/shared/wizard/wizard.component';
 import { DetalleJuridicoComponent } from './juridico/detalle-juridico/detalle-juridico.component';
 import { JuridicoComponent } from './juridico/juridico.component';
 import { DetalleCapaComponent } from './capa/detalle-capa/detalle-capa.component';
 import { CapaComponent } from './capa/capa.component';
+
+import { PropuestasComponent } from './propuestas/propuestas.component';
+import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
+import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/detalle-propuesta.component';
+
 
 /* Components */
 @NgModule({
@@ -38,6 +42,8 @@ import { CapaComponent } from './capa/capa.component';
   declarations: [
     AdminComponent,
     PropuestasComponent,
+    ValidacionProComponent,
+    DetallePropuestaComponent,
     DetalleJuridicoComponent,
     JuridicoComponent,
     CapaComponent,

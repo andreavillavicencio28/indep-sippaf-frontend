@@ -1,0 +1,384 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row" style="padding: 15px 15px;">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 1"
+                                (click)="cambioAccionDetalle(1)">Detalle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 2"
+                                (click)="cambioAccionDetalle(2)">Documentos</a>
+                        </li>
+                    </ul>
+
+                    <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
+                       <!-- <sg-detalle [tipo]="tipo"></sg-detalle>    -->
+                       <sg-detalle-propuesta [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-propuesta>                   
+                    </div>
+                    <!--------------------Documentacion-------------------->
+                    <div class="row" class="mt-2" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th style="width: 5%;">#</th>
+                                        <th style="width: 35%;">Tipo Documento</th>
+                                        <th style="width: 25%;">Tipo de firma</th>
+                                        <th style="width: 35%;" class="valoresCentrados">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of documentosCarga">
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.nombreDocumento}}</td>
+                                        <td>Electrónica</td>
+                                        <td class="valoresCentrados">
+                                            <!--------
+                                            <button class="btn btn-link" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" data-bs-title="Firmar" title="Firmar"
+                                                (click)="openFirma(item.nombreDocumento)">
+                                                <i class="bi bi-laptop"></i>
+                                            </button>
+                                             ------>
+                                            <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                           
+                                            <!---------
+                                            <button class="btn btn-link"
+                                                (click)="descargarDocumento(item.nombreDocumento)" title="Descargar">
+                                                <i class="bi bi-download"></i>
+                                            </button>
+                                            --------->
+                                            <button class="btn btn-link"
+                                                (click)="cargarDocumento(item.nombreDocumento, 'cargarDocumento')"
+                                                title="Cargar documento">
+                                                <i class="bi bi-upload"></i>
+                                            </button>
+                                            <button class="btn btn-link"
+                                                (click)="eliminarDocumento(item.nombreDocumento)" title="Eliminar">
+                                                <i class="bi bi-x-circle"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!---Formulario-----Editar----->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditar" [class.bajar]="showObs" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarEditar()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                        <h5>
+                            Validación de Registro de Propuesta
+                        </h5>
+                    </div>
+                    <tbody>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <h3><span> Propuesta {{ datosPropuesta.IdPropuesta }}</span></h3>
+                                    <h3><span>{{ datosPropuesta.RemitentePro }}</span></h3>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th  class="col-sm-6">
+                                <div>
+                                    <label for="pagoCompra" class="form-label">Pago o Compra&nbsp;</label>
+                                    <span> {{ datosPropuesta.pagoCompra }}</span>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaRecepcion" class="form-label">Fecha de recepcion en el INDEP&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaRecepcion}}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="remitentePro" class="form-label">Remitente propuesta:&nbsp;</label>
+                                    <span>{{ datosPropuesta.RemitentePro }}</span>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaPropuesta" class="form-label">Fecha recepción de coordinación de recuperación de cartera y activos&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaPropuesta }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraMXN" class="form-label">Monto de propuesta con letra pesos&nbsp;</label>
+                                    <span>{{ datosPropuesta.montoletraMXN }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="fechaDocumentos" class="form-label">Fecha del documento&nbsp;</label>
+                                    <span>{{ datosPropuesta.fechaDocumentos }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraUSD" class="form-label">Monto propuesta con letra dólares&nbsp;</label>
+                                    <span>{{ datosPropuesta.montoletraUSD }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="tipoCartera" class="form-label">Tipo cartera automatico del acreditado&nbsp;</label>
+                                    <span>{{ datosPropuesta.tipoCartera }}</span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="plazaSoli" class="form-label">Plazo solicitado&nbsp;</label>
+                                    <span>{{ datosPropuesta.plazaSoli }}</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoMXN" class="form-label">Monto propuesta pesos&nbsp;</label>
+                                    <span> {{datosPropuesta.montoMXN}} </span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="NumVolante" class="form-label">Númenro de volante&nbsp;</label>
+                                    <span> {{datosPropuesta.NumVolante}} </span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-sm-6">
+                                <div>
+                                    <label for="montoletraUSD" class="form-label">Monto propuesta dólares&nbsp;</label>
+                                    <span> {{datosPropuesta.montoletraUSD}} </span>
+                                </div>
+                            </th>
+                            &nbsp;
+                            <th class="col-sm-6">
+                                <div>
+                                    <span for="capturo" class="from-label">Capturó:</span>
+                                    <span id="capturo" class="form-label">Andrea Villavicencio</span>
+                                    <span for="fecha" class="form-label">Fecha:</span>
+                                    <span id="fecha" class="form-label">22/02/2023</span>
+                                    <span for="hora" class="form-label">Hora:</span>
+                                    <span id="hora" class="form-label">12:23:34</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <hr>
+                        <div class="col-sm-6">
+                            <label for="cometarios" class="control-label">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" cols="45" rows="5"></textarea>
+                        </div>    
+                    </tbody>                    
+                </div>                     
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="guardarCambios()">Guardar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>
+<div class="offcanvas-backdrop fade show" *ngIf="showDetalle"></div>
+<div class="offcanvas-backdrop fade show" *ngIf="showEditar || showObs || showGenerarOficio"></div>
+
+
+
+
+<!-- Modal vista previa -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Vista previa</h1>
+        <div>
+            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+        </div>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row" *ngIf="tipoModal === 'verDocumento'">
+            <p>Documento</p>
+        </div>
+        <div class="row" *ngIf="tipoModal === 'cargarDocumento'">
+            <div class="col-sm-12">
+                <label for="formFile" class="form-label"><i class="bi bi-upload"></i></label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal carga documento -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showCargaDocumento" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1 style="visibility: hidden;">Titulo</h1>
+        <button type="button" class="btn btn-negativo-modal boton-derecho" data-bs-dismiss="offcanvas"
+            aria-label="Close" (click)="cerrarCargaDocumentos()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <label for="formFile" class="form-label"><em class="bi bi-upload"></em></label> -->
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="uploadDocumento()">&nbsp; <em
+                    class="bi bi-check-lg"></em> Subir
+            </button> &nbsp;
+        </div>
+    </div>
+</div>
+
+
+<!---Formulario-----OFICIO----->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showGenerarOficio" [class.bajar]="showObs" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>OFICIO</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarOficio()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                        <div class="col-sm-12 row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <p class="valoresCentrados">
+                                    Oficio N°
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end">
+                <button class="btn btn-positivo-modal boton-derecho" title="Firmar"
+                (click)="openFirma()">
+                    Firmar Oficio&nbsp;<i class="bi bi-pen"></i>
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-negativo-modal boton-derecho" title="Descargar"
+                (click)="descargarOficio('Oficio')">
+                    Descargar&nbsp;<i class="bi bi-download"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal firma -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirma" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Firma</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12 row" [formGroup]="FormularioConfirma">
+                <div class="col-sm-8">
+                    <label for="cert" class="control-label">Certificado (.cer):</label>
+                    <div class="input-group">
+                        <label for="cert" class="control-label" style="display: none">Certificado (.cer):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert"
+                            id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
+                        <label for="fileCertificate" class="control-label" style="display: none">Certificado
+                            (.cer):</label>
+                        <input type="file" style="display: none" id="fileCertificate" accept=".cer"
+                            (change)="onCertFileChange($event)" formControlName="key">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate"
+                                onclick="document.getElementById('fileCertificate').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="key" class="control-label">Clave privada (.key):</label>
+                    <div class="input-group">
+                        <label for="key" class="control-label" style="display: none">Clave privada (.key):</label>
+                        <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key"
+                            id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
+                        <label for="filePrivateKey" class="control-label" style="display: none">Clave privada
+                            (.key):</label>
+                        <input type="file" style="display: none" id="filePrivateKey" accept=".key"
+                            (change)="onKeyFileChange($event)" formControlName="cer">
+                        <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey"
+                                onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <label for="contra" class="control-label">Contraseña de clave privada:</label>
+                    <input type="password" class="form-control" id="contra" placeholder="Contraseña"
+                        formControlName="contra">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
+        </div>
+    </div>
+</div>

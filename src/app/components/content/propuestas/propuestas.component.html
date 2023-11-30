@@ -1,27 +1,62 @@
 <div class="row">
     <div class="col-sm-12">
-        <h1>Juridico</h1>
+        <h1>Propuestas de pago</h1>
         <hr class="red">
     </div>
+    <!--------->
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row" style="padding: 0px 5px;">
+                <div class="col-sm-9 text-end">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
+                    (click)="reportePDF()">
+                        Generar Reporte PDF
+                    </button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
+                    (click)="reporteExcel()">
+                        Generar Reporte Excel
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
+                        (click)="agregarArchivo()">
+                        <em class="bi bi-plus-lg"></em>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----Busqueda---->
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body row" style="padding: 0px 5px;">
                 <div class="col-sm-3">
+                    <label for="busqueda" class="form-label">Fecha inicio-Fecha fin</label>
+                    <input type="text" class="form-control" id="fecha" placeholder="Fecha inicio-Fecha Fin">
+                </div>
+                <div class="col-sm-3">
                     <label for="busqueda" class="form-label">Búsqueda</label>
                     <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
                 </div>
-                <div class="col-sm-7">
-                    <button class="btn btn-primary" title="Buscar" style="margin-top: 32px;"
+                <div class="col-sm-2">
+                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
                         (click)="cambioSeleccion(1)">
                         <em class="bi bi-search"></em>
                     </button>
                 </div>
+                
+                    
+                <!---
                 <div class="col-sm-2 text-end">
                     <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
                         [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
                         <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
                     </button>
                 </div>
+                ---->
             </div>
         </div>
     </div>
@@ -41,46 +76,48 @@
                 <thead>
                     <tr class="table-secondary">
                         <th style="width: 40%;">Id Propuesta</th>
-                        <th style="width: 30%;">Remitente Propuesta</th>
-                        <th style="width: 10%;">Fecha de Recepción</th>
-                        <th style="width: 10%;">Fecha Propuesta</th>
-                        <th style="width: 10%;">Tipo de Propuesta</th>
-                        <th>Monto(MXM)</th>
-                        <th>Monto(US)</th>
-                        <th>Propuesta Dación</th>
-                        <th>Pagos</th>
-                        <th>Plazo Solicitado</th>
-                        <th>Capturista</th>
-                        <th>Fecha de Captura</th>
-                        <th>Id Responsable Caso</th>
-                        <th>No. Volante</th>
-                        <th>Status</th>
-                        <th>Tiempo Atención</th>
+                        <th style="width: 40%;">Acreditado</th>
+                        <th style="width: 40%;">Fecha recepcion</th>
+                        <th style="width: 40%;">Fecha propuesta</th>
+                        <th style="width: 40%;">Tipo propuesta</th>
+                        <th style="width: 40%;">Monto MXN</th>
+                        <th style="width: 40%;">Monto USD</th>
+                        <th style="width: 40%;">Propuesta Dacion</th>
+                        <th style="width: 20%;">Pagos</th>
+                        <th style="width: 40%;">Plazo Solicitado</th>
+                        <th style="width: 20%;">Capturista</th>
+                        <th style="width: 40%;">Fecha captura</th>
+                        <th style="width: 40%;">Id Responsable caso</th>
+                        <th style="width: 40%;">N° Volante</th>
+                        <th style="width: 10%;">Estatus</th>
+                        <th style="width: 30%;">Tipo atención</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal(dato)">
-                        <td>{{ dato.idPropuesta }}</td>
-                        <td>{{ dato.remitente }}</td>
+                        <td>{{ dato.IdPropuesta }}</td>
+                        <td>{{ dato.RemitentePro }}</td>
                         <td>{{ dato.fechaRecepcion }}</td>
                         <td>{{ dato.fechaPropuesta }}</td>
                         <td>{{ dato.tipoPropuesta }}</td>
-                        <td>{{ dato.montoMxn }}</td>
-                        <td>{{ dato.MontoUs }}</td>
-                        <td>{{ dato.propuestaDacion }}</td>
+                        <td>{{ dato.montoMXN }}</td>
+                        <td>{{ dato.montoUSD }}</td>
+                        <td>{{ dato.propuestaDACION }}</td>
                         <td>{{ dato.pagos }}</td>
-                        <td>{{ dato.plazoSolicitado }}</td>
+                        <td>{{ dato.plazaSoli }}</td>
                         <td>{{ dato.capturista }}</td>
                         <td>{{ dato.fechaCaptura }}</td>
-                        <td>{{ dato.idResponsableCaso }}</td>
-                        <td>{{ dato.noVolante }}</td>
+                        <td>{{ dato.idResponsable }}</td>
+                        <td>{{ dato.NumVolante }}</td>
                         <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
-                        <td>{{ dato.tiempoAtencion }}</td>                                                
+                        <td>{{ dato.tipoAtencion }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-------------
     <div class="col-sm-12 row" *ngIf="!tipoVista">
         <div class="col-sm-3 " *ngFor="let dato of listaDatos" title="Ver detalalle"
             (click)="abrirCamvasPrincipal(dato)">
@@ -107,6 +144,7 @@
         </div>
 
     </div>
+    ------------->
 </div>
 
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
@@ -117,20 +155,139 @@
             (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
-        <!--<sg-prevalidacion *ngIf="Seleccionado == 1" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-prevalidacion>
-        <sg-propuesta-del-bien *ngIf="Seleccionado == 2"  (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-propuesta-del-bien>
-        <sg-validacion *ngIf="Seleccionado === 3" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-validacion>-->
-        <sg-juridico *ngIf="Seleccionado === 4" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-juridico>
-        <sg-capa *ngIf="Seleccionado == 5" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-capa>
+        
+        <sg-validacionPro *ngIf="Seleccionado == 1" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-validacionPro>
+
+
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
-            <!-- <button type="button" class="btn btn-print-modal"  (click)="imprimir()" *ngIf="Seleccionado">Imprimir&nbsp;<em class="bi bi-printer"></em> </button> &nbsp;&nbsp; -->
-            <button type="button" class="btn btn-positivo-modal" (click)="respuestaCofirmarModal(true)">
-                Guardar
-                &nbsp;<em class="bi bi-check-lg"></em>
-            </button>&nbsp;            
+            <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" >Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado != 3 && Seleccionado != 5 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9  && Seleccionado != 10">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+
         </div>
     </div>
 </div>
 <div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>
+
+
+
+<!-- OffCanvas Agregar Archivo -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarArchivo" [class.offcanvas-bajar]=""
+  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h1>Nueva Propuesta</h1>
+    <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                        <label for="seccionAdd" class="control-label"></label>
+                        <select class="form-select" aria-label="Default select example" id="seccionAdd">
+                            <option>Selecciona Acreditado</option>
+                            <option >001 Juan Perez </option>
+                            <option >002 Cristina Leon </option>
+                        </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="seccionAdd" class="control-label">Pago o Compra</label>
+                    <select class="form-select" aria-label="Default select example" id="seccionAdd">
+                        <option selected></option>
+                        <option value="1">Pago</option>
+                        <option value="2">Compra</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label for="fecharecepcion" class="control-label">Fecha de recepcion en el INDEP</label>
+                    <input type="text" class="form-control" id="fecharecepcion" placeholder="fecha de recepcion">
+                </div>
+                <div class="col-sm-6">
+                    <label for="remitente" class="control-label">Remitente de propuesta</label>
+                    <input type="text" class="form-control" id="remitente" placeholder="Remitente">
+                </div>
+                <div class="col-sm-6">
+                    <label for="fecharecepcion" class="control-label">Fecha recepcion de coordinación de recuperación de cartera y activos</label>
+                    <input type="text" class="form-control" id="fecharecepcion" placeholder="fecha de recepcion">
+                </div>
+                <div class="col-sm-6">
+                    <label for="montoletraMXN" class="control-label">Monto de propuesta con letra pesos</label>
+                    <input type="text" class="form-control" id="montoletraMXN" placeholder="Monto letra">
+                </div>
+                <div class="col-sm-6">
+                    <label for="fechaDocumento" class="control-label">Fecha Documento</label>
+                    <input type="text" class="form-control" id="fechaDocumento" placeholder="fecha de documento">
+                </div>
+                <div class="col-sm-6">
+                    <label for="montoletraUSD" class="control-label">Monto de propuesta con letra dolares</label>
+                    <input type="text" class="form-control" id="montoletraUSD" placeholder="monto letra">
+                </div>
+                <div class="col-sm-6">
+                    <label for="tipocartera" class="control-label">Tipo cartera automatico del acreditado</label>
+                    <input type="text" class="form-control" id="tipocartera" placeholder="Tipo cartera">
+                </div>
+                
+                <div class="col-sm-6">
+                    <label for="plazo" class="control-label">Plazo Solicitado</label>
+                    <input type="text" class="form-control" id="plazo" placeholder="Plazo solicitado">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="montoMXN" class="control-label">Monto de propuesta pesos</label>
+                    <input type="text" class="form-control" id="montoMXN" placeholder="monto MXN">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="volante" class="control-label">Numero de volante</label>
+                    <input type="text" class="form-control" id="volante" placeholder="Numero volante">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="montoUSD" class="control-label">Monto de propuesta dolares</label>
+                    <input type="text" class="form-control" id="montoUSD" placeholder="monto USD">
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="montoUSD" class="control-label">Observaciones</label>
+                    <textarea name="montoUSD" id="montoUSD" cols="35" rows="5"></textarea>
+                </div>
+                
+                <div class="col-sm-6">
+                    <label for="subseccionAdd" class="control-label">Asignación</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd">
+                        <option></option>
+                        <option selected value="1">Roberto</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="capturo" class="form-label">Capturó:</label>
+                    <label id="capturo" class="form-label">Andrea Villavicencio</label>
+                    <br>
+                    <label for="fecha" class="form-label">Fecha:</label>
+                    <label id="fecha" class="form-label">22/02/2023</label>
+                    <br>
+                    <label for="hora" class="form-label">Hora:</label>
+                    <label id="hora" class="form-label">12:23:34</label>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="offcanvas-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarArchivo()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

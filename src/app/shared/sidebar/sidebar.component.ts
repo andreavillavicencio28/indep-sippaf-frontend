@@ -10,7 +10,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 export class SidebarComponent {
   public menuItems: any[] = [    
     { label: 'Acreditados', icon: 'bi bi-person-workspace', route: '/content/acreditados'},
-    { label: 'Propuestas', icon: 'bi bi-house', route: '/content/propuestas'},
+    { label: 'Propuestas de Pago', icon: 'bi bi-pass-fill', route: '/content/propuestas' },
     { label: 'Sesiones', icon: 'bi bi-calendar-check', route: '/content/sesiones'},
     { label: 'Bitácora', icon: 'bi bi-journal-check', route: '/content/bitacora'},
     { label: 'Catálogos', icon: 'bi bi-book', route: '/content/catalogos'},
