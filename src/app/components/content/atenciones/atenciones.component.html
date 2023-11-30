@@ -1,13 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Atención de Acreditados</h1>
+        <hr class="red">
+    </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="busqueda" placeholder="Fecha inicial / Fecha final">
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                            <em class="bi bi-search"></em>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="form-control" (click)="descargarAtencionesexcel()">
+                        <i class="bi-plus-downland"></i> Generar reporte excel
+                    </button> 
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="form-control" (click)="descargarAtencionespdf()">
+                        <i class="bi-plus-downland"></i> Generar reporte pdf
+                    </button> 
+                </div>
+                <div class="col-sm-1 pad" style="padding-bottom: 10px ">
+                    <button type="button" class="form-control" (click)="agregarAtencion()">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                </div>
+                <!--<div class="col-sm-2 text-end">
+                    <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
+                        [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
+                        <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
+                    </button>
+                </div>-->
+            </div>
+        </div>
+    </div>
 
-  <h1>Atenciones</h1>
-  
-</body>
-</html>
+    <hr>
+    <div class="col-sm-12" *ngIf="tipoVista">
+        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-secondary">
+                        <th style="width: 10%;">Fecha</th>
+                        <th style="width: 10%;">Elaboró</th>
+                        <th style="width: 10%;">No. Cliente</th>
+                        <th style="width: 10%;">Acreditado</th>
+                        <th style="width: 10%;">encomienda</th>
+                        <th style="width: 10%;">Dirección</th>
+                        <th style="width: 10%;">Estado y Municipio</th>
+                        <th style="width: 10%;">Teléfono</th>
+                        <th style="width: 10%;">Correo electrónico</th>
+                        <th style="width: 10%;">Asunto</th>
+                        <th style="width: 10%;">Medio atención</th>
+                        <th style="width: 10%;">Monto de la propuesta</th>
+                        <th style="width: 10%;">Tipo de propuesta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal(dato)">
+                        <td>{{ dato.fecha }}</td>
+                        <td>{{ dato.elaboro }}</td>
+                        <td>{{ dato.noCliente }}</td>
+                        <td>{{ dato.acreditado }}</td>
+                        <td>{{ dato.encomienda }}</td>
+                        <td>{{ dato.direccion}}</td>
+                        <td>{{ dato.estadoymuni}}</td>
+                        <td>{{ dato.telefono}}</td>
+                        <td>{{ dato.correo}}</td>
+                        <td>{{ dato.asunto}}</td>
+                        <td>{{ dato.medioatencion}}</td>
+                        <td>{{ dato.montopropuesta}}</td>
+                        <td>{{ dato.tipopropuesta}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{tituloSeleccionado}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <sg-detalle-atencion [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-atencion> 
+    </div>
+</div>
+
+<!-- OffCanvas Agregar Atencion -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarAtencion" [class.offcanvas-bajar]=""
+    ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Registro de Atención</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card" style="padding: 15px;">
+            <h5>Datos del acreditado</h5>
+            <label class="form-label">Elaboró: Oscar Gomez Piña</label>
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <label for="subseccionAdd" class="control-label">Nombre del deudor,acreditado o tercero:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of acreditados" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">No.Cliente:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">encomienda:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Dirección:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="subseccionAdd" class="control-label">Estado y Municipio:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of edosmunis" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">Numero de Teléfono:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Correo electrónico:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-1">
+                    <label class="form-label">Asunto:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of asuntos" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">Medio de atención:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of mediosatenciones" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tipo de propuesta:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of tipopropuestas" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                </div>
+            </div> 
+        </div>
+        <div class="card" style="padding: 15px;">
+            <div class="col-md-12">
+                <label for="subseccionAdd" class="control-label">Monto de la propuesta en su caso:</label>
+                <div class="input-group col-md-3">
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+                <label for="exampleFormControlTextarea1" class="form-label">Observaciones:</label>
+                <textarea class="form-control" id="Observaciones" rows="3"></textarea>
+            </div>            
+            <div class="offcanvas-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarAtencion()">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>           
+    </div>
+</div>

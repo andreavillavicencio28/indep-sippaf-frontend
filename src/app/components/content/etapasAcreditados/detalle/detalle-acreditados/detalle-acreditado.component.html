@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row" style="padding: 15px 15px;">
+                    <ul class="nav nav-tabs"> 
+                        <li class="nav-item">
+                            <a class="nav-link" [class.active]="accionDetalle == 1"
+                                >Detalle</a>
+                        </li>
+                    </ul>
+                    <div class="row">
+                    <div class="col-md-12 valoresCentrados title">
+                        <h5>
+                            Datos del acreditado 
+                        </h5>
+                    </div> 
+                    <div class="col-sm-6">
+                        <label for="idAcreditado" class="form-label">Id Acreditado:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.idAcreditado }}</span><br>
+                        <label for="noCliente" class="form-label">No. Cliente:&nbsp;</label><br>
+                        <span> {{ datosAcreditado.noCliente }}</span><br>
+                        <label for="fechaDocumento" class="form-label">Fecha del documento:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.fechaDocumento }}</span><br>
+                        <label for="encomienda" class="form-label">Encomienda / Mandato:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.encomienda }}</span><br>
+                        <label for="personasRelacionadas" class="form-label">Personas relacionadas:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.personasRelacionadas }}</span><br>
+                        <label for="sucursal" class="form-label">Sucursal:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.sucursal }}</span><br>
+                        <label for="seguimiento" class="form-label">Seguimiento:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.seguimiento }}</span><br>
+                        <label for="Propuestas" class="form-label">Propuestas:&nbsp;</label><br>
+                        <button type="button"  class="form-label">
+                            <i class="btn-outline"></i> Propuesta 001
+                        </button><br>
+                        <button type="button"  class="form-label">
+                        <i class="btn-outline"></i> Propuesta 002
+                        </button><br>
+                        <button type="button"  class="form-label">
+                        <i class="btn-outline"></i> Propuesta 003
+                        </button>
+                    </div> 
+
+                    <div class="col-sm-6  ">
+                        <label for="calle" class="form-label">Calle:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.calle }}</span><br>
+                        <label for="colonia" class="form-label"> Colonia:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.colonia }}</span><br>
+                        <label for="municipioDelegacion" class="form-label">Municipio o Delegación:&nbsp;</label><br>
+                        <span>{{ datosAcreditado.municipioDelegacion }}</span><br>
+                        <label for="entidad" class="form-label">Entidad:&nbsp;</label><br>
+                        <span> {{datosAcreditado.entidad}} </span><br>
+                        <label for="telefono" class="form-label">Teléfono:&nbsp;</label><br>
+                        <span> {{datosAcreditado.telefono}} </span><br>
+                        <label for="correo" class="form-label">Correo:&nbsp;</label><br>
+                        <span> {{datosAcreditado.correo}} </span><br>
+                        <label for="adjudicados" class="form-label">Adjudiciados:&nbsp;</label><br>
+                        <span> {{datosAcreditado.adjudicados}} </span><br>
+                        <label class="form-label">Capturó:&nbsp; </label>
+                        <label class="form-label">Andrea Villavicencio</label><br>
+                        <label class="form-label">Fecha:&nbsp; </label>
+                        <label class="form-label">11/09/23</label><br>
+                        <label class="form-label">Hora:&nbsp; </label>
+                        <label class="form-label">22:12:12</label>
+                    </div>
+                </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDocumento" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{ nombreDocumento}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('documento')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <!-- <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas-backdrop fade show" *ngIf=" showDetalleAcreditado"></div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showDocumento"></div>

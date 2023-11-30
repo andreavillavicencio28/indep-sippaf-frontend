@@ -1,8 +1,6 @@
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {CurrencyPipe, DatePipe, DecimalPipe} from '@angular/common';
-
-
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
@@ -16,6 +14,12 @@ import { DetalleJuridicoComponent } from './juridico/detalle-juridico/detalle-ju
 import { JuridicoComponent } from './juridico/juridico.component';
 import { DetalleCapaComponent } from './capa/detalle-capa/detalle-capa.component';
 import { CapaComponent } from './capa/capa.component';
+import { AtencionesComponent } from './atenciones/atenciones.component';
+//import { DetalleAtencionComponent } from './etapasSolicitudes/detalle/detalle-atencion/detalle-atencion.component';
+import { DetalleAtencionComponent } from './etapasAtenciones/detalle/detalle-atencion/detalle-atencion.component';
+import { AcreditadosComponent } from './acreditados/acreditados.component';
+//import {DetalleAcreditadoComponent} from './etapasSolicitudes/detalle/detalle-acreditados/detalle-acreditado.component';
+import { DetalleAcreditadoComponent } from './etapasAcreditados/detalle/detalle-acreditados/detalle-acreditado.component';
 
 import { PropuestasComponent } from './propuestas/propuestas.component';
 import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
@@ -47,10 +51,16 @@ import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/
     DetalleJuridicoComponent,
     JuridicoComponent,
     CapaComponent,
-    DetalleCapaComponent
+    DetalleCapaComponent,
+    AcreditadosComponent,
+    DetalleAcreditadoComponent,
+    AtencionesComponent,
+    DetalleAtencionComponent,
   ],
   exports: [
     WizardComponent,
+    DetalleAtencionComponent,
+    DetalleAcreditadoComponent,
   ],
 
 })
