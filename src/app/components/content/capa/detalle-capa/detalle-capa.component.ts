@@ -53,12 +53,7 @@ export class DetalleCapaComponent {
     this.showDetalleSolicitud = true;    
   }
 
-  cerrarCanvas(tipo: string) {
-    if (tipo === 'oficio') {
-      this.showGenerarOficio = false;
-    } else if (tipo === 'documento') {
-      this.showAgregarDocumento = false;
-    }
+  cerrarCanvas(tipo: string) {   
     switch (tipo) {
       case 'oficio':
         this.showGenerarOficio = false;

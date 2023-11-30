@@ -54,11 +54,6 @@ export class DetalleJuridicoComponent {
   }
 
   cerrarCanvas(tipo: string) {
-    if (tipo === 'oficio') {
-      this.showGenerarOficio = false;
-    } else if (tipo === 'documento') {
-      this.showAgregarDocumento = false;
-    }
     switch (tipo) {
       case 'oficio':
         this.showGenerarOficio = false;
@@ -106,6 +101,7 @@ export class DetalleJuridicoComponent {
     this.toastrService.success('Se ha guardado exitosamente el oficio.')
     this.showGenerarOficio = false;
   }  
+
   openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
     console.log(documentoNombre);
     this.documentoNombre = documentoNombre;
