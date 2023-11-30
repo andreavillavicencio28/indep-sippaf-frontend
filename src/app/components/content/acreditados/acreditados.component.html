@@ -1,13 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Acreditados</h1>
+        <hr class="red">
+    </div>
+    <div class="col-sm-8">
 
-  <h1>Acreditados</h1>
-  
-</body>
-</html>
+    </div>
+    <div class="col-sm-2">
+        <button type="button" class="form-control" (click)="descargarAcreditados()">
+            <i class="bi-plus-downland"></i> Generar reporte
+        </button>
+    </div>
+    <div class="col-sm-1 pad" style="padding-bottom: 10px ">
+        <button type="button" class="form-control" (click)="agregarAcreditado()">
+            <i class="bi bi-plus-circle"></i>
+        </button>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="card">
+
+            <div class="card-body row">
+                <div class="col-sm-3">
+                    <label for="busqueda" class="form-label">Fecha</label>
+                    <input type="text" class="form-control" id="busqueda" placeholder="Fecha inicial / Fecha final">
+                </div>
+                <div class="col-sm-2">
+                    <label for="busqueda" class="form-label">Buscar</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                            <em class="bi bi-search"></em>
+                        </button>
+                    </div>
+                </div>
+                <!--<div class="col-sm-2">
+                    <label for="busqueda" class="form-label">Tipo mandato</label>
+                    <tr *ngFor="let item of encomiendas">
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </th>
+                        <th>{{ item.tx_descripcion }}</th>
+                    </tr>
+                </div>-->
+                <div class="col-sm-2">
+                    <label for="busqueda" class="form-label">Tipo mandato</label>
+                    <tr *ngFor="let item of encomiendas">
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </th>
+                        <th>{{ item.tx_descripcion }}</th>
+                    </tr>
+                </div>
+                
+                <!--<div class="col-sm-2">
+                    <wj-list-box #theListBox [displayMemberPath]="tx_descripcion" [checkedMemberPath]="'selected'"
+                        [itemsSource]="encomiendas"></wj-list-box>
+                </div>-->
+
+                <div class="col-sm-2">
+                    <label for="busqueda" class="form-label">Tipo cartera</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="P100" id="Control">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Control y Resguardo
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="P100" id="Objetivo">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Objetivo
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="col-sm-12" *ngIf="tipoVista">
+        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-secondary">
+                        <th style="width: 20%;">Nombre Acreditado</th>
+                        <th style="width: 15%;">ID Acreditado</th>
+                        <th style="width: 15%;">No. Cliente</th>
+                        <th style="width: 20%;">Fecha registro</th>
+                        <th style="width: 20%;">Tipo mandato</th>
+                        <th style="width: 20%;">Tipo cartera</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal(dato)">
+                        <td>{{ dato.NombreAcreditado }}</td>
+                        <td>{{ dato.IDAcreditado }}</td>
+                        <td>{{ dato.NoCliente }}</td>
+                        <td>{{ dato.Fecharegistro }}</td>
+                        <td>{{ dato.Tipomandato }}</td>
+                        <td>{{ dato.Tipocartera}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
+    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>{{tituloSeleccionado}}</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <sg-detalle-acreditado [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-acreditado>
+    </div>
+</div>
+
+<!-- OffCanvas Agregar Acreditado -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarAcreditado" [class.offcanvas-bajar]=""
+    ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Registro de nuevo acreditado</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="card" style="padding: 15px;">
+            <div class="row">
+                <div class="col-md-6 mt-1">
+                    <label class="form-label">ID Acreditado:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="12325" disabled>
+                    </div>
+                    <label class="form-label">Nombre completo:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control">
+                    </div>
+                    <label class="form-label">No.Cliente:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Fecha del documento:</label>
+                    <div class="input-group">
+                        <input type="date" class="form-control" placeholder="">
+                    </div>
+                    <label for="subseccionAdd" class="control-label">Encomienda/Mandato:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+
+                        <option *ngFor="let item of encomiendas" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">Personas relacionadas:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="subseccionAdd" class="control-label">Sucursal:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of sucursales" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">Asunto:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="subseccionAdd" class="control-label">Cartera:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of carteras" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mt-1">
+                    <label class="form-label">Calle:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Colonia:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Municipio/Delegación:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="subseccionAdd" class="control-label">Entidad:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of entidades" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label class="form-label">Teléfono:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Correo:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Adjudicados:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Monto de la propuesta (Si aplica):</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Id grupo económico :</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <label class="form-label">Capturó: </label>
+                    <label class="form-label">Andrea Villavicencio</label><br>
+                    <label class="form-label">Fecha: </label>
+                    <label class="form-label">11/09/23</label><br>
+                    <label class="form-label">Hora: </label>
+                    <label class="form-label">22:12:12</label>
+                </div>
+                <div class="col-sm-12">
+                    <label for="exampleFormControlTextarea1" class="form-label">Observaciones:</label>
+                    <textarea class="form-control" id="Observaciones" rows="3"></textarea>
+                </div>
+
+
+                <div class="offcanvas-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-negativo-modal boton-derecho"
+                                (click)="cerrarOffCanvas(1)">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-positivo-modal boton-derecho"
+                                (click)="guadarAcreditado()">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

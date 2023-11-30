@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AdminComponent } from './admin.component';
 import { InicioComponent } from '../auth/inicio/inicio.component';
-import { AcreditadosComponent } from './acreditados/acreditados.component';
 import { PropuestasComponent } from './propuestas/propuestas.component';
 import { SesionesComponent } from './sesiones/sesiones.component';
 import { BitacoraComponent } from './bitacora/bitacora.component';
@@ -10,6 +9,8 @@ import { CatalogosComponent } from './catalogos/catalogos.component';
 import { AdminComponents } from './admin/admin.component';
 import { ArchivosComponent } from './archivos/archivos.component';
 import { AtencionesComponent } from './atenciones/atenciones.component';
+import { AcreditadosComponent } from './acreditados/acreditados.component';
+
 
 
 const routes: Routes = [
@@ -25,19 +26,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'inicio',
         pathMatch: 'full',
-      },      
-      {
-        path: 'acreditados',
-        data: {
-          title: 'Acreditados',
-          breadcrumbs: [
-            {
-              text: 'Acreditados',
-              active: true
-            }
-          ],
-        },
-        component: AcreditadosComponent
       },        
       {
         path: 'propuestas',
@@ -118,18 +106,31 @@ const routes: Routes = [
         component: ArchivosComponent
       },
       {
-        path: 'atenciones',
+        path: 'acreditados',
         data: {
-          title: 'Atenciones',
+          title: 'acreditados',
           breadcrumbs: [
             {
-              text: 'Atenciones',
-              active: true
+              text: 'acreditados',
+              active: true,
             }
           ],
         },
-        component: AtencionesComponent
-      }, 
+        component: AcreditadosComponent,
+      },
+      {
+        path: 'atenciones',
+        data: {
+          title: 'atenciones',
+          breadcrumbs: [
+            {
+              text: 'atenciones',
+              active: true,
+            }
+          ],
+        },
+        component: AtencionesComponent,
+      },
      ],
   },
 
