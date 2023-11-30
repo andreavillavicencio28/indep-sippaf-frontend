@@ -17,7 +17,7 @@ export class PropuestasComponent {
   Seleccionado: number = 0;
   tituloSeleccionado: string = '';
 
-  listadoSolicitudes: datosEtapasSolicitud[];
+  listadoPropuestas: datosEtapasSolicitud[];
   listaDatos: any[] = [];
 
   // offcanvasInstance: any;
@@ -31,6 +31,8 @@ export class PropuestasComponent {
   
   //Agergar archivo
   showAgregarArchivo: boolean = false;
+  pdfSrc: string = '';
+  showReporteExcel: boolean = false;
 
 
 
@@ -42,7 +44,7 @@ export class PropuestasComponent {
   ) {
     
     this.Seleccionado = 1;
-    this.listadoSolicitudes = [
+    this.listadoPropuestas = [
       //=========================ESTATUS ASIGNADOS A ACCION DEL USUARIO===============================
       // { indice: 1, titulo: 'Cancelados', activo: true, title: 'Solicitudes canceladas' ,noReg:25},
       // { indice: 2, titulo: 'Acción solicitante', activo: false, title: 'Solicitudes pendientes de acción del usuario' ,noReg:25},
@@ -55,33 +57,7 @@ export class PropuestasComponent {
       { indice: 6, titulo: 'SIAB', activo: false, title: '', noReg: 0 },
       { indice: 7, titulo: 'Analisis', activo: false, title: '', noReg: 5 },
       { indice: 8, titulo: 'COPER', activo: false, title: '', noReg: 15 },
-      { indice: 9, titulo: 'Acuerdos', activo: false, title: '', noReg: 3 },
-     // { indice: 10, titulo: 'Entrega', activo: false, title: '', noReg: 45 },
-      // { indice: 11, titulo: 'Remoción', activo: false, title: '', noReg: 10 },
-      // { indice: 12, titulo: 'Siniestros', activo: false, title: '', noReg: 5 },
-
-
-      //{ indice: 4, titulo: 'Pre-validación rezhazada', activo: false, title: '' , noReg:25}, regresa a (2)
-      //{ indice: 6, titulo: 'Vo.Bo. Rechazado',  activo: false, title: '' ,noReg:5}, // regres a (2)
-      //{ indice: 8, titulo: 'Rechazo Propuesta bien',  activo: false, title: '' ,noReg:30},  // regresa a (2)
-      //{ indice: 9, titulo: 'Confirmacion de bien',  activo: false, title: '' ,noReg:30},  // regresa a (2)
-      //{ indice: 10, titulo: 'Desestimacion de Bien',  activo: false, title: '' ,noReg:30},  // regresa a (2)
-      //{ indice: 12, titulo: 'Opinión técnica rechazada',  activo: false, title: '' ,noReg:2}, regresa a (5)
-      //{ indice: 14, titulo: 'Rechazo Nombramiento',  activo: false, title: '' ,noReg:2},  REgresa a (2)
-
-
-      //{ indice: 17, titulo: 'Rechazo autoerrización DEBI',  activo: false, title: '' ,noReg:45}, // regresa a  (5)
-      //{ indice: 19, titulo: 'Rechazo Autoerrización DCB',  activo: false, title: '' ,noReg:0}, // regrersa a (13)
-      //{ indice: 21, titulo: 'Rechazo Autorización DG',  activo: false, title: '' , noReg:30}, regresa a (15)
-
-      // { indice: 22, titulo: 'Aut. DG',  activo: false, title: '' ,noReg:5},
-      //{ indice: 23, titulo: 'Rechazo Nombramiento DG',  activo: false, title: '' , noReg:30}, regresa a (15)
-
-      //{ indice: 24,titulo: 'Poliza Seguro',  activo: false, title: '' ,noReg:1},  regresa a (2)
-      // { indice: 25, titulo: 'Revicioón poliza',  activo: false, title: '' ,noReg:45},
-      // { indice: 26, titulo: 'Rechazo poliza',  activo: false, title: '' ,noReg:45}, regresa a (2)
-      //{ indice: 28, titulo: 'Rechazo entrega bien',  activo: false, title: '' ,noReg:45}, regresa a (2)
-      // { indice: 29, titulo: 'Notificación aut. uso',  activo: false, title: '' ,noReg:45}
+      { indice: 9, titulo: 'Acuerdos', activo: false, title: '', noReg: 3 }
     ]
   }
 
@@ -139,10 +115,10 @@ export class PropuestasComponent {
 
   cambioSeleccion(num: number) {
     this.Seleccionado = num;
-    this.listadoSolicitudes.forEach(solicitud => {
+    this.listadoPropuestas.forEach(solicitud => {
       solicitud.activo = false;
     });
-    this.listadoSolicitudes.forEach(solicitud => {
+    this.listadoPropuestas.forEach(solicitud => {
       if (solicitud.indice == num) {
         solicitud.activo = true;
       }
@@ -298,18 +274,24 @@ export class PropuestasComponent {
     this.showCamvasPrincipal = false;
   }
 
-
-  // openOfcamvas(content: TemplateRef<any>, data:any) {
-  //   this.offcanvasInstance = this.offcanvasService.open(content, { position: 'end',  backdrop: 'static'});
-
-  // }
-
-  // cerrarOfcamvas(){
-  //   this.offcanvasInstance.dismiss();
-  // }
-
   agregarArchivo() {
     this.showAgregarArchivo = true;
+  }
+  reportePDF() {
+    const downloadLink = document.createElement('a');
+    const fileName = 'ReporteDetalle.pdf';
+
+    downloadLink.href = this.pdfSrc;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+  reporteExcel() {
+    const downloadLink = document.createElement('a');
+    const fileName = 'ReporteDetalle.xlsx';
+
+    downloadLink.href = this.pdfSrc;
+    downloadLink.download = fileName;
+    downloadLink.click();
   }
   cerrarOffCanvas( numero: number) {
     switch (numero) {

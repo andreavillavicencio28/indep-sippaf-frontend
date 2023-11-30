@@ -31,7 +31,7 @@ export class ValidacionProComponent {
   showFirma: boolean = false;
   showCargaDocumento:boolean = false;
   showGenerarOficio:boolean=false;
-
+  pdfSrc: string = '';
 
   objetoDetalle: any = {};
   indiceObjetoDetalle: any = {};
@@ -252,6 +252,12 @@ export class ValidacionProComponent {
         // this.cerrarCamvasObs();
         this.cerrarOficio();
         this.respuestaCofirmarModal.emit(true);
+        const downloadLink = document.createElement('a');
+        const fileName = 'Oficio.pdf';
+    
+        downloadLink.href = this.pdfSrc;
+        downloadLink.download = fileName;
+        downloadLink.click();
         this.toastrService.success(titulomsm);
         
       } else {
