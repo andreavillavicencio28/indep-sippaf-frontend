@@ -129,6 +129,38 @@ export class PropuestasComponent {
         this.tituloSeleccionado = 'Validación';
         break;
       }
+      case 2: {
+        this.tituloSeleccionado = 'SIARAF';
+        break;
+      }
+      case 3: {
+        this.tituloSeleccionado = 'SAEOG';
+        break;
+      }
+      case 4: {
+        this.tituloSeleccionado = 'Juridico';
+        break;
+      }
+      case 5: {
+        this.tituloSeleccionado = 'CAPA';
+        break;
+      }
+      case 6: {
+        this.tituloSeleccionado = 'SIAB';
+        break;
+      }
+      case 7: {
+        this.tituloSeleccionado = 'Analisis';
+        break;
+      }
+      case 8: {
+        this.tituloSeleccionado = 'COPER';
+        break;
+      }
+      case 9: {
+        this.tituloSeleccionado = 'Acuerdos';
+        break;
+      }
       default: {
         break;
       }

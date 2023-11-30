@@ -24,7 +24,10 @@ import { DetalleAcreditadoComponent } from './etapasAcreditados/detalle/detalle-
 import { PropuestasComponent } from './propuestas/propuestas.component';
 import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
 import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/detalle-propuesta.component';
-
+import { SiarafComponent } from './siaraf/siaraf.component';
+import { SaeogComponent } from './saeog/saeog.component';
+import { DetalleSiarafComponent } from './siaraf/detalle-siaraf/detalle-siaraf.component';
+import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.component";
 
 /* Components */
 @NgModule({
@@ -56,6 +59,10 @@ import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/
     DetalleAcreditadoComponent,
     AtencionesComponent,
     DetalleAtencionComponent,
+    SiarafComponent,
+    SaeogComponent,
+    DetalleSiarafComponent,
+    DetalleSaeogComponent,
   ],
   exports: [
     WizardComponent,
