@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row" style="padding: 15px 15px;">
+                    <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
+                        <sg-detalle-juridico [id_solicitud]="id_solicitud"
+                            [solicitante]="solicitante"></sg-detalle-juridico>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas-backdrop fade show" *ngIf="showDetalle"></div>
+
+<div class="offcanvas-backdrop fade show" ngtabindex="-1"  *ngIf="showEditar  ||  showObs || showFirma || showPdf"></div>
