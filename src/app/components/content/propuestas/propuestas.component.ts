@@ -12,13 +12,16 @@ import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacio
 export class PropuestasComponent {
 
   decicion: boolean = false;
-
   tipoVista: boolean = true;
   Seleccionado: number = 0;
   tituloSeleccionado: string = '';
-
   listadoPropuestas: datosEtapasPropuestas[];
   listaDatos: any[] = [];
+  tipoDetalle: string = '';
+
+  valueBoton: string = '';
+  iconoBoton: string = '';
+
 
   // offcanvasInstance: any;
   //private offcanvasService: NgbOffcanvas, private modal: NgbModal, private config: NgbModalConfig,  config.backdrop = 'static'; config.keyboard = false;
@@ -340,6 +343,17 @@ export class PropuestasComponent {
     this.toastrService.success('Se ha guardado exitosamente el nuevo archivo')
     this.showAgregarArchivo = false;
   }
-
+  
+  tipoDetalleSeleccionado(tipoDetalle: any) {
+    switch (tipoDetalle) {
+      case 'juridico':
+        this.iconoBoton = 'btn btn-positivo-modal';
+        this.valueBoton = 'Guardar'
+        break;
+    
+      default:
+        break;
+    }
+  }
  
 }

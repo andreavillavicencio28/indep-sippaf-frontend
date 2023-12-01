@@ -155,22 +155,22 @@
             (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
-        
         <sg-validacionPro *ngIf="Seleccionado == 1" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-validacionPro>
-
-
+        <sg-juridico *ngIf="Seleccionado === 4" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-juridico>
+        <sg-capa *ngIf="Seleccionado == 5" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-capa>
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
-            <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" >Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado != 3 && Seleccionado != 5 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9  && Seleccionado != 10">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-
+            <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-positivo-modal" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">
+                Guardar
+                &nbsp;<em class="bi bi-check-lg"></em>
+            </button>&nbsp;   
         </div>
     </div>
 </div>
 <div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>
-
-
 
 <!-- OffCanvas Agregar Archivo -->
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarArchivo" [class.offcanvas-bajar]=""
@@ -185,12 +185,12 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-6">
-                        <label for="seccionAdd" class="control-label"></label>
-                        <select class="form-select" aria-label="Default select example" id="seccionAdd">
-                            <option>Selecciona Acreditado</option>
-                            <option >001 Juan Perez </option>
-                            <option >002 Cristina Leon </option>
-                        </select>
+                    <label for="seccionAdd" class="control-label"></label>
+                    <select class="form-select" aria-label="Default select example" id="seccionAdd">
+                        <option>Selecciona Acreditado</option>
+                        <option >001 Juan Perez </option>
+                        <option >002 Cristina Leon </option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
                     <label for="seccionAdd" class="control-label">Pago o Compra</label>
