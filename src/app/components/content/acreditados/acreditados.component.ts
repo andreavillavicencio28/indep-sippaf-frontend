@@ -71,6 +71,15 @@ export class AcreditadosComponent {
     ]*/
   }
 
+  isDisplay = true;
+  toggleDisplayMandato(){
+    this.isDisplay=!this.isDisplay;
+  }
+
+  isDisplay1 = true;
+  toggleDisplayCartera(){
+    this.isDisplay1=!this.isDisplay1;
+  }
 
     
 
