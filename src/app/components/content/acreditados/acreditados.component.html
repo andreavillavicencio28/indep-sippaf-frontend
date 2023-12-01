@@ -45,7 +45,7 @@
                         <th>{{ item.tx_descripcion }}</th>
                     </tr>
                 </div>-->
-                <div class="col-sm-2">
+                <!--<div class="col-sm-2">
                     <label for="busqueda" class="form-label">Tipo mandato</label>
                     <tr *ngFor="let item of encomiendas">
                         <th>
@@ -55,14 +55,26 @@
                         </th>
                         <th>{{ item.tx_descripcion }}</th>
                     </tr>
-                </div>
-                
-                <!--<div class="col-sm-2">
-                    <wj-list-box #theListBox [displayMemberPath]="tx_descripcion" [checkedMemberPath]="'selected'"
-                        [itemsSource]="encomiendas"></wj-list-box>
                 </div>-->
-
                 <div class="col-sm-2">
+                    <label class="form-label">Tipo Mandato</label>
+                    <div class="input-group">
+                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayMandato()">
+                            <em class="bi bi-chevron-compact-down"></em>
+                        </button>
+                    </div>
+                    <div class="scroll" [hidden]="isDisplay">
+                        <div *ngFor="let item of encomiendas" >
+                            <label class="m-checkbox-list">
+                                <input id="item{{item.id}}" type="checkbox" name="item{{item.name}}" [(ngModel)]="item.isSelected">
+                                {{ item.tx_descripcion }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="col-sm-2">
                     <label for="busqueda" class="form-label">Tipo cartera</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="P100" id="Control">
@@ -75,6 +87,29 @@
                         <label class="form-check-label" for="flexCheckDefault">
                             Objetivo
                         </label>
+                    </div>
+                </div>-->
+                <div class="col-sm-2">
+                    <label class="form-label">Tipo Cartera</label>
+                    <div class="input-group">
+                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayCartera()">
+                            <em class="bi bi-chevron-compact-down"></em>
+                        </button>
+                    </div>
+                    <div [hidden]="isDisplay1" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="P100" id="Control">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Control y Resguardo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="P100" id="Objetivo">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Objetivo
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
