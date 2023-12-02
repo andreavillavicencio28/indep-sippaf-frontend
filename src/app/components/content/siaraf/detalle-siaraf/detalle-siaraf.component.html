@@ -1,1 +1,26 @@
-<p>si funciona</p>
+<div class="row">
+    <div class="col-sm-12" *ngIf="tipoVista">
+        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-secondary">
+                        <th style="width: 20%;">Cliente</th>
+                        <th style="width: 20%;">Sucursal</th>
+                        <th style="width: 20%;">Fecha</th>
+                        <th style="width: 20%;">CapV</th>
+                        <th style="width: 20%;">Saldo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let dato of datosSiaraf"  >
+                        <td>{{ dato.cliente }}</td>
+                        <td>{{ dato.sucursal }}</td>
+                        <td>{{ dato.fecha }}</td>
+                        <td>{{ dato.capV }}</td>
+                        <td>{{ dato.saldo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
