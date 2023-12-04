@@ -51,27 +51,45 @@ export const dataEncomienda = [
     },
     {
         id: 2,
-        tx_descripcion: 'FIDERCA',
+        tx_descripcion: 'BANJERCITO CARTERA TRADICIONAL',
         tx_ubicaarchivo: 'FC'
     },
     {
         id: 3,
-        tx_descripcion: 'TESOFE',
+        tx_descripcion: 'BANRURAL CESION',
         tx_ubicaarchivo: 'TF'
-    },
+    },    
     {
-        id: 4,
+        id: 3,
+        tx_descripcion: 'BANRURAL MANDATO',
+        tx_ubicaarchivo: 'TF'
+    },{
+        id: 3,
         tx_descripcion: 'BNCI CESION',
         tx_ubicaarchivo: 'TF'
-    },
+    },    
     {
-        id: 4,
-        tx_descripcion: 'FIFOMI',
+        id: 3,
+        tx_descripcion: 'BNCI MANDATO',
         tx_ubicaarchivo: 'TF'
     },
     {
-        id: 4,
-        tx_descripcion: 'saM',
+        id: 3,
+        tx_descripcion: 'EMPLEADO SAE',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'FDE MANDATO',
+        tx_ubicaarchivo: 'TF'
+    },{
+        id: 3,
+        tx_descripcion: 'FIDERCA',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'FIFOMI',
         tx_ubicaarchivo: 'TF'
     },
 ];
