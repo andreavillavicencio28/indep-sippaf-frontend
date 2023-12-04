@@ -21,10 +21,11 @@ export class SiarafComponent {
   showDetalle: boolean = false;
   showCargaDocumento:boolean = false;
   FormularioConfirma !: FormGroup;
-  showGenerarOficio: boolean = false;
+  
   showAgregarDocumento:  boolean = false;
   prevDocumento: boolean = false;
   prevAnexo: boolean = false;
+  Seleccionado: number = 0;
 
 
   constructor(
@@ -108,27 +109,10 @@ export class SiarafComponent {
     });
   }
 
-  generarOficio() {
-    this.showGenerarOficio = true;
-  }
 
 
-  cerrarCanvas(tipo: string) {
-    switch (tipo) {
-      case 'oficio':
-        this.showGenerarOficio = false;
-        break;
-      case 'documento':
-        this.showAgregarDocumento = false;
-        break;    
-      case 'prevDocumento':
-        this.prevDocumento = false;
-        break;
-      case 'prevAnexo':
-        this.prevAnexo = false;
-        break;
-      default:
-        break;
-    }
-  }
+
+
+
+  
 }
