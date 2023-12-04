@@ -1,1 +1,23 @@
-<p>saeog works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row" style="padding: 15px 15px;">
+                    <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
+                        <sg-detalle-saeog [id_solicitud]="id_solicitud"
+                            [solicitante]="solicitante"></sg-detalle-saeog>
+                    </div>      
+                    
+                   
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
+<button type="button" class="btn btn-positivo-modal" (click)="guardarDocumentos()">Guardar&nbsp;</button>&nbsp;
+<button type="button" class="btn btn-positivo-modal" (click)="completarTarea()">Completar Tarea &nbsp;</button> &nbsp;
+            
+

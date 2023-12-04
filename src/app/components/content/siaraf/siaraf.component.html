@@ -1,1 +1,75 @@
-<p>siaraf works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col sm-12">
+            <div class="card" style="padding: 5px;">
+                <div class="card-body row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body row" style="padding: 0px 5px;">
+                                <div class="col-sm-3">
+                                    <label for="busqueda" class="form-label">Búsqueda</label>
+                                    <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;">
+                                        <em class="bi bi-search"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
+                        
+                        <sg-detalle-siaraf [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-siaraf>  
+                        <sg-detalle-siaraf [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-siaraf>
+                        <sg-detalle-siaraf [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-siaraf>                 
+                     </div>
+
+                     <div class="row" class="mt-2" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th style="width: 50%;">Documento</th>
+                                        <th style="width: 50%;" class="valoresCentrados">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dato of datosDocumentos">
+                                        <td>{{dato.nombreDoc}}</td>
+                                        
+                                        <td class="valoresCentrados">
+                                            
+                                            <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                            
+                                            <button class="btn btn-link"
+                                                (click)="cargarDocumento(dato.nombreDoc, 'cargarDocumento')"
+                                                title="Cargar documento">
+                                                <i class="bi bi-upload"></i>
+                                            </button>
+
+                                            
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                   
+
+                    
+                    
+
+                </div> 
+            </div>
+
+            
+        </div>
+    </div>
+</div>
