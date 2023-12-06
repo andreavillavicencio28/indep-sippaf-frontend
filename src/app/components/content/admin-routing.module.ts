@@ -7,7 +7,7 @@ import { SesionesComponent } from './sesiones/sesiones.component';
 import { BitacoraComponent } from './bitacora/bitacora.component';
 import { CatalogosComponent } from './catalogos/catalogos.component';
 import { AdminComponents } from './admin/admin.component';
-import { ArchivosComponent } from './archivos/archivos.component';
+import { AdminArchivosComponent } from './admin-archivos/admin-archivos.component';
 import { AtencionesComponent } from './atenciones/atenciones.component';
 import { AcreditadosComponent } from './acreditados/acreditados.component';
 
@@ -103,7 +103,7 @@ const routes: Routes = [
             }
           ],
         },
-        component: ArchivosComponent
+        component: AdminArchivosComponent
       },
       {
         path: 'acreditados',

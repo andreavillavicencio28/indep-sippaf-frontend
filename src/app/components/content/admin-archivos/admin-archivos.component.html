@@ -1,0 +1,211 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Administración de Archivos</h1>
+        <hr class="red">
+    </div>
+    <div class="card">
+        <div class="row">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label for="seccion" class="control-label">Seccion</label>
+                        <select class="form-select" aria-label="Default select example" id="seccion" [(ngModel)]="seccion"
+                        (change)="changeSeccion">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of secciones" [value]="item.tx_ubicaarchivo">
+                            {{item.tx_descripcion}}
+                        </option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="subseccion" class="control-label">Subsección:</label>
+                        <select class="form-select" aria-label="Default select example" id="subseccion" [(ngModel)]="subseccion"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of subsecciones" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="archivo" class="control-label">Archivo:</label>
+                        <select class="form-select" aria-label="Default select example" id="archivo" [(ngModel)]="archivo"
+                        (change)="changeArchivos()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of archivos" [value]="item.id">
+                            {{ item.tx_descripcion }}
+                        </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 mt-2">
+                        <button class="btn btn-primary boton-derecho " type="button" id="button-addon2" title="Buscar"
+                        (click)="busquedaArchivos()">
+                        <em class="bi bi-search"></em> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-0 p-0">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-positivo-modal" (click)="agregarArchivo()">
+                <i class="bi bi-plus-circle"></i> Agregar
+            </button>
+        </div>
+        <div class="col-sm-8" *ngIf="mostrarTabla">
+            <sg-paginador></sg-paginador>
+        </div>
+        <div class="col-sm-12" *ngIf="mostrarTabla">
+            <table class="table table-hover">
+                <thead>
+                  <tr class="table-secondary">
+                    <th>No.</th>
+                    <th>Sección</th>
+                    <th>Subsección</th>
+                    <th>Archivo</th>
+                    <th>Firma Electrónica</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of dataTablaArchivos">
+                    <th>{{item.id}}</th>
+                    <th>{{item.seccion}}</th>
+                    <th>{{item.subseccion}}</th>
+                    <th>{{item.archivo}}</th>
+                    <th>{{item.e_firma ? 'Sí' : 'No'}}</th>
+                    <th>
+                      <button type="button" id="item" class="id btn-link btn" title="Ver">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                    </th>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- OffCanvas Agregar Archivo -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarArchivo" [class.offcanvas-bajar]=""
+  ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h1>Nuevo Archivo</h1>
+    <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="seccionAdd" class="control-label">Sección:</label>
+            <select class="form-select" aria-label="Default select example" id="seccionAdd" (change)="changeSeccion()">
+              <option>Elige una opción</option>
+              <option *ngFor="let item of secciones" [value]="item.tx_ubicaarchivo">
+                {{ item.tx_descripcion }}
+              </option>
+            </select>
+          </div>
+          <div class="col.sm-6"></div>
+          <div class="col-sm-6">
+            <label for="subseccionAdd" class="control-label">Subsección:</label>
+            <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+              (change)="changeSubseccion()">
+              <option>Elige una opción</option>
+              <option *ngFor="let item of subsecciones" [value]="item.tx_ubicaarchivo">
+                {{ item.tx_descripcion }}
+              </option>
+            </select>
+          </div>
+          <div class="col.sm-6"></div>
+          <div class="col-sm-6">
+            <label for="archivoAdd" class="control-label">Archivo:</label>
+            <select class="form-select" aria-label="Default select example" id="archivoAdd" (change)="changeArchivos()">
+              <option>Elige una opción</option>
+              <option *ngFor="let item of archivos" [value]="item.id">
+                {{ item.tx_descripcion }}
+              </option>
+            </select>
+          </div>
+          <div class="col-ms-6 content-radio">
+            <div class="lbl-radio">
+              <label class="control-label">Con firma electrónica: </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioEFirma" id="radioEFirmaSi">
+              <label class="form-check-label" for="radioEFirmaSi">
+                Sí
+              </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioEFirma" id="radioEFirmaNo">
+              <label class="form-check-label" for="radioEFirmaNo">
+                No
+              </label>
+            </div>
+          </div>
+
+          <div class="col-ms-6 content-radio">
+            <div class="lbl-radio">
+              <label class="control-label">Plantilla: </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioPlantilla" id="radioPlantillaSi">
+              <label class="form-check-label" for="radioPlantillaSi">
+                Sí
+              </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioPlantilla" id="radioPlantillaNo">
+              <label class="form-check-label" for="radioPlantillaNo">
+                No
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="formFile" class="control-label">Archivo Word: </label>
+            <input class="form-control" type="file" id="formFile">
+          </div>
+
+          <div class="col-ms-6 content-radio">
+            <div class="lbl-radio">
+              <label class="control-label">Descarga word: </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioDescarga" id="radioDescargaSi">
+              <label class="form-check-label" for="radioDescargaSi">
+                Sí
+              </label>
+            </div>
+            <div class="form-check ml-3">
+              <input class="form-check-input" type="radio" name="radioDescarga" id="radioDescargaNo">
+              <label class="form-check-label" for="radioDescargaNo">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarArchivo()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
