@@ -1,0 +1,114 @@
+<p>administracion works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Administración</h1>
+        <hr class="red">
+    </div>
+
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="accionDetalle == 1"
+                    (click)="cambioAccionDetalle(1)">Módulo Catálogos</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="accionDetalle == 2"
+                    (click)="cambioAccionDetalle(2)">Módulo Bitácoras</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="accionDetalle == 3"
+                    (click)="cambioAccionDetalle(3)">Módulo Propuestas</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="accionDetalle == 4"
+                    (click)="cambioAccionDetalle(4)">Módulo Alertas</a>
+            </li>
+        </ul>
+
+        <div class="col-md-12" *ngIf="accionDetalle == 1">
+            <p class="control-label">Catálogo 3</p>
+
+            <div class="col-sm-12">
+                <div class="col-md-4">
+                    <label class="control-label">Nombre Catálogo</label>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Tipo de Remitente</option>
+                        <option value="1">Uno</option>
+                        <option value="2">Dos</option>
+                        <option value="3">Tres</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" 
+                    title="Registrar Informe" (click)="agregarCatalogo()">
+                    <i class="bi bi-plus-circle"></i> Agregar Catálogo
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of dataInforme">
+                                <th>{{ item.id }}</th>
+                                <th>{{ item.descripcion }}</th>
+                                <th>
+                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                    data-placement="top" title="Ver"
+                                    (click)="openVistaPrevia(item.id, '', item.descripcion)">
+                                    <em style="color: blue;" class="bi bi-eye"></em>
+                                    </button>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+<!-- 
+        <div class="col-md-12 contenido" *ngIf="accionDetalle == 1">
+            <sg-catalogo></sg-catalogo>
+        </div> -->
+        
+        <div class="col-md-12 contenido" *ngIf="accionDetalle == 2">
+            <!-- <sg-bitacoras></sg-bitacoras> -->
+        </div>
+
+        <div class="col-md-12 contenido" *ngIf="accionDetalle == 3">
+            <sg-propuesta></sg-propuesta>
+        </div>
+
+        <div class="col-md-12 contenido" *ngIf="accionDetalle == 4">
+            <!-- <sg-alertas></sg-alertas> -->
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarCatalogo" [class.offcanvas-bajar]="" 
+ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Vista Previa</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+      (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="row">
+            <div class="col-sm-12 centrar-contenido">
+                <h2>Catalogo</h2>
+            </div>
+        </div>
+    </div>
+</div>
