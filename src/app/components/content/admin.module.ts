@@ -25,9 +25,7 @@ import { PropuestasComponent } from './propuestas/propuestas.component';
 import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
 import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/detalle-propuesta.component';
 import { SiarafComponent } from './siaraf/siaraf.component';
-import { SaeogComponent } from './saeog/saeog.component';
 import { DetalleSiarafComponent } from './siaraf/detalle-siaraf/detalle-siaraf.component';
-import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.component";
 import { AdminArchivosComponent } from './admin-archivos/admin-archivos.component';
 import { AdministracionComponent } from './administracion/administracion.component';
 import { SaedgComponent } from './saedg/saedg.component';
@@ -64,9 +62,7 @@ import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.compo
     AtencionesComponent,
     DetalleAtencionComponent,
     SiarafComponent,
-    SaeogComponent,
     DetalleSiarafComponent,
-    DetalleSaeogComponent,
     AdminArchivosComponent,
     AdministracionComponent,
     SaedgComponent,
