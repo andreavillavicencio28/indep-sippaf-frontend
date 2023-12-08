@@ -34,6 +34,8 @@ export class DetalleSaedgComponent {
   prevDocumento: boolean = false;
   prevAnexo: boolean = false;
   documentoFileName: string = "Ubicación del documento";
+  pdfSrc:string = '';
+  showAgregarAnexo: boolean = false;
   
 
   constructor(
@@ -86,9 +88,7 @@ export class DetalleSaedgComponent {
   }
 
   private construirUrlDelDocumento(nombreDocumento: string): string | null {
-    // Aquí debes implementar la lógica para construir la URL del documento según tus necesidades.
-    // Esto podría ser una llamada a un servicio que genera la URL del documento.
-    // En este ejemplo, solo devolvemos null.
+    
     return null;
   }
 
@@ -170,5 +170,29 @@ export class DetalleSaedgComponent {
     this.toastrService.success("Se ha completado la tarea exitosamente")
     console.log('Tarea completada');
   }
+
+
+
+  openVistaPreviaDocumento(documentoNombre: string = '',  tipo: string) {
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('documento')) {
+      this.pdfSrc = "../../../../../assets/nombre.pdf";
+      this.abrirPdfDocummento();
+    }
+  }
+
+  abrirPdfDocummento() {
+    this.prevDocumento = true;
+  }
+
+  descargarAnexo() {
+    const downloadLink = document.createElement('a');
+    const fileName = 'ejemploAnexo.pdf';
+    downloadLink.href = this.pdfSrc;
+    downloadLink.download = fileName;
+    downloadLink.click();
+    this.toastrService.success('Se ha descargado correctamente el Anexo.')
+  }
+
 
 }
