@@ -150,17 +150,17 @@
         <sg-saedg *ngIf="Seleccionado == 3" ></sg-saedg>
         <sg-juridico *ngIf="Seleccionado === 4" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-juridico>
         <sg-capa *ngIf="Seleccionado == 5" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-capa>
+        <sg-siab *ngIf="Seleccionado == 6"></sg-siab>
         <sg-coper *ngIf="Seleccionado == 8" (respuestaCofirmarModal)="respuestaCofirmarModal($event)"></sg-coper>
         <sg-acuerdos *ngIf="Seleccionado == 9" ></sg-acuerdos>
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
             <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-positivo-modal" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">
-                Guardar
-                &nbsp;<em class="bi bi-check-lg"></em>
-            </button>&nbsp;   
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;            
+            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 7 && Seleccionado != 9">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
         </div>
     </div>
 </div>
@@ -274,10 +274,10 @@
   <div class="offcanvas-footer">
     <div class="row">
       <div class="col-sm-12">
-        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+        <button type="button" class="btn btn-neutral-modal boton-derecho" (click)="cerrarOffCanvas(1)">
           Cancelar
         </button>
-        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarArchivo()">
+        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="guadarArchivo()">
           Guardar
         </button>
       </div>

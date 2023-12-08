@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BitacoraComponent } from './bitacora.component';
+import { SiabComponent } from './siab.component';
 
-describe('BitacoraComponent', () => {
-  let component: BitacoraComponent;
-  let fixture: ComponentFixture<BitacoraComponent>;
+describe('SiabComponent', () => {
+  let component: SiabComponent;
+  let fixture: ComponentFixture<SiabComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [BitacoraComponent]
+      declarations: [SiabComponent]
     });
-    fixture = TestBed.createComponent(BitacoraComponent);
+    fixture = TestBed.createComponent(SiabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
