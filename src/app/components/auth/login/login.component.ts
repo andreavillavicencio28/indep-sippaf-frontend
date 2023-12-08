@@ -49,13 +49,13 @@ export class LoginComponent {
     });
   }
 
-  reset(){
-    this.router.navigateByUrl('/auth/resetpass');
-  }
+  // reset(){
+  //   this.router.navigateByUrl('/auth/resetpass');
+  // }
 
-  regis(){
-    this.router.navigateByUrl('/auth/registroUsuario');
-  }
+  // regis(){
+  //   this.router.navigateByUrl('/auth/registroUsuario');
+  // }
 
   login() {
 
