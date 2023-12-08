@@ -61,7 +61,7 @@ export class PropuestasComponent {
       { indice: 3, titulo: 'SAEDG', activo: false, title: '', noReg: 0 },
       { indice: 4, titulo: 'Juridico', activo: false, title: '', noReg: 15 },
       { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
-      { indice: 6, titulo: 'SIAB', activo: false, title: '', noReg: 0 },
+      { indice: 6, titulo: 'SIGEBI', activo: false, title: '', noReg: 0 },
       { indice: 7, titulo: 'Analisis', activo: false, title: '', noReg: 5 },
       { indice: 8, titulo: 'COPER', activo: false, title: '', noReg: 15 },
       { indice: 9, titulo: 'Acuerdos', activo: false, title: '', noReg: 3 }
