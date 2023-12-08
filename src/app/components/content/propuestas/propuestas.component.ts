@@ -20,8 +20,8 @@ export class PropuestasComponent {
   listaDatos: any[] = [];
   tipoAccion: boolean = false;
   tipoDetalle: string = '';
+  showObs: boolean = false;
   showCapturaSeguimiento = false;
-
   valueBoton: string = '';
   iconoBoton: string = '';
   cedulaFileName: string = "Ubicación de la cédula";
@@ -114,6 +114,7 @@ export class PropuestasComponent {
   // SI AL FINAL CONFIRMA  EL ULTIMO MODAL ENTONCES CERRAMOS TODO, INCLUIDO EL CAMVAS ACTUAL Y ACTUALIZAMOS  LOS DATOS DEL ESTATUS DONDE ESTEMOS
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
+    this.toastrService.success('Se ha guardado exitosamente el resgistro.')
     this.toastrService.success("Registro guardado correctamente")
   }
 
@@ -408,4 +409,15 @@ export class PropuestasComponent {
     this.otroFileName = event.target.files[0].name;
   }
  
+
+  confirmarCOPER() {
+    this.confirmarModalService.abriraModalCOPER('Al completar este régistro,se marcará como completada la tarea').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.toastrService.success("Modúlo Completado");
+  
+      }
+    });
+
+}
 }
