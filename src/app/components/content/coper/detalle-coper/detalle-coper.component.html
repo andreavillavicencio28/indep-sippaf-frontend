@@ -1,0 +1,148 @@
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h3 class="text-center">
+                Seguimiento a sesiones COPER
+            </h3>
+        </div>
+        <div class="col-md-12">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    Fecha Asignada:
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    Número de sesión
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Número de sesión">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    Fecha de presentación a Órgano Colegiado
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    Canal de Solución
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select" id="">
+                        <option disabled>Seleccione una</option>
+                        <option value="1">Canal 1</option>
+                        <option value="2">Canal 2</option>
+                        <option value="3">Canal 3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    Fecha de Vencimiento
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div><br />
+    <div class="row">           
+        <div class="col-md-6">
+            <label for="folio" class="form-label">Documentación</label>
+        </div>
+        <div class="col-md-6" style="display: flex; flex-direction: column;">
+            <div class="input-group">
+                <button type="button" class="btn  btn-negativo-modal" (click)="agregarDocumento()">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>Comprobante del Pago</th>
+                <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataAnexos">
+                <td>{{item.name}}</td>
+                <td>
+                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                        data-placement="top" title="Vista previa"
+                        (click)="openVistaPreviaAnexo('anexo', 'verDocumento')">
+                        <em style="color: blue;" class="bi bi-eye"></em>
+                    </button>
+                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                        data-placement="top" title="Descargar"
+                        (click)="descargarComprobante()">
+                        <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
+                    </button>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarDocumento" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Agregar Comprobante de Pago</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('documento')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="documento" class="control-label">Cargar Documento</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Ubicación del documento" name="documento" id="documento" size="25" readonly="readonly" value="{{documentoFileName}}" disabled>
+                            <label for="fileDocumento" class="control-label" style="display: none" >Cargar Documento</label>
+                            <input type="file" style="display: none" id="fileDocumento" accept=".pdf" (change)="onDocumentoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnDocumento" name="btnDocumento" onclick="document.getElementById('fileDocumento').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardarDocumento()">
+                    Cargar
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Archivo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('prevAnexo')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        </div>
+    </div>
+</div>

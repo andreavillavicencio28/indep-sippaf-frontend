@@ -3,11 +3,11 @@ import { saveAs } from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'sg-detalle-saeog',
-  templateUrl: './detalle-saeog.component.html',
-  styleUrls: ['./detalle-saeog.component.scss']
+  selector: 'sg-detalle-saedg',
+  templateUrl: './detalle-saedg.component.html',
+  styleUrls: ['./detalle-saedg.component.scss']
 })
-export class DetalleSaeogComponent {
+export class DetalleSaedgComponent {
   @ViewChild('inputFile') inputFile!: ElementRef<HTMLInputElement>;
   
   @Input() id_solicitud: number = 0;
@@ -171,8 +171,4 @@ export class DetalleSaeogComponent {
     console.log('Tarea completada');
   }
 
-
 }
-
-
-

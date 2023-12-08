@@ -3,6 +3,7 @@ import { NgbModal, NgbModalConfig, NgbOffcanvas } from '@ng-bootstrap/ng-bootstr
 import { ToastrService } from 'ngx-toastr';
 import { datosEtapasPropuestas } from 'src/app/models/datosEtapasPropuesta.model';
 import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacionPro.component';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
   selector: 'sg-propuesta',
@@ -17,10 +18,14 @@ export class PropuestasComponent {
   tituloSeleccionado: string = '';
   listadoPropuestas: datosEtapasPropuestas[];
   listaDatos: any[] = [];
+  tipoAccion: boolean = false;
   tipoDetalle: string = '';
-
+  showObs: boolean = false;
+  showCapturaSeguimiento = false;
   valueBoton: string = '';
   iconoBoton: string = '';
+  cedulaFileName: string = "Ubicación de la cédula";
+  otroFileName: string = "Ubicación de otro";
 
 
   // offcanvasInstance: any;
@@ -38,12 +43,11 @@ export class PropuestasComponent {
   showReporteExcel: boolean = false;
 
 
-
-
   //Acciones de los componentes por estatus
   @ViewChild(ValidacionProComponent) ValidacionProComponent!: ValidacionProComponent;
   constructor(
     private toastrService : ToastrService,
+    private confirmarModalService: ConfirmarModalService,
   ) {
     
     this.Seleccionado = 1;
@@ -54,7 +58,7 @@ export class PropuestasComponent {
       //=========================FIN ESTATUS ASIGNADOS A ACCION DEL USUARIO===============================
       { indice: 1, titulo: 'Validación', activo: false, title: '', noReg: 14 },
       { indice: 2, titulo: 'SIARAF', activo: false, title: '', noReg: 30 },
-      { indice: 3, titulo: 'SAEOG', activo: false, title: '', noReg: 0 },
+      { indice: 3, titulo: 'SAEDG', activo: false, title: '', noReg: 0 },
       { indice: 4, titulo: 'Juridico', activo: false, title: '', noReg: 15 },
       { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
       { indice: 6, titulo: 'SIAB', activo: false, title: '', noReg: 0 },
@@ -110,7 +114,8 @@ export class PropuestasComponent {
   // SI AL FINAL CONFIRMA  EL ULTIMO MODAL ENTONCES CERRAMOS TODO, INCLUIDO EL CAMVAS ACTUAL Y ACTUALIZAMOS  LOS DATOS DEL ESTATUS DONDE ESTEMOS
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
-
+    this.toastrService.success('Se ha guardado exitosamente el resgistro.')
+    this.toastrService.success("Registro guardado correctamente")
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
@@ -137,7 +142,7 @@ export class PropuestasComponent {
         break;
       }
       case 3: {
-        this.tituloSeleccionado = 'SAEOG';
+        this.tituloSeleccionado = 'SAEDG';
         break;
       }
       case 4: {
@@ -355,5 +360,64 @@ export class PropuestasComponent {
         break;
     }
   }
+
+  completar(tipoCanvas: string) {
+    this.tipoAccion = true;
+    let mensaje = this.tipoAccion ? '¿Estas seguro de completar este paso? está acción cambiará el estatus de está etapa a ?' : '¿Estas seguro que quieres rechazar la opinión técnica?';
+    let titulomsm = this.tipoAccion ? 'Se aprobo correctamente la opinión técnica ' : 'Se rechazo correctamente la opinión técnica';
+    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
+      if (result) {
+        if(tipoCanvas == 'detalle')
+        this.cerrarCamvasPrincipal();
+        if(tipoCanvas == 'captura')
+        this.cerrarCamvasPrincipal();
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro completado correctamente")
+      } else {                
+        // El usuario canceló
+        //this.valorRespuestaComfirmarModal.emit(false);
+      }
+
+    });
+  }
+
+  capturar(tipoAccion: string) {
+
+    switch (tipoAccion) {
+      case 'abrir':
+        this.showCapturaSeguimiento = true;
+        break;
+      case 'guardarCaptura':
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro guardado correctamente")
+        break;
+      case 'guardar':
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro guardado correctamente")
+        break;      
+      default:
+        this.showCapturaSeguimiento = false;
+        break;
+    }    
+  }
+
+  onCedulaFileChange(event: any){
+    this.cedulaFileName = event.target.files[0].name;
+  }
+
+  onOtroFileChange(event: any){
+    this.otroFileName = event.target.files[0].name;
+  }
  
+
+  confirmarCOPER() {
+    this.confirmarModalService.abriraModalCOPER('Al completar este régistro,se marcará como completada la tarea').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.toastrService.success("Modúlo Completado");
+  
+      }
+    });
+
+}
 }

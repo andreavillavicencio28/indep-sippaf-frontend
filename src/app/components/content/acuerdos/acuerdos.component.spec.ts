@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaeogComponent } from './saeog.component';
+import { AcuerdosComponent } from './acuerdos.component';
 
-describe('SaeogComponent', () => {
-  let component: SaeogComponent;
-  let fixture: ComponentFixture<SaeogComponent>;
+
+describe('AcuerdosComponent', () => {
+  let component: AcuerdosComponent;
+  let fixture: ComponentFixture<AcuerdosComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SaeogComponent]
+      declarations: [AcuerdosComponent]
     });
-    fixture = TestBed.createComponent(SaeogComponent);
+    fixture = TestBed.createComponent(AcuerdosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

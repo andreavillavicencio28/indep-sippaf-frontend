@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
-  selector: 'sg-saeog',
-  templateUrl: './saeog.component.html',
-  styleUrls: ['./saeog.component.scss']
+  selector: 'sg-saedg',
+  templateUrl: './saedg.component.html',
+  styleUrls: ['./saedg.component.scss']
 })
-export class SaeogComponent {
+export class SaedgComponent {
+  
+
   @Input() id_solicitud: number = 0;
   @Input() solicitante: string = '';
 
@@ -103,7 +105,5 @@ export class SaeogComponent {
     this.toastrService.success("Se ha completado la tarea exitosamente")
     console.log('Tarea completada');
   }
-
- 
 
 }
