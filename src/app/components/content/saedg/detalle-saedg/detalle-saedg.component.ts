@@ -57,17 +57,7 @@ export class DetalleSaedgComponent {
   }
 
 
-  descargarDocumento(nombreDocumento: string): void {
-    
-    const url = this.construirUrlDelDocumento(nombreDocumento);
-  
-    if (url) {
-      
-      saveAs(url, `${nombreDocumento}.pdf`);
-    } else {
-      console.warn('La URL del documento no está definida.');
-    }
-  }
+
 
   activarInputFile(){
     this.inputFile.nativeElement.click();
