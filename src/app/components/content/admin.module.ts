@@ -33,6 +33,8 @@ import { AdminArchivosComponent } from './admin-archivos/admin-archivos.componen
 import { AdministracionComponent } from './administracion/administracion.component';
 import { SaedgComponent } from './saedg/saedg.component';
 import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.component';
+import { SiabComponent } from './siab/siab.component';
+import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component';
 
 
 /* Components */
@@ -77,6 +79,8 @@ import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.compo
     AdministracionComponent,
     SaedgComponent,
     DetalleSaedgComponent,
+    SiabComponent,
+    DetalleSiabComponent
   ],
   exports: [
     WizardComponent,
