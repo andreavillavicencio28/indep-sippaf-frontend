@@ -1,13 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Bitacoras</h1>
+    <hr class="red">
+  </div>
+<!--------->
+<!----Busqueda---->
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body row" style="padding: 0px 5px;">
+        <div class="col-sm-3">
+          <label for="fInicio" class="form-label">Fecha inicio</label>
+          <input type="date" class="form-control" id="fInicio" [(ngModel)]="fInicio" (change)="comparaFechas()">
+        </div>
+        <div class="col-sm-3">
+          <label for="fFin" class="form-label">Fecha fin</label>
+          <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
+        </div>
+        
+        <div class="card-body row" style="padding: 0px 5px;">
+          <div class="col-sm-3">
+            <label for="txtPropuesta" class="form-label">Numero de Propuesta</label>
+            <input type="text" class="form-control" id="txtPropuesta">
+          </div>
+          <div class="col-sm-3">
+            <label for="txtAcreditado" class="form-label">Nombre del acreditado</label>
+            <input type="text" class="form-control" id="txtAcreditado">
+          </div>
+        </div>
+        <div class="card-body row" style="padding: 0px 5px;">
+          <div class="col-sm-3">
+            <label for="txtEspecialista" class="form-label">Nombre del especialista</label>
+            <input type="text" class="form-control" id="txtEspecialista"> 
+          </div>
+          <div class="col-sm-2 text-end">
+            <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"  (click)="cambioSeleccion()">
+            <em class="bi bi-search">&nbsp;Buscar&nbsp;</em>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------->
 
-  <h1>Bitacora</h1>
-  
-</body>
-</html>
+
+
+<div class="col-sm-12">
+    <ul class="nav nav-underline">
+        <li class="nav-item">
+            <a class="nav-link " [class.active]="" aria-current="page">
+                <span class="badge text-bg-secondary"></span></a>
+        </li>
+    </ul>
+</div>
+<hr>
+<div class="col-sm-12" *ngIf="tipoVista">
+    <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-secondary">
+                    <th style="width: 10%;">Tipo</th>
+                    <th style="width: 10%;">Id Propuesta</th>
+                    <th style="width: 10%;">Acreditado</th>
+                    <th style="width: 10%;">Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dato of listaDatos" (click)="abrirCamvasPrincipal()">
+                  <td>{{ dato.Propuesta }}</td>
+                  <td>{{ dato.idPropuesta }}</td>
+                  <td>{{ dato.Acreditado }}</td>
+                  <td>{{ dato.Estatus }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+  <!------New vistas----->
+  <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
+  id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+      <h1></h1>
+      <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+          (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+  </div>
+  <div class="offcanvas-body">
+    <sg-detalle-bitacora [id_bitacora]="id_bitacora" [acreditado]="acreditado"></sg-detalle-bitacora>                   
+      
+  </div>
+</div>
+<div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>

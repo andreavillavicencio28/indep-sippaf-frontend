@@ -1,13 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Catalogo</h1>
+    <hr class="red">
+  </div>
+  <div class="col-md-12 contenido">
+    <p class="control-label">Catálogo 3</p>
 
-  <h1>Catalogos</h1>
-  
-</body>
-</html>
+  <div class="col-sm-12">
+    <div class="col-md-4">
+      <label class="control-label">Nombre Catálogo</label>
+    </div>
+    <div class="col-sm-3">
+      <select (click)="abrirCamvasPrincipal(listaCatalogos)">
+        <option *ngFor="let dato of listaCatalogos" [value]="dato">{{dato.descripcion}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" (click)="agregarCatalogo()">
+        <i id="circle" class="bi bi-plus-circle"></i> Agregar Catalogo
+    </button>
+  </div>
+  <div class="card-body" >
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>
+            <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+              data-placement="top" title="Ver"
+              >
+              <em style="color: blue;" class="bi bi-eye"></em>
+            </button>
+            <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+              data-placement="top" title="Actualizar"
+              >
+              <em style="color: blue;" class="bi bi-arrow-clockwise"></em>
+            </button>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>   
+   
+   
+   
+   
+   
+
+    <div class="offcanvas-backdrop fade show" *ngIf="showAgregarCatalogo"></div>
+    
+
+    <!-- OffCanvas Agregar Archivo -->
+<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarCatalogo" [class.offcanvas-bajar]=""
+ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas-header">
+  <h1>Agregar </h1>
+  <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+    (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+</div>
+<div class="offcanvas-body">
+  <div class="card">
+      <div class="card-body">
+          <div class="row">
+              <div class="col-sm-6">
+                  <label for="idRegistro" class="control-label">N° de registro</label>
+                  <input type="text" class="form-control" id="idRegistro">
+              </div>
+              <div class="col-sm-6">
+                  <label for="descripcion" class="control-label">Descripción</label>
+                  <input type="text" class="form-control" id="descripcion">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="offcanvas-footer">
+  <div class="row">
+    <div class="col-sm-12">
+      <button type="button" class="btn btn-neutral-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="guadarArchivo()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+
+

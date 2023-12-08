@@ -22,12 +22,15 @@ import { AcreditadosComponent } from './acreditados/acreditados.component';
 import { DetalleAcreditadoComponent } from './etapasAcreditados/detalle/detalle-acreditados/detalle-acreditado.component';
 
 import { PropuestasComponent } from './propuestas/propuestas.component';
+import { BitacoraComponent } from './bitacora/bitacora.component';
 import { ValidacionProComponent } from './etapasPropuestas/validacion/validacionPro.component';
 import { DetallePropuestaComponent } from './etapasPropuestas/detalle-solicitud/detalle-propuesta.component';
 import { SiarafComponent } from './siaraf/siaraf.component';
 import { SaeogComponent } from './saeog/saeog.component';
 import { DetalleSiarafComponent } from './siaraf/detalle-siaraf/detalle-siaraf.component';
 import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.component";
+import { DetalleBitacoraComponent } from './bitacora/etapasBitacoras/detalle-bitacora.component';
+import { CatalogosComponent } from './catalogos/catalogos.component';
 
 /* Components */
 @NgModule({
@@ -51,6 +54,7 @@ import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.comp
     PropuestasComponent,
     ValidacionProComponent,
     DetallePropuestaComponent,
+    BitacoraComponent,
     DetalleJuridicoComponent,
     JuridicoComponent,
     CapaComponent,
@@ -63,6 +67,8 @@ import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.comp
     SaeogComponent,
     DetalleSiarafComponent,
     DetalleSaeogComponent,
+    DetalleBitacoraComponent,
+    CatalogosComponent,
   ],
   exports: [
     WizardComponent,

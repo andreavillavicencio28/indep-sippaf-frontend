@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12 valoresCentrados title">
+        <h5>
+            
+        </h5>
+    </div>
+    <div class="col-sm-12">
+        <div class="col-md-12 valoresCentrados title">
+            <h5>
+                Cargando Documento Juridico
+            </h5>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="fechaPropuesta" class="form-label">Fecha y Hora&nbsp;</label>
+            <span>{{ datosBitacora.fechaHora }}</span>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="montoletraMXN" class="form-label">Cargado por&nbsp;</label>
+            <span>{{ datosBitacora.cargadoPor }}</span>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="fechaDocumentos" class="form-label">Nombre de documento&nbsp;</label>
+            <span>{{ datosBitacora.nombreDoc }}</span>
+        </div>
+        <div class="offcanvas-footer">
+            <div class="text-end">
+                <button type="button" class="btn btn-neutral-modal" (click)="openVistaPreviaAnexo('anexo', 'verDocumento')" >Ver&nbsp;<em class="bi bi-eye"></em> </button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-positivo-modal" (click)="downloadDocJuridico()">Descargar&nbsp;<em class="bi bi-file-earmark-arrow-down"></em></button>&nbsp;
+            </div>
+        </div>
+
+        <div class="col-md-12 valoresCentrados title">
+            <h5>
+                Guardado Módulo Jurídico
+            </h5>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="fechaPropuesta" class="form-label">Fecha y Hora&nbsp;</label>
+            <span>{{ datosBitacora.fechaHora2 }}</span>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="montoletraMXN" class="form-label">Cargado por&nbsp;</label>
+            <span>{{ datosBitacora.cargadoPor2 }}</span>
+        </div>
+
+        <div class="col-md-12 valoresCentrados title">
+            <h5>
+                Finalizado Módulo Jurídico
+            </h5>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="fechaPropuesta" class="form-label">Fecha y Hora&nbsp;</label>
+            <span>{{ datosBitacora.fechaHora3 }}</span>
+        </div>
+        <div class="col-sm-6  ">
+            <label for="montoletraMXN" class="form-label">Cargado por&nbsp;</label>
+            <span>{{ datosBitacora.cargadoPor3 }}</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Previsualización del Documento</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarPDF()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        </div>
+    </div>
+</div>
+<div class="offcanvas-backdrop fade show" *ngIf="prevAnexo"></div>
