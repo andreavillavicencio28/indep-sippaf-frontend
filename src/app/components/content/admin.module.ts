@@ -30,6 +30,8 @@ import { DetalleSiarafComponent } from './siaraf/detalle-siaraf/detalle-siaraf.c
 import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.component";
 import { AdminArchivosComponent } from './admin-archivos/admin-archivos.component';
 import { AdministracionComponent } from './administracion/administracion.component';
+import { SaedgComponent } from './saedg/saedg.component';
+import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.component';
 
 /* Components */
 @NgModule({
@@ -67,6 +69,8 @@ import { AdministracionComponent } from './administracion/administracion.compone
     DetalleSaeogComponent,
     AdminArchivosComponent,
     AdministracionComponent,
+    SaedgComponent,
+    DetalleSaedgComponent,
   ],
   exports: [
     WizardComponent,

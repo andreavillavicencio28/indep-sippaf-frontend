@@ -58,7 +58,7 @@ export class PropuestasComponent {
       //=========================FIN ESTATUS ASIGNADOS A ACCION DEL USUARIO===============================
       { indice: 1, titulo: 'Validación', activo: false, title: '', noReg: 14 },
       { indice: 2, titulo: 'SIARAF', activo: false, title: '', noReg: 30 },
-      { indice: 3, titulo: 'SAEOG', activo: false, title: '', noReg: 0 },
+      { indice: 3, titulo: 'SAEDG', activo: false, title: '', noReg: 0 },
       { indice: 4, titulo: 'Juridico', activo: false, title: '', noReg: 15 },
       { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
       { indice: 6, titulo: 'SIAB', activo: false, title: '', noReg: 0 },
@@ -141,7 +141,7 @@ export class PropuestasComponent {
         break;
       }
       case 3: {
-        this.tituloSeleccionado = 'SAEOG';
+        this.tituloSeleccionado = 'SAEDG';
         break;
       }
       case 4: {
