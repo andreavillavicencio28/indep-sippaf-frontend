@@ -18,10 +18,14 @@ export class PropuestasComponent {
   tituloSeleccionado: string = '';
   listadoPropuestas: datosEtapasPropuestas[];
   listaDatos: any[] = [];
+  tipoAccion: boolean = false;
   tipoDetalle: string = '';
   showObs: boolean = false;
+  showCapturaSeguimiento = false;
   valueBoton: string = '';
   iconoBoton: string = '';
+  cedulaFileName: string = "Ubicación de la cédula";
+  otroFileName: string = "Ubicación de otro";
 
 
   // offcanvasInstance: any;
@@ -37,8 +41,6 @@ export class PropuestasComponent {
   showAgregarArchivo: boolean = false;
   pdfSrc: string = '';
   showReporteExcel: boolean = false;
-
-
 
 
   //Acciones de los componentes por estatus
@@ -113,6 +115,7 @@ export class PropuestasComponent {
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
     this.toastrService.success('Se ha guardado exitosamente el resgistro.')
+    this.toastrService.success("Registro guardado correctamente")
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
@@ -356,6 +359,54 @@ export class PropuestasComponent {
       default:
         break;
     }
+  }
+
+  completar(tipoCanvas: string) {
+    this.tipoAccion = true;
+    let mensaje = this.tipoAccion ? '¿Estas seguro de completar este paso? está acción cambiará el estatus de está etapa a ?' : '¿Estas seguro que quieres rechazar la opinión técnica?';
+    let titulomsm = this.tipoAccion ? 'Se aprobo correctamente la opinión técnica ' : 'Se rechazo correctamente la opinión técnica';
+    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
+      if (result) {
+        if(tipoCanvas == 'detalle')
+        this.cerrarCamvasPrincipal();
+        if(tipoCanvas == 'captura')
+        this.cerrarCamvasPrincipal();
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro completado correctamente")
+      } else {                
+        // El usuario canceló
+        //this.valorRespuestaComfirmarModal.emit(false);
+      }
+
+    });
+  }
+
+  capturar(tipoAccion: string) {
+
+    switch (tipoAccion) {
+      case 'abrir':
+        this.showCapturaSeguimiento = true;
+        break;
+      case 'guardarCaptura':
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro guardado correctamente")
+        break;
+      case 'guardar':
+        this.showCapturaSeguimiento = false;
+        this.toastrService.success("Registro guardado correctamente")
+        break;      
+      default:
+        this.showCapturaSeguimiento = false;
+        break;
+    }    
+  }
+
+  onCedulaFileChange(event: any){
+    this.cedulaFileName = event.target.files[0].name;
+  }
+
+  onOtroFileChange(event: any){
+    this.otroFileName = event.target.files[0].name;
   }
  
 

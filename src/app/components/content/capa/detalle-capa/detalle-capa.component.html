@@ -1,57 +1,103 @@
-
 <div class="col-sm-12">
     <div class="row">
-        <div class="col-md-12" style="display: flex; flex-direction: column;">
-            <div class="input-group">
-                <button type="button" class="btn  btn-negativo-modal" (click)="generarOficio()">Generar oficio</button>
-            </div>
-        </div>
-    </div><br />
-    <div class="row">           
-        <div class="col-md-6">
-            <label for="folio" class="form-label">Documentación</label>
-        </div>
-        <div class="col-md-6" style="display: flex; flex-direction: column;">
-            <div class="input-group">
-                <button type="button" class="btn  btn-negativo-modal" (click)="agregarDocumento()">Agregar</button>
-            </div>
-        </div>
-    </div>
+        <div class="col-md-12">
+            <div class="col-sm-12">                                   
+                    
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="accionDetalle == 1"
+                            (click)="cambioAccionDetalle(1)">Documentación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [class.active]="accionDetalle == 2"
+                            (click)="cambioAccionDetalle(2)">Anexos</a>
+                    </li>
+                </ul>
+                <br />             
+                <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
 
-    <div class="card-body">
-        <div class="row">
-            <table class="table table-striped">
-            <thead>
-                <tr>
-                <th>Anexos</th>
-                <th>Acciones</th>                
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of dataAnexos">
-                <td>{{item.name}}</td>
-                <td>
-                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
-                        data-placement="top" title="Vista previa"
-                        (click)="openVistaPreviaAnexo('anexo', 'verDocumento')">
-                        <em style="color: blue;" class="bi bi-eye"></em>
-                    </button>
-                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
-                        data-placement="top" title="Descargar"
-                        (click)="descargarAnexo()">
-                        <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
-                    </button>
-                </td>
-                </tr>
-            </tbody>
-            </table>
-        </div>
-    </div>
-            
-    <div class="row">
-        <div class="col-sm-12">
-            <label for="obs" class="form-label">Observaciones</label>
-            <textarea class="form-control" id="obs" rows="6"></textarea>
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th>Documento</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of dataDocumentos">
+                                <td>{{item.name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                        data-placement="top" title="Vista previa"
+                                        (click)="openVistaPreviaDocumento('documento', 'verDocumento')">
+                                        <em style="color: blue;" class="bi bi-eye"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                        data-placement="top" title="Descargar"
+                                        (click)="descargasArchivos('documento')">
+                                        <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
+                                    </button>
+                                    <button class="btn btn-link"
+                                        (click)="agregarDocumento()"
+                                        title="Cargar documento">
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>                   
+                </div>
+
+                <div class="row" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                <th>Documento</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of dataAnexos">
+                                <td>{{item.name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                        data-placement="top" title="Vista previa"
+                                        (click)="openVistaPreviaAnexo('anexo', 'verAnexo')">
+                                        <em style="color: blue;" class="bi bi-eye"></em>
+                                    </button>
+                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                        data-placement="top" title="Descargar"
+                                        (click)="descargasArchivos('anexo')">
+                                        <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
+                                    </button>
+                                    <button class="btn btn-link"
+                                        (click)="agregarAnexo()"
+                                        title="Cargar anexo">
+                                        <i class="bi bi-upload"></i>
+                                    </button>
+                                </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                            
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="obs" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="obs" rows="6"></textarea>
+                        </div>
+                    </div>                    
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
@@ -65,8 +111,8 @@
     </div>
     <div class="offcanvas-body">
         <div class="col-sm-12">
-            <div class="row">
-                <div class="card-body row" style="padding: 15px 15px;">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
                     <div class="col-md-6">
                         <label for="documento" class="control-label">Cargar Documento</label>
                         <div class="input-group">
@@ -104,6 +150,54 @@
     </div>
 </div>
 
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Cargar Anexo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('showAgregarAnexo')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="anexo" class="control-label">Cargar Anexo</label>
+                        <div class="input-group">
+                            <label for="anexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input class="form-control" type="text" placeholder="Ubicación del anexo" name="anexo" id="anexo" size="25" readonly="readonly" value="{{anexoFileName}}" disabled>
+                            <label for="fileAnexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input type="file" style="display: none" id="fileAnexo" accept=".pdf" (change)="onAnexoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnAnexo" name="btnAnexo" onclick="document.getElementById('fileAnexo').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Previsualizar:</label>
+                        <div class="input-group">
+                            <button class="btn btn-link" (click)="previsualizarAnexo()" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardarAnexo()">
+                    Guardar
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showGenerarOficio" ngtabindex="-1"
     id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -118,23 +212,23 @@
                     <div class="card-body row" style="padding: 15px 15px;">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" [class.active]="accionDetalle == 1"
-                                    (click)="cambioAccionDetalle(1)">Oficio</a>
+                                <a class="nav-link" [class.active]="accionDetalle == 3"
+                                    (click)="cambioAccionDetalle(3)">Oficio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" [class.active]="accionDetalle == 2" (click)="cambioAccionDetalle(2)">
+                                <a class="nav-link" [class.active]="accionDetalle == 4" (click)="cambioAccionDetalle(4)">
                                     Recordatorio </a>
                             </li>
                         </ul>
 
-                        <div class="row" *ngIf="accionDetalle == 1" style="margin-top: 15px;">
+                        <div class="row" *ngIf="accionDetalle == 3" style="margin-top: 15px;">
                             <div class="col-sm-12">
                                 <label for="detalleOficio" class="form-label">Detalle Oficio</label>
                                 <textarea class="form-control" id="detalleOficio" rows="6"></textarea>
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="accionDetalle == 2" style="margin-top: 15px;">
+                        <div class="row" *ngIf="accionDetalle == 4" style="margin-top: 15px;">
                             <div class="col-sm-12">
                                 <label for="detalleRecordatorio" class="form-label">Detalle Recordatorio</label>
                                 <textarea class="form-control" id="detalleRecordatorio" rows="6"></textarea>
@@ -190,10 +284,8 @@
     </div>
     <div class="offcanvas-body">
         <div class="col-sm-12">
-            <div class="col-sm-12 centrar-contenido">
-                <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
                     style="width: 700px; height: 100vh;"></pdf-viewer>
-            </div>
         </div>
     </div>
 

@@ -14,16 +14,17 @@ export class DetalleCapaComponent {
   showDocumento: boolean = false;
   showGenerarOficio: boolean = false;
   showAgregarDocumento:  boolean = false;
+  showAgregarAnexo: boolean = false;
   nombreDocumento: string = '';
   documentoFileName: string = "Ubicación del documento";
+  anexoFileName: string = "Ubicación del anexo";
   prevDocumento: boolean = false;
   accionDetalle: number = 1;
   dataAnexos: any[] = [];
+  dataDocumentos: any[] = [];
   prevAnexo: boolean = false;
-  notificacionPrim: boolean = false;
-  notificacionSeg: boolean = false;
-  notificacionTerc: boolean = false;
   documentoNombre: string = '';
+  anexoNombre: string = '';
   pdfSrc:string = '';
   pdfSrc2:string = '';
   showDetalle: boolean = false;
@@ -46,6 +47,20 @@ export class DetalleCapaComponent {
       {
         name: "Otro",
       },
+    ];
+    this.dataDocumentos = [
+      {
+        name: "Layout Saldos",
+      },
+      {
+        name: "Edo Cuenta Cert",
+      },
+      {
+        name: "Oficio Solicitud",
+      },
+      {
+        name: "Dictamen Juridico",
+      },
     ]
   }
 
@@ -53,19 +68,22 @@ export class DetalleCapaComponent {
     this.showDetalleSolicitud = true;    
   }
 
-  cerrarCanvas(tipo: string) {   
+  cerrarCanvas(tipo: string) {
     switch (tipo) {
       case 'oficio':
         this.showGenerarOficio = false;
         break;
       case 'documento':
         this.showAgregarDocumento = false;
-        break;    
+        break;       
       case 'prevDocumento':
         this.prevDocumento = false;
         break;
       case 'prevAnexo':
         this.prevAnexo = false;
+        break;
+      case 'showAgregarAnexo':
+        this.showAgregarAnexo = false;
         break;
       default:
         break;
@@ -83,16 +101,28 @@ export class DetalleCapaComponent {
   agregarDocumento() {
     this.showAgregarDocumento = true;
   }
-
+  agregarAnexo() {
+    this.showAgregarAnexo = true;
+  }
   onDocumentoFileChange(event: any){
     this.documentoFileName = event.target.files[0].name;
+  }
+  onAnexoFileChange(event: any) {
+    this.anexoFileName = event.target.files[0].name;
   }
   previsualizarDocumento() {
     this.prevDocumento = true;
   }
+  previsualizarAnexo() {
+    this.prevAnexo = true;
+  }
   guardarDocumento() {
     this.toastrService.success('Se ha guardado exitosamente el documento.')
     this.showAgregarDocumento = false;
+  }
+  guardarAnexo() {
+    this.toastrService.success('Se ha guardado exitosamente el anexo.')
+    this.showAgregarAnexo = false;
   }
   cambioAccionDetalle(accion : number) {
     this.accionDetalle = accion;
@@ -101,14 +131,18 @@ export class DetalleCapaComponent {
     this.toastrService.success('Se ha guardado exitosamente el oficio.')
     this.showGenerarOficio = false;
   }  
-  /*openVistaPreviaAnexo() {
-    this.prevAnexo = true;
-  }*/
 
-  openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
-    console.log(documentoNombre);
+  openVistaPreviaDocumento(documentoNombre: string = '',  tipo: string) {
     this.documentoNombre = documentoNombre;
-    if (documentoNombre.includes('anexo')) {
+    if (documentoNombre.includes('documento')) {
+      this.pdfSrc = "../../../../../assets/nombre.pdf";
+      this.abrirPdfDocummento();
+    }
+  }
+
+  openVistaPreviaAnexo(anexoNombre: string = '',  tipo: string) {
+    this.anexoNombre = anexoNombre;
+    if (anexoNombre.includes('anexo')) {
       this.pdfSrc = "../../../../../assets/nombre.pdf";
       this.abrirPdf();
     }
@@ -118,22 +152,25 @@ export class DetalleCapaComponent {
     this.prevAnexo = true
   }
 
+  abrirPdfDocummento() {
+    this.prevDocumento = true;
+  }
+
+  descargasArchivos(tipoArchivo: string = '') {
+    if (tipoArchivo == 'documento') {
+      this.toastrService.success(`Se ha descargado correctamente el ${tipoArchivo}.`)
+    } else {
+      this.toastrService.success(`Se ha descargado correctamente el ${tipoArchivo}.`)
+    }
+  }
+
   descargarAnexo() {
     this.toastrService.success('Se ha descargado correctamente el anexo.')
   }
 
-  primeraNotificacionDatos() {
-    this.notificacionPrim = !this.notificacionPrim
+  descargarDocumento(documentoNombre: string = '', accion: string) {
+    console.log("DESCARGAR DOCUMENTO");
   }
-
-  segundaNotificacionDatos() {
-    this.notificacionSeg = !this.notificacionSeg
-  }
-
-  terceraNotificacionDatos() {
-    this.notificacionTerc = !this.notificacionTerc
-  }
-
 
 }
   

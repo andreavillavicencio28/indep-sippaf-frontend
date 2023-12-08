@@ -28,6 +28,8 @@ import { DetalleSaeogComponent  } from "./saeog/detalle-saeog/detalle-saeog.comp
 import { CoperComponent } from './coper/coper.component';
 import { DetalleCoperComponent } from './coper/detalle-coper/detalle-coper.component';
 import { AcuerdosComponent } from './acuerdos/acuerdos.component';
+import { AdminArchivosComponent } from './admin-archivos/admin-archivos.component';
+
 
 /* Components */
 @NgModule({
@@ -66,6 +68,7 @@ import { AcuerdosComponent } from './acuerdos/acuerdos.component';
     CoperComponent,
     DetalleCoperComponent,
     AcuerdosComponent,
+    AdminArchivosComponent,
   ],
   exports: [
     WizardComponent,

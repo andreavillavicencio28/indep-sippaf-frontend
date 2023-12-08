@@ -46,17 +46,7 @@
                         (click)="cambioSeleccion(1)">
                         <em class="bi bi-search"></em>
                     </button>
-                </div>
-                
-                    
-                <!---
-                <div class="col-sm-2 text-end">
-                    <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
-                        [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
-                        <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
-                    </button>
-                </div>
-                ---->
+                </div>          
             </div>
         </div>
     </div>
@@ -167,7 +157,6 @@
         <div class="text-end">
             <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
             <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-neutral-modal"  (click)="confirmarCOPER()" *ngIf="Seleccionado == 8" style="background-color: green">Completar&nbsp;<em class="bi bi-check-circle"></em> </button> &nbsp;&nbsp;
             <button type="button" class="btn btn-positivo-modal" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">
                 Guardar
                 &nbsp;<em class="bi bi-check-lg"></em>
@@ -296,3 +285,92 @@
   </div>
 </div>
 
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showCapturaSeguimiento" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Capturar</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="capturar('cerrar')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-md-12">
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+
+                        <div class="row" *ngIf="Seleccionado == 4" style="margin-top: 15px;">
+                            <div class="col-sm-12">
+                                <label for="observaciones" class="form-label">Observaciones</label>
+                                <textarea class="form-control" id="observaciones" rows="6"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="cedula" class="control-label">Cargar Cedula</label>
+                            <div class="input-group">
+                                <label for="cedula" class="control-label" style="display: none" >Cargar Cedula</label>
+                                <input class="form-control" type="text" placeholder="Ubicación de la cédula" name="cedula" id="cedula" size="25" readonly="readonly" value="{{cedulaFileName}}" disabled>
+                                <label for="fileCedula" class="control-label" style="display: none" >Cargar Cedula</label>
+                                <input type="file" style="display: none" id="fileCedula" accept=".pdf" (change)="onCedulaFileChange($event)" formControlName="key">
+                                <span class="input-group-btn" style="vertical-align: bottom">
+                                <button type="button" class="btn btn-secundary" id="btnCedula" name="btnCedula" onclick="document.getElementById('fileCedula').click();">Buscar</button>
+                                </span>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="otro" class="control-label">Cargar Otro</label>
+                            <div class="input-group">
+                                <label for="otro" class="control-label" style="display: none" >Cargar otro</label>
+                                <input class="form-control" type="text" placeholder="Ubicación de otro" name="otro" id="otro" size="25" readonly="readonly" value="{{otroFileName}}" disabled>
+                                <label for="fileOtro" class="control-label" style="display: none" >Cargar otro</label>
+                                <input type="file" style="display: none" id="fileOtro" accept=".pdf" (change)="onOtroFileChange($event)" formControlName="key">
+                                <span class="input-group-btn" style="vertical-align: bottom">
+                                <button type="button" class="btn btn-secundary" id="btnOtro" name="btnOtro" onclick="document.getElementById('fileOtro').click();">Buscar</button>
+                                </span>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-12" style="margin-top: 50px;">
+                        
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="P100" id="demandadoActivo">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Demandado-Activo
+                                </label>
+                            </div>                
+        
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="P100" id="noDemandado">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    No-Demandado
+                                </label>
+                            </div>
+                        
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="P100" id="demandadoInactivo">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Demandado-Inactivo
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="offcanvas-footer">       
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="capturar('guardar')">
+                Guardar
+              </button>
+        </div>
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="completar('captura')">
+                Completar
+              </button>
+        </div>
+    </div>
+</div>
