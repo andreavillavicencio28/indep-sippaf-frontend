@@ -3,6 +3,7 @@ import { NgbModal, NgbModalConfig, NgbOffcanvas } from '@ng-bootstrap/ng-bootstr
 import { ToastrService } from 'ngx-toastr';
 import { datosEtapasPropuestas } from 'src/app/models/datosEtapasPropuesta.model';
 import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacionPro.component';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
   selector: 'sg-propuesta',
@@ -18,7 +19,7 @@ export class PropuestasComponent {
   listadoPropuestas: datosEtapasPropuestas[];
   listaDatos: any[] = [];
   tipoDetalle: string = '';
-
+  showObs: boolean = false;
   valueBoton: string = '';
   iconoBoton: string = '';
 
@@ -44,6 +45,7 @@ export class PropuestasComponent {
   @ViewChild(ValidacionProComponent) ValidacionProComponent!: ValidacionProComponent;
   constructor(
     private toastrService : ToastrService,
+    private confirmarModalService: ConfirmarModalService,
   ) {
     
     this.Seleccionado = 1;
@@ -110,7 +112,7 @@ export class PropuestasComponent {
   // SI AL FINAL CONFIRMA  EL ULTIMO MODAL ENTONCES CERRAMOS TODO, INCLUIDO EL CAMVAS ACTUAL Y ACTUALIZAMOS  LOS DATOS DEL ESTATUS DONDE ESTEMOS
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
-
+    this.toastrService.success('Se ha guardado exitosamente el resgistro.')
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
@@ -356,4 +358,15 @@ export class PropuestasComponent {
     }
   }
  
+
+  confirmarCOPER() {
+    this.confirmarModalService.abriraModalCOPER('Al completar este régistro,se marcará como completada la tarea').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.toastrService.success("Modúlo Completado");
+  
+      }
+    });
+
+}
 }
