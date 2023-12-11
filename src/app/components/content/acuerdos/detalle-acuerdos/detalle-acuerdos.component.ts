@@ -3,11 +3,11 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
 @Component({
-  selector: 'sg-detalle-coper',
-  templateUrl: './detalle-coper.component.html',
-  styleUrls: ['./detalle-coper.component.scss']
+  selector: 'sg-detalle-acuerdos',
+  templateUrl: './detalle-acuerdos.component.html',
+  styleUrls: ['./detalle-acuerdos.component.scss']
 })
-export class DetalleCoperComponent {
+export class DetalleAcuerdosComponent {
   @Input() id_solicitud: number = 0;
   @Input() solicitante: string = '';
 
@@ -16,13 +16,11 @@ export class DetalleCoperComponent {
   showGenerarOficio: boolean = false;
    showObs: boolean = false;
   showAgregarDocumento:  boolean = false;
-  showAgregarAnexo: boolean = false;
   nombreDocumento: string = '';
   documentoFileName: string = "Ubicación del documento";
   prevDocumento: boolean = false;
   accionDetalle: number = 1;
   dataAnexos: any[] = [];
-  dataDocumentos: any[] = [];
   prevAnexo: boolean = false;
   notificacionPrim: boolean = false;
   notificacionSeg: boolean = false;
@@ -34,7 +32,6 @@ export class DetalleCoperComponent {
   tipoModal: string = 'true';
   showPdf:boolean = false;
   showCamvasPrincipal: boolean = false;
-  anexoFileName: string = "Ubicación del anexo";
 
   constructor(
     private toastrService : ToastrService,  
@@ -42,21 +39,10 @@ export class DetalleCoperComponent {
   ) {
     this.dataAnexos = [
       {
-        name: "NOTA 1",
+        name: "Comprobante 1",
       },
       {
-        name: "NOTA 2",
-      },
-      {
-        name: "NOTA 3",
-      },
-    ]
-    this.dataDocumentos = [
-      {
-        name: "Documento 1",
-      },
-      {
-        name: "Documento 2",
+        name: "Comprobante 2",
       },
     ]
   }
@@ -79,10 +65,7 @@ export class DetalleCoperComponent {
       case 'prevAnexo':
         this.prevAnexo = false;
         break;
-        case 'showAgregarAnexo':
-          this.showAgregarAnexo = false;
-          break;
-        default:
+      default:
         break;
     }
   }
@@ -172,35 +155,5 @@ export class DetalleCoperComponent {
     });
   }
 
-  agregarAnexo() {
-    this.showAgregarAnexo = true;
-  }
 
-  descargasArchivos(tipoArchivo: string = '') {
-    if (tipoArchivo == 'documento') {
-      this.toastrService.success(`Se ha descargado correctamente el ${tipoArchivo}.`)
-    } else {
-      this.toastrService.success(`Se ha descargado correctamente el ${tipoArchivo}.`)
-    }
-  }
-
-  abrirPdfDocummento() {
-    this.prevDocumento = true;
-  }
-
-  openVistaPreviaDocumento(documentoNombre: string = '',  tipo: string) {
-    this.documentoNombre = documentoNombre;
-    if (documentoNombre.includes('documento')) {
-      this.pdfSrc = "../../../../../assets/nombre.pdf";
-      this.abrirPdfDocummento();
-    }
-  }
-
-  guardarAnexo() {
-    this.toastrService.success('Se ha guardado exitosamente el anexo.')
-    this.showAgregarAnexo = false;
-  }
-  onAnexoFileChange(event: any) {
-    this.anexoFileName = event.target.files[0].name;
-  }
 }

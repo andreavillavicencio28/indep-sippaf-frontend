@@ -3,7 +3,7 @@
         <h1>Propuestas de pago</h1>
         <hr class="red">
     </div>
-    <!--------->
+
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body row" style="padding: 0px 5px;">
@@ -65,22 +65,22 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="table-secondary">
-                        <th style="width: 30%;">Id Propuesta</th>
-                        <th style="width: 30%;">Acreditado</th>
-                        <th style="width: 30%;">Fecha recepcion</th>
-                        <th style="width: 30%;">Fecha propuesta</th>
-                        <th style="width: 30%;">Tipo propuesta</th>
-                        <th style="width: 30%;">Monto MXN</th>
-                        <th style="width: 30%;">Monto USD</th>
-                        <th style="width: 20%;">Propuesta Dacion</th>
+                        <th style="width: 40%;">Id Propuesta</th>
+                        <th style="width: 40%;">Acreditado</th>
+                        <th style="width: 40%;">Fecha recepcion</th>
+                        <th style="width: 40%;">Fecha propuesta</th>
+                        <th style="width: 40%;">Tipo propuesta</th>
+                        <th style="width: 40%;">Monto MXN</th>
+                        <th style="width: 40%;">Monto USD</th>
+                        <th style="width: 40%;">Propuesta Dacion</th>
                         <th style="width: 20%;">Pagos</th>
-                        <th style="width: 20%;">Plazo Solicitado</th>
+                        <th style="width: 40%;">Plazo Solicitado</th>
                         <th style="width: 20%;">Capturista</th>
-                        <th style="width: 20%;">Fecha captura</th>
-                        <th style="width: 20%;">Id Responsable caso</th>
-                        <th style="width: 20%;">N° Volante</th>
+                        <th style="width: 40%;">Fecha captura</th>
+                        <th style="width: 40%;">Id Responsable caso</th>
+                        <th style="width: 40%;">N° Volante</th>
                         <th style="width: 10%;">Estatus</th>
-                        <th style="width: 10%;">Tiempo atención</th>
+                        <th style="width: 30%;">Tipo atención</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,14 +99,42 @@
                         <td>{{ dato.fechaCaptura }}</td>
                         <td>{{ dato.idResponsable }}</td>
                         <td>{{ dato.NumVolante }}</td>
-                        <td>{{ dato.estatus}}</td>
-                        <td id="colores" [ngStyle]="{'background-color':colorVentana(dato.tiempoAtencion)}"></td>
+                        <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
+                        <td>{{ dato.tipoAtencion }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-------------
+    <div class="col-sm-12 row" *ngIf="!tipoVista">
+        <div class="col-sm-3 " *ngFor="let dato of listaDatos" title="Ver detalalle"
+            (click)="abrirCamvasPrincipal(dato)">
+            <div class="card card-container">
+                <div class="card-header">
+                    <label>Nombre solicitante: </label> <strong>{{dato.NombreSolicitante}}</strong>
+                </div>
+                <div class="card-body" style="overflow-y: scroll;">
+                    <div class="col-sm-12">
+                        <label>Tipo de bien: </label> <strong>{{dato.tipoBien}}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Fecha se solicitud: </label> <strong>{{dato.fechaSolicitud}}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Estatus: </label> <strong>{{dato.proceso}}</strong>
+                    </div>
+                    <hr>
+                    <div class="col-sm-12">
+                        <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    ------------->
 </div>
 
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
@@ -130,11 +158,10 @@
         <div class="text-end">
             <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
             <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;            
-            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 7 && Seleccionado != 9">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
-            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
         </div>
-        
     </div>
 </div>
 <div class="offcanvas-backdrop fade show" *ngIf="showCamvasPrincipal"></div>
@@ -217,8 +244,8 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="comentarios" class="control-label">Comentarios</label>
-                    <textarea name="montoUSD" id="comentarios" cols="35" rows="5"></textarea>
+                    <label for="montoUSD" class="control-label">Observaciones</label>
+                    <textarea name="montoUSD" id="montoUSD" cols="35" rows="5"></textarea>
                 </div>
                 
                 <div class="col-sm-6">
@@ -231,13 +258,13 @@
 
                 <div class="col-sm-6">
                     <label for="capturo" class="form-label">Capturó:</label>
-                    <input type="text" class="form-control" id="capturo" placeholder="Andrea Villavicencio" disabled> 
+                    <label id="capturo" class="form-label">Andrea Villavicencio</label>
                     <br>
                     <label for="fecha" class="form-label">Fecha:</label>
-                    <input type="text" class="form-control" id="capturo" placeholder="22/02/2023" disabled> 
+                    <label id="fecha" class="form-label">22/02/2023</label>
                     <br>
                     <label for="hora" class="form-label">Hora:</label>
-                    <input type="text" class="form-control" id="capturo" placeholder="12:23:34" disabled> 
+                    <label id="hora" class="form-label">12:23:34</label>
                 </div>
             </div>
         </div>

@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-12 mb-4">
+                    <h3 class="text-center">
+                        Reportes
+                    </h3>
+                </div>
+
+                <div class="card-body row">                    
+                    <div class="col-sm-3">                                      
+                        <div class="row mb-12">                           
+                            <div class="col-md-12">
+                                <button class="btn btn-neutral-modal">Atención de Acreditados</button>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">                                      
+                        <div class="row mb-12">                           
+                            <div class="col-md-12">
+                                <button class="btn btn-neutral-modal">Activos Financieros</button>
+                            </div>
+                        </div>
+                    </div>         
+                    <div class="col-sm-3">                                      
+                        <div class="row mb-12">                           
+                            <div class="col-md-12">
+                                <button class="btn btn-neutral-modal">&nbsp;&nbsp;&nbsp;&nbsp; COPER &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">                                      
+                        <div class="row mb-12">                           
+                            <div class="col-md-12">
+                                <button class="btn btn-neutral-modal">Seguimiento COPER</button>
+                            </div>
+                        </div>
+                    </div>                                
+                </div>
+
+                <div class="col-12 mb-4" [class.show]="showTipoReporte">
+                    <h3 class="text-center">
+                        Roles y Perfiles
+                    </h3>
+                </div>
+
+            </div>   
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditPerfilRol" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar Perfil</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                                                                     
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardar()">
+                    Guardar
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+

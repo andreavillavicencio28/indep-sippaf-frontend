@@ -7,9 +7,7 @@
 
     </div>
     <div class="col-sm-2">
-        <button type="button" class="form-control" (click)="descargarAcreditados()">
-            <i class="bi-plus-downland"></i> Generar reporte
-        </button>
+       
     </div>
     <div class="col-sm-1 pad" style="padding-bottom: 10px ">
         <button type="button" class="form-control" (click)="agregarAcreditado()">
@@ -22,33 +20,11 @@
 
             <div class="card-body row">
                 <div class="col-sm-3">
-                    <label for="busqueda" class="form-label">Fecha</label>
                     <input type="text" class="form-control" id="busqueda" placeholder="Fecha inicial / Fecha final">
                 </div>
                 <div class="col-sm-2">
-                    <label for="busqueda" class="form-label">Buscar</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
-                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
-                            <em class="bi bi-search"></em>
-                        </button>
-                    </div>
-                </div>
-                <!--<div class="col-sm-2">
-                    <label for="busqueda" class="form-label">Tipo mandato</label>
-                    <tr *ngFor="let item of encomiendas">
-                        <th>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </th>
-                        <th>{{ item.tx_descripcion }}</th>
-                    </tr>
-                </div>-->
-                <div class="col-sm-2">
-                    <label class="form-label">Tipo Mandato</label>
-                    <div class="input-group">
-                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
+                        <label class="form-label" id="busqueda" class="form-control">Tipo Mandato</label>
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayMandato()">
                             <em class="bi bi-chevron-compact-down"></em>
                         </button>
@@ -62,31 +38,9 @@
                         </div>
                     </div>
                 </div>
-                
-                <!--<div class="col-sm-2">
-                    <wj-list-box #theListBox [displayMemberPath]="tx_descripcion" [checkedMemberPath]="'selected'"
-                        [itemsSource]="encomiendas"></wj-list-box>
-                </div>-->
-
-               <!-- <div class="col-sm-2">
-                    <label for="busqueda" class="form-label">Tipo cartera</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="P100" id="Control">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Control y Resguardo
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="P100" id="Objetivo">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Objetivo
-                        </label>
-                    </div>
-                </div>-->
                 <div class="col-sm-2">
-                    <label class="form-label">Tipo Cartera</label>
                     <div class="input-group">
-                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
+                        <label class="form-label" id="busqueda" class="form-control">Tipo Cartera</label>
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayCartera()">
                             <em class="bi bi-chevron-compact-down"></em>
                         </button>
@@ -104,6 +58,13 @@
                                 Objetivo
                             </label>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                            <em class="bi bi-search"></em>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -224,11 +185,15 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="">
                     </div>
-                    <label class="form-label">Municipio/Delegación:</label>
-                    <div class="input-group col-md-3">
-                        <input type="text" class="form-control" placeholder="">
-                    </div>
-                    <label for="subseccionAdd" class="control-label">Entidad:</label>
+                    <label for="subseccionAdd" class="control-label">Municipio:</label>
+                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+                        <option *ngFor="let item of municipios" [value]="item.tx_ubicaarchivo">
+                            {{ item.tx_descripcion }}
+                        </option>
+                    </select>
+                    <label for="subseccionAdd" class="control-label">Entidad Federativa:</label>
                     <select class="form-select" aria-label="Default select example" id="subseccionAdd"
                         (change)="changeSubseccion()">
                         <option>Elige una opción</option>
@@ -256,12 +221,6 @@
                     <div class="input-group col-md-3">
                         <input type="text" class="form-control" placeholder="">
                     </div>
-                    <label class="form-label">Capturó: </label>
-                    <label class="form-label">Andrea Villavicencio</label><br>
-                    <label class="form-label">Fecha: </label>
-                    <label class="form-label">11/09/23</label><br>
-                    <label class="form-label">Hora: </label>
-                    <label class="form-label">22:12:12</label>
                 </div>
                 <div class="col-sm-12">
                     <label for="exampleFormControlTextarea1" class="form-label">Observaciones:</label>
@@ -272,11 +231,11 @@
                 <div class="offcanvas-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-negativo-modal boton-derecho"
+                            <button type="button" class="btn btn-positivo-modal boton-derecho"
                                 (click)="cerrarOffCanvas(1)">
                                 Cancelar
                             </button>
-                            <button type="button" class="btn btn-positivo-modal boton-derecho"
+                            <button type="button" class="btn btn-warning boton-derecho"
                                 (click)="guadarAcreditado()">
                                 Guardar
                             </button>

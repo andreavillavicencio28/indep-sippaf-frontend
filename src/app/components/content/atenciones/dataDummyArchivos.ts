@@ -41,6 +41,71 @@ export const dataAcreditados = [
     },
 ];
 
+export const dataEncomienda = [
+    {
+        id: 1,
+        tx_descripcion: 'BANCOMEX',
+        tx_ubicaarchivo: 'BX'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'BANJERCITO CARTERA TRADICIONAL',
+        tx_ubicaarchivo: 'FC'
+    },
+    {
+        id: 3,
+        tx_descripcion: 'BANRURAL CESION',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'BANRURAL MANDATO',
+        tx_ubicaarchivo: 'TF'
+    },{
+        id: 3,
+        tx_descripcion: 'BNCI CESION',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'BNCI MANDATO',
+        tx_ubicaarchivo: 'TF'
+    },
+    {
+        id: 3,
+        tx_descripcion: 'EMPLEADO SAE',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'FDE MANDATO',
+        tx_ubicaarchivo: 'TF'
+    },{
+        id: 3,
+        tx_descripcion: 'FIDERCA',
+        tx_ubicaarchivo: 'TF'
+    },    
+    {
+        id: 3,
+        tx_descripcion: 'FIFOMI',
+        tx_ubicaarchivo: 'TF'
+    },
+];
+
+export const dataIDAcreditados = [
+    {
+        id: 1,
+        tx_descripcion: '101',
+        tx_ubicaarchivo: 'CL'
+    },
+    {
+        id: 2,
+        tx_descripcion: '102',
+        tx_ubicaarchivo: 'JP'
+    },
+];
+
+
 export const dataEdosmunis = [
     {
         id: 1,
