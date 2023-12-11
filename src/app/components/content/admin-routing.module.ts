@@ -11,6 +11,7 @@ import { AdminArchivosComponent } from './admin-archivos/admin-archivos.componen
 import { AtencionesComponent } from './atenciones/atenciones.component';
 import { AcreditadosComponent } from './acreditados/acreditados.component';
 import { AdministracionComponent } from "./administracion/administracion.component";
+import { RolesPerfiles } from './rolesPerfiles/rolesPerfiles.component';
 
 
 
@@ -144,6 +145,19 @@ const routes: Routes = [
           ],
         },
         component: AtencionesComponent,
+      },
+      {
+        path: 'rolesPerfiles',
+        data: {
+          title: 'rolesPerfiles',
+          breadcrumbs: [
+            {
+              text: 'rolesPerfiles',
+              active: true,
+            }
+          ],
+        },
+        component: RolesPerfiles,
       },
      ],
   },

@@ -4,9 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { datosEtapasPropuestas } from 'src/app/models/datosEtapasPropuesta.model';
 import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacionPro.component';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
-import { Element } from '@angular/compiler';
-import { elementAt } from 'rxjs';
-import { listaCatalogos } from '../catalogos/listaCatalogos';
 
 @Component({
   selector: 'sg-propuesta',
@@ -29,7 +26,7 @@ export class PropuestasComponent {
   iconoBoton: string = '';
   cedulaFileName: string = "Ubicación de la cédula";
   otroFileName: string = "Ubicación de otro";
-  colores:string='';
+
 
   // offcanvasInstance: any;
   //private offcanvasService: NgbOffcanvas, private modal: NgbModal, private config: NgbModalConfig,  config.backdrop = 'static'; config.keyboard = false;
@@ -157,7 +154,7 @@ export class PropuestasComponent {
         break;
       }
       case 6: {
-        this.tituloSeleccionado = 'SIAB';
+        this.tituloSeleccionado = 'SIGEBI';
         break;
       }
       case 7: {
@@ -192,8 +189,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'002',
       NumVolante:'001',
-      estatus: 'En espera documentación',
-      tiempoAtencion:'yellow'
+      estatus: 'Activo',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'002',
@@ -210,8 +207,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'007',
       NumVolante:'002',
-      estatus: 'Tarea completada',
-      tiempoAtencion:'green'
+      estatus: 'activo',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'003',
@@ -228,8 +225,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'004',
       NumVolante:'003',
-      estatus: 'Pendiente',
-      tiempoAtencion:'red'
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'004',
@@ -246,8 +243,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'002',
       NumVolante:'004',
-      estatus: 'Tarea completada',
-      tiempoAtencion:'green'
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'005',
@@ -264,8 +261,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'007',
       NumVolante:'005',
-      estatus: 'Pendiente',
-      tiempoAtencion:'red'
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'006',
@@ -282,8 +279,8 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'004',
       NumVolante:'006',
-      estatus: 'En espera documentación',
-      tiempoAtencion:'yellow'
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     },
     {
       IdPropuesta:'007',
@@ -300,26 +297,10 @@ export class PropuestasComponent {
       fechaCaptura:'01/05/2022',
       idResponsable:'001',
       NumVolante:'007',
-      estatus: 'Tarea completada',
-      tiempoAtencion: 'green'
+      estatus: 'Aprobado',
+      tipoAtencion:'General'
     }]
-
   }
-
-
-  colorVentana(color:string){
-    this.colores = color;
-    if(color == 'green'){
-      return '#66BB6A'
-    }
-    else if(color == 'red'){
-      return '#F44336'
-    }
-    else{
-      return '#FFEE58'
-    }
-  }
-
 
   cambioTipoVista() {
     this.tipoVista = !this.tipoVista

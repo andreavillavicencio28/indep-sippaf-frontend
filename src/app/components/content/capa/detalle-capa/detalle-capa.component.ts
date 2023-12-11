@@ -27,9 +27,13 @@ export class DetalleCapaComponent {
   anexoNombre: string = '';
   pdfSrc:string = '';
   pdfSrc2:string = '';
+  pdfSrcAnexo:string = '';
+  pdfSrcDocumento:string = '';
   showDetalle: boolean = false;
   tipoModal: string = 'true';
   showPdf:boolean = false;
+  showSustituirDocumento:boolean = false;
+  showSustituirAnexo:boolean = false;
 
   constructor(
     private toastrService : ToastrService,    
@@ -85,6 +89,12 @@ export class DetalleCapaComponent {
       case 'showAgregarAnexo':
         this.showAgregarAnexo = false;
         break;
+      case 'sustituirDocumento':
+        this.showSustituirDocumento = false;
+        break;
+      case 'showSustituirAnexo':
+        this.showSustituirAnexo = false;
+        break;
       default:
         break;
     }
@@ -106,9 +116,22 @@ export class DetalleCapaComponent {
   }
   onDocumentoFileChange(event: any){
     this.documentoFileName = event.target.files[0].name;
-  }
-  onAnexoFileChange(event: any) {
     this.anexoFileName = event.target.files[0].name;
+    this.pdfSrcDocumento = "../../../../../assets/anexo.pdf";      
+    this.mostrarPdfADocumento()
+  }
+  onAnexoFileChange(event: any) {    
+    this.anexoFileName = event.target.files[0].name;
+    this.pdfSrcAnexo = "../../../../../assets/anexo.pdf";      
+    this.mostrarPdfAnexo()
+  }
+
+  mostrarPdfAnexo() {
+    this.pdfSrcAnexo = "../../../../../assets/nombre.pdf";
+  }
+
+  mostrarPdfADocumento() {
+    this.pdfSrcDocumento = "../../../../../assets/nombre.pdf";
   }
   previsualizarDocumento() {
     this.prevDocumento = true;
@@ -116,13 +139,25 @@ export class DetalleCapaComponent {
   previsualizarAnexo() {
     this.prevAnexo = true;
   }
-  guardarDocumento() {
-    this.toastrService.success('Se ha guardado exitosamente el documento.')
-    this.showAgregarDocumento = false;
+  guardarDocumento(cadena: string) {
+    if(cadena == 'cargarDocumento') {
+      this.toastrService.success('Se ha guardado exitosamente el documento.')
+      this.showAgregarDocumento = false;
+    } else {
+      this.toastrService.success('Se ha guardado exitosamente el documento.')
+      this.showSustituirDocumento = false;
+    }
+    
   }
-  guardarAnexo() {
-    this.toastrService.success('Se ha guardado exitosamente el anexo.')
-    this.showAgregarAnexo = false;
+  guardarAnexo(cadena: string) {
+
+    if (cadena == 'guardarAnexo') {
+      this.toastrService.success('Se ha guardado exitosamente el anexo.')
+      this.showAgregarAnexo = false;
+    } else {
+      this.toastrService.success('Se ha guardado exitosamente el anexo.')
+      this.showSustituirAnexo = false;
+    }
   }
   cambioAccionDetalle(accion : number) {
     this.accionDetalle = accion;
@@ -170,6 +205,12 @@ export class DetalleCapaComponent {
 
   descargarDocumento(documentoNombre: string = '', accion: string) {
     console.log("DESCARGAR DOCUMENTO");
+  }
+  sustituirDocumento() {
+    this.showSustituirDocumento = true;
+  }
+  sustituirAnexo() {
+    this.showSustituirAnexo = true;
   }
 
 }
