@@ -43,7 +43,7 @@
                                                 <i class="bi bi-laptop"></i>
                                             </button>
                                              ------>
-                                            <button class="btn btn-link" (click)="abrirPdf()" title="Visualizar Documentación">
+                                            <button class="btn btn-link" (click)="openOficio()" title="Visualizar Documentación">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                            
@@ -292,23 +292,16 @@
     </div>
     <div class="offcanvas-body">
         <div class="col-sm-12">
-            <div class="col-sm-12">
-                <div class="card" style="padding: 5px;">
-                    <div class="card-body row" style="padding: 15px 15px;">
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center;">
-                                <p class="valoresCentrados">
-                                    Oficio N°
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+            <div class="offcanvas-body">
+                <div class="col-sm-12">
+                    <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                            style="width: 500px; height: 100vh;"></pdf-viewer>
                 </div>
             </div>
             <div class="text-end">
                 <button class="btn btn-positivo-modal boton-derecho" title="Firmar"
                 (click)="openFirma()">
-                    Firmar Oficio&nbsp;<i class="bi bi-pen"></i>
+                    Oficio Firmado&nbsp;<i class="bi bi-pen"></i>
                 </button>
             </div>
             <div>
@@ -322,63 +315,41 @@
 </div>
 
 <!-- Modal firma -->
-<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirma" ngtabindex="-1" id="offcanvasRight"
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirmado" ngtabindex="-1" id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-        <h1>Firma</h1>
+        <h1>Documento Firmado</h1>
         <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
             (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
         <div class="row">
-            <div class="col-sm-12 row" [formGroup]="FormularioConfirma">
-                <div class="col-sm-8">
-                    <label for="cert" class="control-label">Certificado (.cer):</label>
-                    <div class="input-group">
-                        <label for="cert" class="control-label" style="display: none">Certificado (.cer):</label>
-                        <input class="form-control" type="text" placeholder="Ubicación del certificado" name="cert"
-                            id="cert" size="25" readonly="readonly" value="{{certFileName}}" disabled>
-                        <label for="fileCertificate" class="control-label" style="display: none">Certificado
-                            (.cer):</label>
-                        <input type="file" style="display: none" id="fileCertificate" accept=".cer"
-                            (change)="onCertFileChange($event)" formControlName="key">
-                        <span class="input-group-btn" style="vertical-align: bottom">
-                            <button type="button" class="btn btn-secundary" id="btnCertificate" name="btnCertificate"
-                                onclick="document.getElementById('fileCertificate').click();">Buscar</button>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-8">
-                    <label for="key" class="control-label">Clave privada (.key):</label>
-                    <div class="input-group">
-                        <label for="key" class="control-label" style="display: none">Clave privada (.key):</label>
-                        <input class="form-control" type="text" placeholder="Ubicación de la llave privada" name="key"
-                            id="key" size="25" readonly="readonly" value="{{keyFileName}}" disabled>
-                        <label for="filePrivateKey" class="control-label" style="display: none">Clave privada
-                            (.key):</label>
-                        <input type="file" style="display: none" id="filePrivateKey" accept=".key"
-                            (change)="onKeyFileChange($event)" formControlName="cer">
-                        <span class="input-group-btn" style="vertical-align: bottom">
-                            <button type="button" class="btn btn-secundary" id="btnPrivateKey" name="btnPrivateKey"
-                                onclick="document.getElementById('filePrivateKey').click();">Buscar</button>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-sm-4"></div>
-                <div class="col-sm-8">
-                    <label for="contra" class="control-label">Contraseña de clave privada:</label>
-                    <input type="password" class="form-control" id="contra" placeholder="Contraseña"
-                        formControlName="contra">
-                </div>
-                <div class="col-sm-4"></div>
+            <div class="col-sm-12">
+                <!-- <label for="formFile" class="form-label"><em class="bi bi-upload"></em></label> -->
+                <input class="form-control" type="file" id="formFile">
             </div>
         </div>
     </div>
     <div class="offcanvas-footer">
-        <div class="text-end">
-            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
-                    class="bi bi-check-lg"></em> </button> &nbsp;
+    <div class="text-end">
+        <button type="button" class="btn btn-positivo-modal" (click)="documentoFirmado()">&nbsp; <em
+                class="bi bi-check-lg"></em> Subir
+        </button> &nbsp;
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Previsualización del Documento</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarPDF()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
         </div>
     </div>
 </div>
+<div class="offcanvas-backdrop fade show" *ngIf="prevAnexo"></div>

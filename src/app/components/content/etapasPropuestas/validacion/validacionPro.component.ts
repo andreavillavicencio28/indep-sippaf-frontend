@@ -28,7 +28,7 @@ export class ValidacionProComponent {
   showObs: boolean = false;
   tituloObs: string = '';
   showDetalle: boolean = false;
-  showFirma: boolean = false;
+  showFirmado: boolean = false;
   showCargaDocumento:boolean = false;
   showGenerarOficio:boolean=false;
   pdfSrc: string = '';
@@ -187,11 +187,11 @@ export class ValidacionProComponent {
 
   openFirma() {
    // this.documentoNombre = nombre;
-    this.showFirma = true;
+    this.showFirmado = true;
   }
 
   cerrarFirma() {
-    this.showFirma = false;
+    this.showFirmado = false;
   }
 
   firmar() { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
@@ -202,11 +202,6 @@ export class ValidacionProComponent {
 
   }
 
-  abrirPdf(documentoNombre: string = '') {
-    //this.prevAnexo = true
-    this.documentoNombre = documentoNombre;
-    this.showDetalle = true;
-  }
 
   cargarDocumento(documentoNombre: string = '', accion: string) {
     this.documentoNombre = documentoNombre
@@ -220,6 +215,13 @@ export class ValidacionProComponent {
   uploadDocumento() {
     this.toastrService.success(`Anexo y/o documentación guardada correctamente`);
     this.showCargaDocumento = false;
+
+  }
+
+  documentoFirmado() {
+    this.toastrService.success(`Documentación guardada correctamente`);
+    this.showFirmado = false;
+
   }
 
   descargarDocumento(documento: string) { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
@@ -336,12 +338,15 @@ export class ValidacionProComponent {
    // });
   }
 
-  openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
+   openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
     this.documentoNombre = documentoNombre;
     if (documentoNombre.includes('anexo')) {
       this.pdfSrc = "../../../../../assets/pdf2.pdf";
       this.abrirPdf();
     }
+  }
+  abrirPdf(){
+    this.prevAnexo = true
   }
   
 }
