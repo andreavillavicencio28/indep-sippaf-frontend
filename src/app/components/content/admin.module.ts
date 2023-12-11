@@ -35,6 +35,7 @@ import { SaedgComponent } from './saedg/saedg.component';
 import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.component';
 import { SiabComponent } from './siab/siab.component';
 import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component';
+import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin/editar-admin.component';
 
 
 /* Components */
@@ -80,7 +81,8 @@ import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component
     SaedgComponent,
     DetalleSaedgComponent,
     SiabComponent,
-    DetalleSiabComponent
+    DetalleSiabComponent,
+    EditarAdminComponent
   ],
   exports: [
     WizardComponent,

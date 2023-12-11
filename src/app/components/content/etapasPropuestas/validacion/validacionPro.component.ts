@@ -15,6 +15,8 @@ export class ValidacionProComponent {
   @Input() tipo: number = 0;
   @Input() id_solicitud: number = 0;
   @Input() solicitante = '';
+  @Input() id_propuesta: number = 0;
+  @Input() propuesta = '';
 
   datosPropuesta = datosPropuesta;
   
@@ -28,7 +30,7 @@ export class ValidacionProComponent {
   showObs: boolean = false;
   tituloObs: string = '';
   showDetalle: boolean = false;
-  showFirma: boolean = false;
+  showFirmado: boolean = false;
   showCargaDocumento:boolean = false;
   showGenerarOficio:boolean=false;
   pdfSrc: string = '';
@@ -149,17 +151,15 @@ export class ValidacionProComponent {
   }
 
   guardarCambios() {
-    this.confirmarModalService.abriraModal('Al guardar esta información se marcara como tarea completada').subscribe(result => {
-      if (result) {
+   // this.confirmarModalService.abriraModal('Al guardar esta información se marcara como tarea completada').subscribe(result => {
+     // if (result) {
         // El usuario aceptó
         this.showEditar = false;
         this.toastrService.success("Se guardó correctamente la información");
   
-      }
+  //    }
 
-    });
-   // this.showEditar = false;
-   // this.toastrService.success("Se guardó correctamente la prevalidación");
+ //   });
   
   }
   documentosCarga = [
@@ -187,11 +187,11 @@ export class ValidacionProComponent {
 
   openFirma() {
    // this.documentoNombre = nombre;
-    this.showFirma = true;
+    this.showFirmado = true;
   }
 
   cerrarFirma() {
-    this.showFirma = false;
+    this.showFirmado = false;
   }
 
   firmar() { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
@@ -221,6 +221,13 @@ export class ValidacionProComponent {
     this.toastrService.success(`Anexo y/o documentación guardada correctamente`);
     this.showCargaDocumento = false;
   }
+
+  documentoFirmado() {
+    this.toastrService.success(`Documentación guardada correctamente`);
+    //this.showCargaDocumento = false;
+    this.showFirmado = false;
+  }
+
 
   descargarDocumento(documento: string) { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
     this.documentoNombre = documento;
@@ -321,10 +328,7 @@ export class ValidacionProComponent {
   onKeyFileChange(event: any) {
     this.keyFileName = event.target.files[0].name;
   }
-  openOficio() {
-    // this.documentoNombre = nombre;
-     this.showGenerarOficio = true;
-   }
+ 
  
   cerrarOficio() {
     //this.confirmarModalService.abriraModal('¿Seguro quieres salir?').subscribe(result => {
@@ -336,12 +340,27 @@ export class ValidacionProComponent {
    // });
   }
 
-  openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
+  openVistaPreviaOficio(documentoNombre: string = '',  tipo: string) {
     this.documentoNombre = documentoNombre;
-    if (documentoNombre.includes('anexo')) {
-      this.pdfSrc = "../../../../../assets/pdf2.pdf";
-      this.abrirPdf();
+    if (documentoNombre.includes('documentos')) {
+      this.pdfSrc = "../../../../assets/ejemplo.pdf";
+      this.openOficio();
     }
   }
+  openOficio() {
+    // this.documentoNombre = nombre;
+     this.showGenerarOficio = true;
+   }
   
+   openVistaPreviaAnexos(documentoNombre: string = '',  tipo: string) {
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('documentos')) {
+      this.pdfSrc = "../../../../../assets/pdf2.pdf";
+      this.abriPDFs();
+    }
+  }
+  abriPDFs() {
+    // this.documentoNombre = nombre;
+     this.showDetalle = true;
+   }
 }

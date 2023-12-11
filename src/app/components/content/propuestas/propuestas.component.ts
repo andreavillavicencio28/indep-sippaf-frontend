@@ -30,7 +30,10 @@ export class PropuestasComponent {
   cedulaFileName: string = "Ubicación de la cédula";
   otroFileName: string = "Ubicación de otro";
   colores:string='';
-
+  fInicio: string='';
+  fFin:string='';
+  busqueda:string='';
+  
   // offcanvasInstance: any;
   //private offcanvasService: NgbOffcanvas, private modal: NgbModal, private config: NgbModalConfig,  config.backdrop = 'static'; config.keyboard = false;
 
@@ -123,7 +126,6 @@ export class PropuestasComponent {
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
 
-
   cambioSeleccion(num: number) {
     this.Seleccionado = num;
     this.listadoPropuestas.forEach(solicitud => {
@@ -134,6 +136,8 @@ export class PropuestasComponent {
         solicitud.activo = true;
       }
     });
+
+ 
 
     switch (this.Seleccionado) {
       case 1: {
@@ -193,7 +197,8 @@ export class PropuestasComponent {
       idResponsable:'002',
       NumVolante:'001',
       estatus: 'En espera documentación',
-      tiempoAtencion:'yellow'
+      tiempoAtencion:'yellow',
+      asignado:'Roberto'
     },
     {
       IdPropuesta:'002',
@@ -211,7 +216,8 @@ export class PropuestasComponent {
       idResponsable:'007',
       NumVolante:'002',
       estatus: 'Tarea completada',
-      tiempoAtencion:'green'
+      tiempoAtencion:'green',
+      asignado:'Jaime'
     },
     {
       IdPropuesta:'003',
@@ -229,7 +235,8 @@ export class PropuestasComponent {
       idResponsable:'004',
       NumVolante:'003',
       estatus: 'Pendiente',
-      tiempoAtencion:'red'
+      tiempoAtencion:'red',
+      asignado:'Erika'
     },
     {
       IdPropuesta:'004',
@@ -247,7 +254,8 @@ export class PropuestasComponent {
       idResponsable:'002',
       NumVolante:'004',
       estatus: 'Tarea completada',
-      tiempoAtencion:'green'
+      tiempoAtencion:'green',
+      asignado:'Roberto'
     },
     {
       IdPropuesta:'005',
@@ -265,7 +273,8 @@ export class PropuestasComponent {
       idResponsable:'007',
       NumVolante:'005',
       estatus: 'Pendiente',
-      tiempoAtencion:'red'
+      tiempoAtencion:'red',
+      asignado:'Jaime'
     },
     {
       IdPropuesta:'006',
@@ -283,7 +292,8 @@ export class PropuestasComponent {
       idResponsable:'004',
       NumVolante:'006',
       estatus: 'En espera documentación',
-      tiempoAtencion:'yellow'
+      tiempoAtencion:'yellow',
+      asignado:'Roberto'
     },
     {
       IdPropuesta:'007',
@@ -301,7 +311,8 @@ export class PropuestasComponent {
       idResponsable:'001',
       NumVolante:'007',
       estatus: 'Tarea completada',
-      tiempoAtencion: 'green'
+      tiempoAtencion: 'green',
+      asignado:'Erika'
     }]
 
   }
@@ -335,6 +346,20 @@ export class PropuestasComponent {
 
   agregarArchivo() {
     this.showAgregarArchivo = true;
+  }
+  confimarPropuesta() {
+    this.confirmarModalService.abriraModal('Al guardar esta información se marcara como tarea completada').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.showEditar = false;
+        this.toastrService.success("Se guardó correctamente la información");
+  
+      }
+
+    });
+   // this.showEditar = false;
+   // this.toastrService.success("Se guardó correctamente la prevalidación");
+  
   }
   reportePDF() {
     const downloadLink = document.createElement('a');
@@ -427,7 +452,19 @@ export class PropuestasComponent {
   onOtroFileChange(event: any){
     this.otroFileName = event.target.files[0].name;
   }
- 
+  comparaFechas() {
+    const fechaInicioDate = new Date(this.fInicio);
+    const fechaFinDate = new Date(this.fFin);
+
+    if (fechaInicioDate > fechaFinDate) {
+      this.toastrService.error('La fecha de inicio no puede ser mayor a la fecha final');
+      this.fInicio='';
+      this.fFin='';
+    }
+    if(fechaInicioDate < fechaFinDate){
+      this.cambioSeleccion(1);      
+    }
+  }
 
   confirmarCOPER() {
     this.confirmarModalService.abriraModalCOPER('Al completar este régistro,se marcará como completada la tarea').subscribe(result => {
@@ -438,5 +475,22 @@ export class PropuestasComponent {
       }
     });
 
-}
+  }
+
+  buscarPropuesta(){
+    const fechaInicio = new Date(this.fInicio);
+    const fechaFin = new Date(this.fFin);
+    const busquedaPro = this.busqueda.valueOf();
+    this.comparaFechas();
+    
+    if (busquedaPro != null) { 
+      this.cambioSeleccion(1); 
+    } 
+    if (this.busqueda == null){
+      this.toastrService.error('Debe de ralizar un filtrado primero');
+      console.log(this.busqueda);
+    }
+    
+    }
+
 }
