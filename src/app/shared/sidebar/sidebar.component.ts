@@ -19,6 +19,6 @@ export class SidebarComponent {
     { label: 'Atenciones', icon: 'bi bi-person', route: '/content/atenciones'},
     { label: 'Roles y perfiles', icon: 'bi bi-person-fill-gear', route: '/content/rolesPerfiles'},
     { label: 'Cancelación y Consulta de propuestas', icon: 'bi bi-search', route: '/content/atenciones'},
-    { label: 'Reportes', icon: 'bi bi-files', route: '/content/atenciones'},
+    { label: 'Reportes', icon: 'bi bi-files', route: '/content/reportes'},
   ];
 }

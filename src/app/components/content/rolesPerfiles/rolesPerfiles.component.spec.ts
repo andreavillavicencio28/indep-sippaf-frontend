@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RolesPerfiles } from './rolesPerfiles.component';
+import { RolesPerfilesComponent } from './rolesPerfiles.component';
 
-describe('AtencionesComponent', () => {
-  let component: RolesPerfiles;
-  let fixture: ComponentFixture<RolesPerfiles>;
+describe('JuridicoComponent', () => {
+  let component: RolesPerfilesComponent;
+  let fixture: ComponentFixture<RolesPerfilesComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RolesPerfiles]
+      declarations: [RolesPerfilesComponent]
     });
-    fixture = TestBed.createComponent(RolesPerfiles);
+    fixture = TestBed.createComponent(RolesPerfilesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

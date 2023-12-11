@@ -1,32 +1,28 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CONSTANTES } from 'src/app/shared/constantes/constantes';
-import { dataPerfil } from './dataPerfiles';
 
 @Component({
   // imports: [NgbDropdownModule, AdminModule, CommonModule, FormsModule, ReactiveFormsModule, PdfViewerModule],
   // standalone: true,
-  selector: 'sg-rolesPerfiles',
-  templateUrl: './rolesPerfiles.component.html',
-  styleUrls: ['./rolesPerfiles.component.scss'],
+  selector: 'sg-reportes',
+  templateUrl: './reportes.component.html',
+  styleUrls: ['./reportes.component.scss'],
 })
-export class RolesPerfilesComponent {
+export class ReportesComponent {
   tipoVista: boolean = false;
   Seleccionado: number = 0;
   showEditPerfilRol: boolean = false;
   listaDatos: any[] = [];
   nombrePerfil: string = 'Hola';
   isDisplay = false;
+  showTipoReporte: boolean = false;
 
   constructor(
     public toastrService: ToastrService
   ) {       
     
   }
-
-  dataPerfiles = dataPerfil;
 
   changeSubseccion() {}
 

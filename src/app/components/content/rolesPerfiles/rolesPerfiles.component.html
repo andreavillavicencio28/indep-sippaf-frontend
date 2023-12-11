@@ -1,131 +1,131 @@
 <div class="row">
     <div class="col-sm-12">
-        <h1>Roles y Perfiles</h1>
-        <hr class="red">
-    </div>
-    <div class="col-sm-12">
         <div class="card">
-            <div class="card-body row">                
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <span>Nombre:  &nbsp;&nbsp;</span>
-                        <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">                        
+            <div class="card-body row">
+                <div class="col-12 mb-4">
+                    <h3 class="text-center">
+                        Roles y Perfiles
+                    </h3>
+                </div>
+                <div class="col-sm-6">                                      
+                    <div class="row mb-6">
+                        <div class="col-md-5">
+                            Nombre
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Nombre">
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="input-group">
-                        <span>Perfil:  &nbsp;&nbsp;</span>
+                <div class="col-sm-6">                                    
+                    <div class="row mb-6">
+                        <div class="col-md-4">
+                            Perfil
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                            (change)="changeSubseccion()">
+                            <option>Elige una opción</option>
+    
+                            <option *ngFor="let item of dataPerfiles" [value]="item.id">
+                                {{ item.name }}
+                            </option>
+                        </select>
+                        </div>
+                    </div><br>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                            <em class="bi bi-search "> Buscar</em>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12" *ngIf="tipoVista">
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-striped">
+                        <thead>
+                            <tr class="table-secondary">
+                                <th style="width: 15%;">ID</th>
+                                <th style="width: 15%;">Usuario</th>
+                                <th style="width: 15%;">Nombre</th>
+                                <th style="width: 15%;">Estatus</th>
+                                <th style="width: 20%;">Estatus AD</th>
+                                <th style="width: 20%;">Perfil</th>
+                                <th style="width: 30%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of listaDatos">
+                                <td>{{data.id}}</td>
+                                <td>{{data.usuario}}</td>
+                                <td>{{data.nombre}}</td>
+                                <td>{{data.estatus}}</td>
+                                <td>{{data.estatusAD}}</td>
+                                <td>{{data.perfil}}</td>
+                                <td>
+                                    <div class="text-end">                                    
+                                        <button type="button" class="btn btn-neutral-modal"  (click)="editarRolPerfil(data.name)" >Editar</button>
+                                    </div>
+                                </td>                            
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditPerfilRol" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar Perfil</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-12">
+                        Seleccione un nuevo perfil para <br />
+                        <!--<strong>{{nombrePerfil}}</strong>-->
+                        <strong> Alfonso Gonzalez J </strong>
+                    </div>
+                    <br /><br /><br /><br />
+                    <div class="col-md-12">
                         <select class="form-select" aria-label="Default select example" id="subseccionAdd"
                         (change)="changeSubseccion()">
-                        <option>Seleccione un perfil</option>
-                        <option *ngFor="let item of dataPerfiles">
-                            {{ item.tx_descripcion }}
+                        <option>Elige una opción</option>
+
+                        <option *ngFor="let item of dataPerfiles" [value]="item.id">
+                            {{ item.name }}
                         </option>
                     </select>
-                    </div>
+                    </div>    
+                    <br /><br /><br />
+                    <div class="col-md-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="chkEstatus" onchange="cambiaEstatus()" checked="">
+                            <label class="form-check-label" for="chkEstatus" id="lblEstatus">Activo</label>
+                        </div>        
+                    </div>                                                         
                 </div>
-                <div class="col-sm-4">
-                    <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
-                        <em class="bi bi-search"></em>&nbsp;&nbsp;Buscar
-                    </button>
-                </div>            
-            </div>
-        </div>
-    </div>
-
-    <hr>
-    <div class="col-sm-12" *ngIf="tipoVista">
-        <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
-            <table class="table table-hover">
-                <thead>
-                    <tr class="table-secondary">
-                        <th style="width: 10%;">Fecha</th>
-                        <th style="width: 10%;">Elaboró</th>
-                        <th style="width: 10%;">No. Cliente</th>
-                        <th style="width: 10%;">Acreditado</th>
-                        <th style="width: 10%;">encomienda</th>
-                        <th style="width: 10%;">Dirección</th>
-                        <th style="width: 10%;">Estado y Municipio</th>
-                        <th style="width: 10%;">Teléfono</th>
-                        <th style="width: 10%;">Correo electrónico</th>
-                        <th style="width: 10%;">Asunto</th>
-                        <th style="width: 10%;">Medio atención</th>
-                        <th style="width: 10%;">Monto de la propuesta</th>
-                        <th style="width: 10%;">Tipo de propuesta</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let dato of dataPerfiles" (click)="abrirCamvasPrincipal(dato)">
-                        <td>{{ dato.fecha }}</td>
-                        <td>{{ dato.elaboro }}</td>
-                        <td>{{ dato.noCliente }}</td>
-                        <td>{{ dato.acreditado }}</td>
-                        <td>{{ dato.encomienda }}</td>
-                        <td>{{ dato.direccion}}</td>
-                        <td>{{ dato.estadoymuni}}</td>
-                        <td>{{ dato.telefono}}</td>
-                        <td>{{ dato.correo}}</td>
-                        <td>{{ dato.asunto}}</td>
-                        <td>{{ dato.medioatencion}}</td>
-                        <td>{{ dato.montopropuesta}}</td>
-                        <td>{{ dato.tipopropuesta}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
-<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
-    id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>{{tituloSeleccionado}}</h1>
-        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarCamvasPrincipal()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-    </div>
-    <div class="offcanvas-body">
-        <!--<sg-detalle-atencion [id_solicitud]="id_solicitud" [solicitante]="solicitante"></sg-detalle-atencion> -->
-    </div>
-</div>
-
-<!-- OffCanvas Agregar Atencion -->
-<div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarAtencion" [class.offcanvas-bajar]=""
-    ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>Registro de Atención</h1>
-        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="card" style="padding: 15px;">
-            <h5>Datos del acreditado</h5>
-            <label class="form-label">Elaboró: Oscar Gomez Piña</label>
-            <div class="row">
-                
-            </div> 
-        </div>
-        <div class="card" style="padding: 15px;">
-            <div class="col-md-12">
-                <label for="subseccionAdd" class="control-label">Monto de la propuesta en su caso:</label>
-                <div class="input-group col-md-3">
-                    <input type="text" class="form-control" placeholder="">
-                </div>
-                <label for="exampleFormControlTextarea1" class="form-label">Observaciones:</label>
-                <textarea class="form-control" id="Observaciones" rows="3"></textarea>
             </div>            
-            <div class="offcanvas-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
-                            Cancelar
-                        </button>
-                        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarAtencion()">
-                            Guardar
-                        </button>
-                    </div>
-                </div>
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardar()">
+                    Guardar
+                  </button>
             </div>
-        </div>           
+        </div>
     </div>
 </div>
+
