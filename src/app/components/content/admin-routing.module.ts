@@ -11,6 +11,7 @@ import { AdminArchivosComponent } from './admin-archivos/admin-archivos.componen
 import { AtencionesComponent } from './atenciones/atenciones.component';
 import { AcreditadosComponent } from './acreditados/acreditados.component';
 import { AdministracionComponent } from "./administracion/administracion.component";
+import { HistorialComponent} from "./historial/historial.component";
 
 
 
@@ -144,6 +145,19 @@ const routes: Routes = [
           ],
         },
         component: AtencionesComponent,
+      },
+      {
+        path: 'historial',
+        data: {
+          title: 'Historial',
+          breadcrumbs: [
+            {
+              text: 'Historial',
+              active: true,
+            }
+          ],
+        },
+        component: HistorialComponent,
       },
      ],
   },

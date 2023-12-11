@@ -33,12 +33,65 @@ export const dataArchivos = [
 export const dataEntidad = [
     {
         id: 1,
-        tx_descripcion: 'Méxicana',
+        tx_descripcion: 'Aguascalientes',
         tx_ubicaarchivo: 'DPM'
     },
     {
         id: 2,
-        tx_descripcion: 'Extranjera',
+        tx_descripcion: 'Baja California',
+        tx_ubicaarchivo: 'DRL'
+    },
+    {
+        id: 1,
+        tx_descripcion: 'Baja California Sur',
+        tx_ubicaarchivo: 'DPM'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'Campeche',
+        tx_ubicaarchivo: 'DRL'
+    },
+    {
+        id: 1,
+        tx_descripcion: 'Coahuila de Zaragoza',
+        tx_ubicaarchivo: 'DPM'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'Colima',
+        tx_ubicaarchivo: 'DRL'
+    },
+    {
+        id: 1,
+        tx_descripcion: 'Chiapas',
+        tx_ubicaarchivo: 'DPM'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'Ciudad de México',
+        tx_ubicaarchivo: 'DRL'
+    },
+];
+
+export const dataMunicipio = [
+    {
+        id: 1,
+        tx_descripcion: 'ACACOYAGUA',
+        tx_ubicaarchivo: 'DPM'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'CHIAPA DE CORZO',
+        tx_ubicaarchivo: 'DRL'
+    },
+    {
+        id: 1,
+        tx_descripcion: 'COCULA',
+        tx_ubicaarchivo: 'DPM'
+    },
+    {
+        id: 2,
+        tx_descripcion: 'IGUALAPA',
         tx_ubicaarchivo: 'DRL'
     },
 ];

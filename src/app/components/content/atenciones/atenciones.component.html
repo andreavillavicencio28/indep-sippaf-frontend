@@ -11,21 +11,14 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
                             <em class="bi bi-search"></em>
                         </button>
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <button type="button" class="form-control" (click)="descargarAtencionesexcel()">
-                        <i class="bi-plus-downland"></i> Generar reporte excel
-                    </button> 
                 </div>
                 <div class="col-sm-2">
-                    <button type="button" class="form-control" (click)="descargarAtencionespdf()">
-                        <i class="bi-plus-downland"></i> Generar reporte pdf
-                    </button> 
                 </div>
                 <div class="col-sm-1 pad" style="padding-bottom: 10px ">
                     <button type="button" class="form-control" (click)="agregarAtencion()">
@@ -109,75 +102,91 @@
     <div class="offcanvas-body">
         <div class="card" style="padding: 15px;">
             <div class="col-12 mb-4">
-                <h3 class="text-left">
+                <h3 class="text-center">
                     Datos del acreditado
                 </h3>
-            </div>           
-            <!--<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-primary me-md-2" type="button">Button</button>
-                <button class="btn btn-primary" type="button">Button</button>
-            </div>-->     
-            <div class="col-sm-6">
-                <div class="row mb-6">
-                    <div class="col-md-8">
-                        Elaboró: Oscar Gómez Piña
-
+            </div>     
+                <div class="card-body row">
+                    <div class="col-sm-5">
+                        <div class="row mb-6">
+                            <div class="col-md-4">
+                                Fecha :
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="08/12/23" disabled>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <!--<input type="text" class="form-control" placeholder="Oscar Gómez Piña" readonly>-->
+                    <div class="col-sm-6">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                Elaboró:
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Oscar Gómez Piña" disabled>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+         
             <div class="row">
-                
-                <div class="col-md-12">
-                    <label for="subseccionAdd" class="control-label">Nombre del deudor,acreditado o tercero:</label>
-                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
-                        (change)="changeSubseccion()">
-                        <option>Elige una opción</option>
-                        <option *ngFor="let item of acreditados" [value]="item.tx_ubicaarchivo">
-                            {{ item.tx_descripcion }}
-                        </option>
-                    </select>
+                <div class="col-md-12">                    
+                    <label for="subseccionAdd" class="control-label">ID del Acreditado:</label>
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
+                            <button class="btn btn-outline btn-primary" title="Buscar" >
+                                <em class="bi bi-search"></em>
+                            </button>
+                        </div>
+                    </div> 
+                    <label class="form-label">Nombre del deudor, acreditado o tercero:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="" disabled>
+                    </div>
                     <label class="form-label">No.Cliente:</label>
                     <div class="input-group col-md-3">
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" placeholder="" disabled>
                     </div>
-                    <label class="form-label">encomienda:</label>
+                    <label class="form-label">Encomienda:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" placeholder="" disabled>
                     </div>
                     <label class="form-label">Dirección:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" placeholder="" disabled>
                     </div>
-                    <label for="subseccionAdd" class="control-label">Estado y Municipio:</label>
-                    <select class="form-select" aria-label="Default select example" id="subseccionAdd"
-                        (change)="changeSubseccion()">
-                        <option>Elige una opción</option>
-                        <option *ngFor="let item of edosmunis" [value]="item.tx_ubicaarchivo">
-                            {{ item.tx_descripcion }}
-                        </option>
-                    </select>
+                    <label class="form-label">Estado:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" disabled>
+                    </div>
+                    <label class="form-label">Municipio:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="" disabled>
+                    </div>
                     <label class="form-label">Numero de Teléfono:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" placeholder="" disabled>
                     </div>
                     <label class="form-label">Correo electrónico:</label>
                     <div class="input-group col-md-3">
-                        <input type="text" class="form-control" placeholder="">
+                        <input type="text" class="form-control" placeholder="" disabled>
+                    </div>
+                    <label class="form-label">Nombre del interesado tercero:</label>
+                    <div class="input-group col-md-3">
+                        <input type="text" class="form-control" placeholder="" disabled>
                     </div>
                 </div>
 
                 <div class="col-md-6 mt-1">
-                    <label class="form-label">Asunto:</label>
+                    <!--<label class="form-label">Asunto:</label>
                     <select class="form-select" aria-label="Default select example" id="subseccionAdd"
                         (change)="changeSubseccion()">
                         <option>Elige una opción</option>
                         <option *ngFor="let item of asuntos" [value]="item.tx_ubicaarchivo">
                             {{ item.tx_descripcion }}
                         </option>
-                    </select>
+                    </select>-->
                     <label class="form-label">Medio de atención:</label>
                     <select class="form-select" aria-label="Default select example" id="subseccionAdd"
                         (change)="changeSubseccion()">
@@ -201,7 +210,7 @@
         </div>
         <div class="card" style="padding: 15px;">
             <div class="col-md-12">
-                <label for="subseccionAdd" class="control-label">Monto de la propuesta en su caso:</label>
+                <label class="form-label">Monto de la propuesta en su caso:</label>
                 <div class="input-group col-md-3">
                     <input type="text" class="form-control" placeholder="">
                 </div>
@@ -211,10 +220,10 @@
             <div class="offcanvas-footer">
                 <div class="row">
                     <div class="col-sm-12">
-                        <button type="button" class="btn btn-negativo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
+                        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="cerrarOffCanvas(1)">
                             Cancelar
                         </button>
-                        <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guadarAtencion()">
+                        <button type="button" class="btn btn-warning boton-derecho" (click)="guadarAtencion()">
                             Guardar
                         </button>
                     </div>

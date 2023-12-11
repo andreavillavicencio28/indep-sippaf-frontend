@@ -4,18 +4,18 @@ import { ToastrService } from 'ngx-toastr';
 import { datosAcreditado,documentos } from '../etapasAcreditados/detalle/detalle-acreditados/datosAcreditado';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 
-import { dataArchivos,dataMunicipio, dataFiles,dataEntidad,dataEncomienda, dataSucursal, TipoCartera } from './dataDummyArchivos';
+import { dataArchivos, dataFiles } from './dataDummyArchivos';
 
 @Component({
-  selector: 'sg-acreditados',
-  templateUrl: './acreditados.component.html',
-  styleUrls: ['./acreditados.component.scss']
+  selector: 'sg-historial',
+  templateUrl: './historial.component.html',
+  styleUrls: ['./historial.component.scss']
 })
-export class AcreditadosComponent {
+export class HistorialComponent {
   @Input() id_solicitud: number = 0;
   @Input() solicitante: string = '';
   decicion: boolean = false;
-
+  prevAnexo: boolean = false;
   tipoVista: boolean = true;
   Seleccionado: number = 0;
   tituloSeleccionado: string = '';
@@ -28,21 +28,8 @@ export class AcreditadosComponent {
 
   archivo: string = 'Elige una opción';
   archivos: any = dataFiles;
-  municipios: any = dataMunicipio;
+
   dataTablaArchivos = dataArchivos;
-
-  entidad: string = 'Elige una opción';
-  entidades: any = dataEntidad;
-
-  encomienda: string = 'Elige una opción';
-  encomiendas: any = dataEncomienda;
-
-  sucursal: string = 'Elige una opción';
-  sucursales: any = dataSucursal;
-
-  cartera: string = 'Elige una opción';
-  carteras: any = TipoCartera;
-
   addSeccion: string = '';
   mostrarTabla: boolean = false;
 
@@ -117,7 +104,17 @@ export class AcreditadosComponent {
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
 
-
+  openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
+    console.log(documentoNombre);
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('anexo')) {
+      this.pdfSrc = "../../../../../assets/ejemplo.pdf";
+      this.abrirPdf();
+    }
+  }
+  abrirPdf(){
+    this.prevAnexo = true
+  }
   
   cambioSeleccion(num: number) {
     this.Seleccionado = num;
@@ -131,28 +128,18 @@ export class AcreditadosComponent {
     });*/
 
     this.listaDatos = [{
-      NombreAcreditado: 'Juan Pérez',
-      IDAcreditado: '101',
-      NoCliente: '261456',
-      Fecharegistro: '01/05/2022',
-      Tipomandato: 'BANCOMEXT',
-      Tipocartera: 'OBJETIVO'
+      nsesion: '12345',
+      fechaasig: '21/10/2023',
+      fechapresen: '25/10/2023',
+      canal: 'Canal',
+      fechavenci: '31/12/2023',
     },
     {
-      NombreAcreditado: 'Isabel Vega',
-      IDAcreditado: '102',
-      NoCliente: '02614632',
-      Fecharegistro: '01/05/2022',
-      Tipomandato: 'FIDERCA',
-      Tipocartera: 'CONTROL Y RESGUARDO'
-    },
-    {
-      NombreAcreditado: 'Cristina Leon',
-      IDAcreditado: '103',
-      NoCliente: '0261167',
-      Fecharegistro: '01/05/2022',
-      Tipomandato: 'TESOFE',
-      Tipocartera: 'OBJETIVO'
+      nsesion: '56789',
+      fechaasig: '11/11/2023',
+      fechapresen: '18/11/2023',
+      canal: 'Canal',
+      fechavenci: '31/12/2023',
     }]
   }
 
@@ -182,5 +169,24 @@ export class AcreditadosComponent {
     downloadLink.click();
   }
 
+
+  descargarComprobante() {
+    const downloadLink = document.createElement('a');
+    const fileName = 'sampleComprobante.pdf';
+    downloadLink.href = this.pdfSrc;
+    downloadLink.download = fileName;
+    downloadLink.click();
+    this.toastrService.success('Se ha descargado correctamente el comprobante de pago.')
+  }
+
+  cerrarCanvas(tipo: string) {
+    switch (tipo) {
+      case 'prevAnexo':
+        this.prevAnexo = false;
+        break;
+      default:
+        break;
+    }
+  }
 }
 

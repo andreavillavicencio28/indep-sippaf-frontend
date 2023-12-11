@@ -2,7 +2,7 @@ import { Component, ViewChild,EventEmitter, Input, Output  } from '@angular/core
 import { NgbModal, NgbModalConfig, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 //import { datosEtapasSolicitud } from 'src/app/models/datosEtapasSolicitud.model';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
-import { dataArchivos, dataAcreditados, dataEdosmunis, dataAsuntos, dataMedios, dataTipopropuestas } from './dataDummyArchivos';
+import { dataArchivos,dataIDAcreditados, dataAcreditados, dataEdosmunis, dataAsuntos, dataMedios, dataTipopropuestas, dataEncomienda } from './dataDummyArchivos';
 import { datosAtencion, documentos } from '../etapasAtenciones/detalle/detalle-atencion/datosAtencion';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,9 +19,9 @@ export class AtencionesComponent {
   Seleccionado: number = 0;
   tituloSeleccionado: string = '';
   showAgregarAtencion: boolean = false;
-
+  idacreditados =dataIDAcreditados;
   listaDatos: any[] = [];
-
+  encomiendas = dataEncomienda;
   seccion: string = 'Elige una opción';
   acreditados = dataAcreditados;
   archivo: string = 'Elige una opción';
@@ -58,7 +58,10 @@ export class AtencionesComponent {
   }
 
 
-    
+  isDisplay = true;
+  toggleDisplayMandato(){
+    this.isDisplay=!this.isDisplay;
+  }
 
   changeSeccion() {}
 

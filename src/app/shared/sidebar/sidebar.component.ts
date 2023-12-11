@@ -17,8 +17,9 @@ export class SidebarComponent {
     { label: 'Admin', icon: 'bi bi-person-fill-gear', route: '/content/administracion'},
     { label: 'Archivos', icon: 'bi bi-files', route: '/content/archivos'},
     { label: 'Atenciones', icon: 'bi bi-person', route: '/content/atenciones'},
-    { label: 'Roles y perfiles', icon: 'bi bi-person-fill-gear', route: '/content/rolesPerfiles'},
-    { label: 'Cancelación y Consulta de propuestas', icon: 'bi bi-search', route: '/content/atenciones'},
-    { label: 'Reportes', icon: 'bi bi-files', route: '/content/atenciones'},
+    { label: 'Roles y perfiles', icon: 'bi bi-person-lock', route: '/content/rolesPerfiles'},
+    { label: 'Cancelación y Consulta de propuestas', icon: 'bi bi-x-octagon', route: '/content/atenciones'},
+    { label: 'Reportes', icon: 'bi bi-file-earmark-spreadsheet', route: '/content/atenciones'},
+    { label: 'Historial', icon: 'bi bi-clock-history', route: '/content/historial'},
   ];
 }

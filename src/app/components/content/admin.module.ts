@@ -29,12 +29,15 @@ import { CatalogosComponent } from './catalogos/catalogos.component';
 import { CoperComponent } from './coper/coper.component';
 import { DetalleCoperComponent } from './coper/detalle-coper/detalle-coper.component';
 import { AcuerdosComponent } from './acuerdos/acuerdos.component';
+import {DetalleAcuerdosComponent} from './acuerdos/detalle-acuerdos/detalle-acuerdos.component';
 import { AdminArchivosComponent } from './admin-archivos/admin-archivos.component';
 import { AdministracionComponent } from './administracion/administracion.component';
 import { SaedgComponent } from './saedg/saedg.component';
 import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.component';
 import { SiabComponent } from './siab/siab.component';
 import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component';
+import { HistorialComponent} from './historial/historial.component';
+
 
 
 /* Components */
@@ -75,12 +78,14 @@ import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component
     CoperComponent,
     DetalleCoperComponent,
     AcuerdosComponent,
+    DetalleAcuerdosComponent,
     AdminArchivosComponent,
     AdministracionComponent,
     SaedgComponent,
     DetalleSaedgComponent,
     SiabComponent,
-    DetalleSiabComponent
+    DetalleSiabComponent,
+    HistorialComponent,
   ],
   exports: [
     WizardComponent,
