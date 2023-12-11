@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'sg-detalle-capa',
-  templateUrl: './detalle-capa.component.html',
-  styleUrls: ['./detalle-capa.component.scss']
+  selector: 'sg-detalle-rolesPerfiles',
+  templateUrl: './detalle-rolesPerfiles.component.html',
+  styleUrls: ['./detalle-rolesPerfiles.component.scss']
 })
-export class DetalleCapaComponent {
+export class DetalleRolesPerfilesComponent {
   @Input() id_solicitud: number = 0;
   @Input() solicitante: string = '';
 
@@ -40,30 +40,38 @@ export class DetalleCapaComponent {
   ) {
     this.dataAnexos = [
       {
+        id: 1,
         name: "Cedula Juridica",
       },
       {
+        id: 2,
         name: "Recordatorio",
       },
       {
+        id: 4,
         name: "Oficio Solicitud",
       },
       {
+        id: 5,
         name: "Otro",
       },
     ];
     this.dataDocumentos = [
       {
-        name: "Layout Saldos",
+        id: 1,
+        name: "Solicitud Información",
       },
       {
-        name: "Edo Cuenta Cert",
+        id: 2,
+        name: "Recordatorio",
       },
       {
+        id: 3,
         name: "Oficio Solicitud",
       },
       {
-        name: "Dictamen Juridico",
+        id: 4,
+        name: "Otro",
       },
     ]
   }
@@ -133,6 +141,7 @@ export class DetalleCapaComponent {
   mostrarPdfADocumento() {
     this.pdfSrcDocumento = "../../../../../assets/nombre.pdf";
   }
+
   previsualizarDocumento() {
     this.prevDocumento = true;
   }
@@ -206,6 +215,7 @@ export class DetalleCapaComponent {
   descargarDocumento(documentoNombre: string = '', accion: string) {
     console.log("DESCARGAR DOCUMENTO");
   }
+
   sustituirDocumento() {
     this.showSustituirDocumento = true;
   }

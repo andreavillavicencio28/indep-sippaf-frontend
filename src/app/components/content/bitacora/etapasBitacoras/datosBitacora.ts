@@ -2,12 +2,15 @@ export const datosBitacora = {
     fechaHora: '10-11-2023 14:30',
     cargadoPor:'José Pérez',
     nombreDoc:'Escaneado 1234.pdf',
+    direccionIP:'192.228.17.57',
 
     fechaHora2: '10-11-2023 15:48',
     cargadoPor2:'José Pérez',
+    direccionIP2:'192.228.17.58',
 
     fechaHora3: '11-11-2023 11:12',
     cargadoPor3:'José Pérez',
+    direccionIP3:'192.228.17.62'
 }
 
 export const documentos = [

@@ -12,6 +12,8 @@ import { AtencionesComponent } from './atenciones/atenciones.component';
 import { AcreditadosComponent } from './acreditados/acreditados.component';
 import { AdministracionComponent } from "./administracion/administracion.component";
 import { HistorialComponent} from "./historial/historial.component";
+import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 
@@ -158,6 +160,32 @@ const routes: Routes = [
           ],
         },
         component: HistorialComponent,
+      },
+      {
+        path: 'rolesPerfiles',
+        data: {
+          title: 'Roles y Perfiles',
+          breadcrumbs: [
+            {
+              text: 'Roles y Perfiles',
+              active: true,
+            }
+          ],
+        },
+        component: RolesPerfilesComponent,
+      },
+      {
+        path: 'reportes',
+        data: {
+          title: 'Reportes',
+          breadcrumbs: [
+            {
+              text: 'Reportes',
+              active: true,
+            }
+          ],
+        },
+        component: ReportesComponent,
       },
      ],
   },

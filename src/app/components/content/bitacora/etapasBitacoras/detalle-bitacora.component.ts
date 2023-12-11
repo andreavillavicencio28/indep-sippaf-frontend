@@ -46,7 +46,7 @@ export class DetalleBitacoraComponent {
   }
   downloadDocJuridico() {
     const downloadLink = document.createElement('a');
-    const fileName = 'Escaneado 1234.pdf';
+    const fileName = 'Bitacora001.pdf';
 
     downloadLink.href = this.pdfSrc;
     downloadLink.download = fileName;

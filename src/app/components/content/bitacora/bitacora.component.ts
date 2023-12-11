@@ -19,6 +19,9 @@ export class BitacoraComponent {
   fFin:string='';
   resultado: string = '';
   error:boolean = false;
+  pdfSrc:string = '';
+  documentoNombre: string = '';
+  prevAnexo: boolean = false;
 
 
   @ViewChild(DetalleBitacoraComponent) DetalleBitacoraComponent!: DetalleBitacoraComponent;
@@ -28,19 +31,19 @@ export class BitacoraComponent {
   
   cambioSeleccion() {
     this.listaDatos = [{
-      Propuesta:'Propuesta',
+      Propuesta:'Pago',
       idPropuesta: '001',
       Acreditado: 'Juan Pérez',
       Estatus: 'Acompletada'
     },
     {
-      Propuesta:'Propuesta',
+      Propuesta:'Compra',
       idPropuesta: '002',
       Acreditado: 'Maria Rodrigez',
       Estatus: 'Pendiente'  
     },
     {
-      Propuesta:'Propuesta',
+      Propuesta:'Pago',
       idPropuesta: '003',
       Acreditado: 'Carlos López',
       Estatus: 'Cancelada'
@@ -71,4 +74,16 @@ export class BitacoraComponent {
       this.cambioSeleccion();      
     }
   }
+
+  
+
+  downloadDocJuridico() {
+    const downloadLink = document.createElement('a');
+    const fileName = 'Escaneado 1234.pdf';
+
+    downloadLink.href = this.pdfSrc;
+    downloadLink.download = fileName;
+    downloadLink.click();
+  }
+
 }  

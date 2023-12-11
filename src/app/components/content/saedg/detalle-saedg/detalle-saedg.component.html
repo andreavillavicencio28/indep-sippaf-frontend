@@ -42,9 +42,11 @@
                                                 
                                                 <td class="valoresCentrados">
                                                     
-                                                    <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
-                                                        <i class="bi bi-eye"></i>
-                                                    </button>                                                  
+                                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                                        data-placement="top" title="Vista previa"
+                                                        (click)="openVistaPreviaDocumento('documento', 'verDocumento')">
+                                                        <em style="color: blue;" class="bi bi-eye"></em>
+                                                    </button>                                                
         
                                                 </td>
                                             </tr>
@@ -70,13 +72,18 @@
                                                 
                                                 <td class="valoresCentrados">
                                                     
-                                                    <button class="btn btn-link" (click)="abrirPdf()" title="Ver">
-                                                        <i class="bi bi-eye"></i>
+                                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                                        data-placement="top" title="Vista previa"
+                                                        (click)="openVistaPreviaDocumento('documento', 'verDocumento')">
+                                                        <em style="color: blue;" class="bi bi-eye"></em>
                                                     </button>
                                     
-                                                    <button class="btn btn-link" (click)="descargarDocumento(dato.nombreDoc)" title="Descargar documento">
-                                                        <i class="bi bi-download"></i>
-                                                      </button>
+                                                    <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                                        data-placement="top" title="Descargar"
+                                                        (click)="descargarAnexo()">
+                                                        <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
+                                                    </button>
+
                                                 </td>
                                             </tr>
                                          
@@ -156,6 +163,31 @@
                             
                         </div>
                         
+                    </div>
+
+                    <div class="offcanvas offcanvas-end canvasTerciario" [class.show]="prevDocumento" ngtabindex="-1"
+                        id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <h1>Previsualización del Documento</h1>
+                            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                                (click)="cerrarCanvas('prevDocumento')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <div class="col-sm-12">
+                                <div class="col-sm-12">
+                                    <!-- <div class="card" style="padding: 5px;">
+                                        <div class="card-body row" style="padding: 15px 15px;">
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="offcanvas-footer">
+                            <div class="text-end">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

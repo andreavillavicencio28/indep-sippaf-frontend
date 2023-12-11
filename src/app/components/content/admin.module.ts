@@ -37,6 +37,9 @@ import { DetalleSaedgComponent } from './saedg/detalle-saedg/detalle-saedg.compo
 import { SiabComponent } from './siab/siab.component';
 import { DetalleSiabComponent } from './siab/detalle-siab/detalle-siab.component';
 import { HistorialComponent} from './historial/historial.component';
+import { DetalleRolesPerfilesComponent } from './rolesPerfiles/detalle-rolesPerfiles/detalle-rolesPerfiles.component';
+import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 
@@ -86,6 +89,9 @@ import { HistorialComponent} from './historial/historial.component';
     SiabComponent,
     DetalleSiabComponent,
     HistorialComponent,
+    DetalleRolesPerfilesComponent,
+    RolesPerfilesComponent,
+    ReportesComponent
   ],
   exports: [
     WizardComponent,

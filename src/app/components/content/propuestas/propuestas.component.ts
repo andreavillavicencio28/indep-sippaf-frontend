@@ -154,7 +154,7 @@ export class PropuestasComponent {
         break;
       }
       case 6: {
-        this.tituloSeleccionado = 'SIAB';
+        this.tituloSeleccionado = 'SIGEBI';
         break;
       }
       case 7: {
