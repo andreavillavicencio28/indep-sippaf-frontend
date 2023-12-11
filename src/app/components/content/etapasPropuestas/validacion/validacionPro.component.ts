@@ -32,6 +32,7 @@ export class ValidacionProComponent {
   showCargaDocumento:boolean = false;
   showGenerarOficio:boolean=false;
   pdfSrc: string = '';
+  prevAnexo: boolean = false;
 
   objetoDetalle: any = {};
   indiceObjetoDetalle: any = {};
@@ -43,7 +44,7 @@ export class ValidacionProComponent {
   FormularioConfirma !: FormGroup;
   certFileName: string = "Ubicación del certificado";
   keyFileName: string = "Ubicación de la llave privada";
-
+  formFile:number=0;
   
    //TODOS LOS COMPONENTES QUE REPRECENTEN  UN ESTATUS DEBERAN TENER ESTE OUTPUT
    @Output() respuestaCofirmarModal = new EventEmitter<boolean>();
@@ -202,6 +203,7 @@ export class ValidacionProComponent {
   }
 
   abrirPdf(documentoNombre: string = '') {
+    //this.prevAnexo = true
     this.documentoNombre = documentoNombre;
     this.showDetalle = true;
   }
@@ -216,7 +218,7 @@ export class ValidacionProComponent {
   }
 
   uploadDocumento() {
-    this.toastrService.success(`Se ha subido el documento ${this.documentoNombre} exitosamente.`);
+    this.toastrService.success(`Anexo y/o documentación guardada correctamente`);
     this.showCargaDocumento = false;
   }
 
@@ -332,6 +334,14 @@ export class ValidacionProComponent {
     //  }
 
    // });
+  }
+
+  openVistaPreviaAnexo(documentoNombre: string = '',  tipo: string) {
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('anexo')) {
+      this.pdfSrc = "../../../../../assets/pdf2.pdf";
+      this.abrirPdf();
+    }
   }
   
 }

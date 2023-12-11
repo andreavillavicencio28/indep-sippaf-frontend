@@ -65,22 +65,22 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="table-secondary">
-                        <th style="width: 40%;">Id Propuesta</th>
-                        <th style="width: 40%;">Acreditado</th>
-                        <th style="width: 40%;">Fecha recepcion</th>
-                        <th style="width: 40%;">Fecha propuesta</th>
-                        <th style="width: 40%;">Tipo propuesta</th>
-                        <th style="width: 40%;">Monto MXN</th>
-                        <th style="width: 40%;">Monto USD</th>
-                        <th style="width: 40%;">Propuesta Dacion</th>
+                        <th style="width: 30%;">Id Propuesta</th>
+                        <th style="width: 30%;">Acreditado</th>
+                        <th style="width: 30%;">Fecha recepcion</th>
+                        <th style="width: 30%;">Fecha propuesta</th>
+                        <th style="width: 30%;">Tipo propuesta</th>
+                        <th style="width: 30%;">Monto MXN</th>
+                        <th style="width: 30%;">Monto USD</th>
+                        <th style="width: 20%;">Propuesta Dacion</th>
                         <th style="width: 20%;">Pagos</th>
-                        <th style="width: 40%;">Plazo Solicitado</th>
+                        <th style="width: 20%;">Plazo Solicitado</th>
                         <th style="width: 20%;">Capturista</th>
-                        <th style="width: 40%;">Fecha captura</th>
-                        <th style="width: 40%;">Id Responsable caso</th>
-                        <th style="width: 40%;">N° Volante</th>
+                        <th style="width: 20%;">Fecha captura</th>
+                        <th style="width: 20%;">Id Responsable caso</th>
+                        <th style="width: 20%;">N° Volante</th>
                         <th style="width: 10%;">Estatus</th>
-                        <th style="width: 30%;">Tipo atención</th>
+                        <th style="width: 10%;">Tiempo atención</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,42 +99,14 @@
                         <td>{{ dato.fechaCaptura }}</td>
                         <td>{{ dato.idResponsable }}</td>
                         <td>{{ dato.NumVolante }}</td>
-                        <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
-                        <td>{{ dato.tipoAtencion }}</td>
+                        <td>{{ dato.estatus}}</td>
+                        <td id="colores" [ngStyle]="{'background-color':colorVentana(dato.tiempoAtencion)}"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-------------
-    <div class="col-sm-12 row" *ngIf="!tipoVista">
-        <div class="col-sm-3 " *ngFor="let dato of listaDatos" title="Ver detalalle"
-            (click)="abrirCamvasPrincipal(dato)">
-            <div class="card card-container">
-                <div class="card-header">
-                    <label>Nombre solicitante: </label> <strong>{{dato.NombreSolicitante}}</strong>
-                </div>
-                <div class="card-body" style="overflow-y: scroll;">
-                    <div class="col-sm-12">
-                        <label>Tipo de bien: </label> <strong>{{dato.tipoBien}}</strong>
-                    </div>
-                    <div class="col-sm-12">
-                        <label>Fecha se solicitud: </label> <strong>{{dato.fechaSolicitud}}</strong>
-                    </div>
-                    <div class="col-sm-12">
-                        <label>Estatus: </label> <strong>{{dato.proceso}}</strong>
-                    </div>
-                    <hr>
-                    <div class="col-sm-12">
-                        <img [src]="dato.imagen" alt="Descripción de la imagen" style="width: 100%; height: 100px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    ------------->
 </div>
 
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showCamvasPrincipal" ngtabindex="-1"
