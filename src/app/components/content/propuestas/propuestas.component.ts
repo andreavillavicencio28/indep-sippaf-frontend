@@ -118,8 +118,7 @@ export class PropuestasComponent {
   // SI AL FINAL CONFIRMA  EL ULTIMO MODAL ENTONCES CERRAMOS TODO, INCLUIDO EL CAMVAS ACTUAL Y ACTUALIZAMOS  LOS DATOS DEL ESTATUS DONDE ESTEMOS
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
-    this.toastrService.success('Se ha guardado exitosamente el resgistro.')
-    this.toastrService.success("Registro guardado correctamente")
+    this.toastrService.success('Se ha guardado exitosamente el resgistro.')    
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
