@@ -11,7 +11,7 @@ export class SidebarComponent {
   public menuItems: any[] = [ 
     { label: 'Atenciones', icon: 'bi bi-person', route: '/content/atenciones'},
     { label: 'Propuestas de Pago', icon: 'bi bi-pass-fill', route: '/content/propuestas' },
-    { label: 'Sesiones', icon: 'bi bi-calendar-check', route: '/content/sesiones'},
+    { label: 'Historial de Sesiones', icon: 'bi bi-calendar-check', route: '/content/historial'},
     { label: 'Administración', icon: 'bi bi-person-fill-gear', route: '/content/administracion'},
     { label: 'Archivos', icon: 'bi bi-files', route: '/content/archivos'},
     { label: 'Acreditados', icon: 'bi bi-person-workspace', route: '/content/acreditados'},
