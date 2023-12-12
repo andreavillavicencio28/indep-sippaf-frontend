@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-12 mb-4">
+                    <h2 class="text-center">Administracion de Alertas</h2>
+
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                          <div class="row">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr class="table-secondary">
+                                  <th>Activo</th>
+                                  <th>Nombre</th>
+                                  <th>Tiempo</th>
+                                  <th>Acciones</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let alerta of datosAlertas">
+                                  <td>{{ alerta.estatus }}</td>
+                                  <td>{{ alerta.nombre }}</td>
+                                  <td>{{ alerta.tiempo }}</td>
+                                  <td>
+                                    <div class="text-end">
+                                      <button type="button" class="btn btn-neutral-modal" (click)="editarAlerta(alerta.nombre)">Editar</button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
