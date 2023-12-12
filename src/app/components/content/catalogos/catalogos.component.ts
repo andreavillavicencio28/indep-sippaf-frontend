@@ -49,11 +49,11 @@ export class CatalogosComponent {
   ){
     config.backdrop = 'static';
     config.keyboard = false;
-    this.obtenerEstados(null);
+
     this.Seleccionado = 1;
     this.listaCatalogos =
     [
-        { idCatalogo: 0, descripcion: 'Selecciona', activo: false , resgistro:[{reg:'1'}]},
+        { idCatalogo: 0, descripcion: 'Selecciona', activo: false},
         { idCatalogo: 1, descripcion: 'Motivo llamada', activo: false },
         { idCatalogo: 2, descripcion: 'Grupo económico', activo: false },
         { idCatalogo: 3, descripcion: 'Estatus Propuesta', activo: false },
@@ -120,142 +120,4 @@ export class CatalogosComponent {
   
 
 
-obtenerEstados(valores:any) {
-    this.mostrarSpenner = true;
-    if (valores != null){
-       this.noPageActual =  valores.noPage;
-       this.itemsPageActual = valores.itemsPage;
-    }
-
-    /*******
-     *
-ngOnInit() {
-    this.crearFormularioBusqueda();
-}
-    
-    this.CatalogosService.getEstados( this.noPageActual,this.itemsPageActual,'ASC').subscribe(
-    (resp) => {
-        if( resp.code == INTERNAL_CODES.SUCCESSFUL ){
-            this.propiedades = resp.data;
-            this.listaRegistros = resp.data.result;
-            this.toastrService.success(resp.message);
-        }else{
-            this.toastrService.warning(resp.message);
-        }
-        this.mostrarSpenner = false;
-    },(error) => {
-        this.toastrService.error(error.message,"Error");
-        this.mostrarSpenner = false;
-    });
-
-    this.mostrarSpenner = false;
-}
-
-crearFormularioBusqueda() {
-    this.FormularioBusqueda = this.fb.group({
-        claveBuscar: [''],
-        estadoBuscar: [''],
-    });
-}
-
-crearFormularioModal() {
-    this.FormularioModal = this.fb.group({
-        clave: ['', [Validators.required, Validators.maxLength(2)]],
-        estado: ['', [Validators.required, Validators.maxLength(40)]],
-    });
-}
-
-abrirModal(contenido: any, datos: catalogoEstado | null) {
-    this.crearFormularioModal();
-    if (datos == null) {
-        this.tituloModal = "Nuevo Estado";
-        this.esActualizacion = false;
-    } else {
-        this.tituloModal = "Actualizar Estado";
-        this.esActualizacion = true;
-        this.FormularioModal.setValue({
-            clave: datos.fnclaveentidad,
-            estado: datos.fsdescripcion,
-        });
-        this.FormularioModal.controls['clave'].disable();
-    }
-
-    this.modal.open(contenido, { size: 'lg' });
-}
-
-abrirModalEliminar(contenido: any, datos: catalogoEstado) {
-    this.registroAEliminar = datos;
-    this.preguntaEliminar = `¿Seguro que deseas eliminar el estado "${this.registroAEliminar.fsdescripcion}?"`;
-    this.modal.open(contenido, { size: 'lg' });
-}
-
-cerrarModal() {
-    this.modal.dismissAll();
-}
-
-guardarRegistro() {
-    if(this.FormularioModal.valid){
-        this.mostrarSpenner = true;
-        let datos: catalogoEstado = {
-            fnclaveentidad: this.FormularioModal.getRawValue().clave,
-            fsdescripcion: this.FormularioModal.getRawValue().estado,
-        }
-        if (!this.esActualizacion) {
-            this.CatalogosService.addEstado(datos).subscribe(
-                (resp) => {
-                    if( resp.code == INTERNAL_CODES.SUCCESSFUL ){
-                        this.toastrService.success(resp.message);
-                    }else{
-                        this.toastrService.warning(resp.message);
-                    }
-                    this.mostrarSpenner = false;
-                    this.obtenerEstados(null);
-                    this.cerrarModal();
-                },(error) => {
-                    this.toastrService.error(error.message,"Error");
-                    this.mostrarSpenner = false;
-                });
-        } else {
-            this.CatalogosService.updateEstado(this.FormularioModal.getRawValue().clave,datos).subscribe(
-                (resp) => {
-                    if( resp.code == INTERNAL_CODES.SUCCESSFUL ){
-                        this.toastrService.success(resp.message);
-                    }else{
-                        this.toastrService.warning(resp.message);
-                    }
-                    this.mostrarSpenner = false;
-                    this.obtenerEstados(null);
-                    this.cerrarModal();
-                },(error) => {
-                    this.toastrService.error(error.message,"Error");
-                    this.mostrarSpenner = false;
-                });
-        }
-    } else {
-        this.FormularioModal.controls['clave'].markAsTouched();
-        this.FormularioModal.controls['estado'].markAsTouched();
-    }
-}
-
-eliminarRegistro() {
-    this.mostrarSpenner = true;
-
-    this.CatalogosService.deleteEstado(this.registroAEliminar.fnclaveentidad).subscribe(
-        (resp) => {
-            if( resp.code == INTERNAL_CODES.SUCCESSFUL ){
-                this.toastrService.success(resp.message);
-            }else{
-                this.toastrService.warning(resp.message);
-            }
-            this.mostrarSpenner = false;
-            this.obtenerEstados(null);
-            this.cerrarModal();
-        },(error) => {
-            this.toastrService.error(error.message,"Error");
-            this.mostrarSpenner = false;
-        });       
-}
-********/
-
-    }
 }

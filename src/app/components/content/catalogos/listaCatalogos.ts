@@ -1,11 +1,13 @@
 export const listaCatalogos =
 [
     {
+        idCatalogo: 0,
+        descripcion:'Selecciona',
+        activo: false
+    },
+    {
         idCatalogo: 1,
         descripcion:'Motivo llamada',
-        resgistro:[{
-            reg:'1'
-        }],
         activo: false
     },
     {

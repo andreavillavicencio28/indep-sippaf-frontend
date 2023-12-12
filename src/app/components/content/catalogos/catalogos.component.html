@@ -3,31 +3,39 @@
     <h1>Catalogo</h1>
     <hr class="red">
   </div>
+  
   <div class="col-md-12 contenido">
-    
-
-  <div class="col-sm-12">
-    <div class="col-md-4">
-      <label class="control-label">Nombre&nbsp;Catálogo</label>
+    <div class="card">
+      <div class="card-body row" style="padding: 0px 5px;">
+        
+    <div class="col-sm-12">
+      
+      <div class="col-md-4">
+        <label class="control-label">Nombre&nbsp;Catálogo</label>
+      </div>
+      <div class="col-sm-3">
+        <select>
+          <option *ngFor="let dato of listaCatalogos" [value]="dato" >
+            {{dato.descripcion}}
+          </option>
+        </select>
+      </div>
     </div>
-    <div class="col-sm-3">
-      <select>
-        <option *ngFor="let dato of listaCatalogos" [value]="dato" >
-          {{dato.descripcion}}
-        </option>
-      </select>
-    </div>
-  </div>
   <div class="col-sm-12">
     <button type="button" class="btn btn-primary " data-toggle="tooltip" data-placement="top" (click)="agregarCatalogo()">
         <i id="circle" class="bi bi-plus-circle"></i> Agregar Catalogo
     </button>
   </div>
-  <div class="card-body" >
-    <div class="row">
+      </div>
+    </div>
+
+
+
+  <div class="col-sm-12" >
+    <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
       <table class="table table-hover">
         <thead>
-          <tr>
+          <tr  class="table-secondary">
             <th>No.</th>
             <th>Descripción</th>
             <th>Acciones</th>
@@ -39,10 +47,6 @@
             <td>{{reg.descripcionReg}}</td>
             
             <td>
-              <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
-                data-placement="top" title="Ver" >
-                <em style="color: blue;" class="bi bi-eye"></em>
-              </button>
               <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                 data-placement="top" title="Actualizar" (click)="EditarCatalogo()">
                 <em style="color: blue;" class="bi bi-arrow-clockwise"></em>

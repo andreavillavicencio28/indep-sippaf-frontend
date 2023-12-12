@@ -12,7 +12,6 @@ import { dataPerfil } from '../rolesPerfiles/dataPerfiles';
   styleUrls: ['./propuestas.component.scss']
 })
 export class PropuestasComponent {
-
   decicion: boolean = false;
   tipoVista: boolean = true;
   Seleccionado: number = 0;
@@ -494,17 +493,13 @@ export class PropuestasComponent {
   buscarPropuesta(){
     const fechaInicio = new Date(this.fInicio);
     const fechaFin = new Date(this.fFin);
-    const busquedaPro = this.busqueda.valueOf();
+    const busca = this.busqueda;
     this.comparaFechas();
-    
-    if (busquedaPro != null) { 
-      this.cambioSeleccion(1); 
-    } 
-    if (this.busqueda == null){
-      this.toastrService.error('Debe de ralizar un filtrado primero');
-      console.log(this.busqueda);
-    }
-    
+      if(busca == ''){
+        this.toastrService.error('Debe de ralizar un filtrado primero');
+      }else{
+        this.cambioSeleccion(1);
+      }
     }
 
 }
