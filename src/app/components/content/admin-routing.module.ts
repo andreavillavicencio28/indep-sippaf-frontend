@@ -14,7 +14,7 @@ import { AdministracionComponent } from "./administracion/administracion.compone
 import { HistorialComponent} from "./historial/historial.component";
 import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
 import { ReportesComponent } from './reportes/reportes.component';
-import { AlertasComponent } from "./alertas/alertas.component";
+import { AdminAlertasComponent } from "./admin-alertas/admin-alertas.component";
 
 
 
@@ -134,7 +134,7 @@ const routes: Routes = [
             }
           ],
         },
-        component: AlertasComponent
+        component: AdminAlertasComponent
       },
       {
         path: 'acreditados',
