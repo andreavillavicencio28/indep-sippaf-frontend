@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, enableProdMode } from '@angular/core';
 import { NgbModal, NgbModalConfig, NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { datosEtapasPropuestas } from 'src/app/models/datosEtapasPropuesta.model';
 import { ValidacionProComponent } from '../etapasPropuestas/validacion/validacionPro.component';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
+import { dataPerfil } from '../rolesPerfiles/dataPerfiles';
 
 @Component({
   selector: 'sg-propuesta',
@@ -40,9 +41,11 @@ export class PropuestasComponent {
   tipoAutorizacion: string = '';
   accion: number = 1; // accion de edicion
   showEditar: boolean = false;
-  
+
   //Agergar archivo
   showAgregarArchivo: boolean = false;
+  dataPerfil=dataPerfil;
+  selectPerfil:number=0;
   pdfSrc: string = '';
   showReporteExcel: boolean = false;
 
@@ -90,7 +93,7 @@ export class PropuestasComponent {
   openOficio() {
     switch (this.Seleccionado) {
       case 1: {
-        this.ValidacionProComponent.openOficio();
+        this.ValidacionProComponent.openVistaPreviaOficio('oficio', 'verDocumento');
         break;
       }
       default: {
@@ -325,14 +328,31 @@ export class PropuestasComponent {
     this.showCamvasPrincipal = false;
   }
 
-  agregarArchivo() {
-    this.showAgregarArchivo = true;
+  agregarArchivo(num: number) {
+    this.selectPerfil = num;
+    switch (this.selectPerfil) {
+      case 1: {
+        this.showAgregarArchivo = true;
+        break;
+      }
+      case 2: {
+        this.showAgregarArchivo = true;
+        break;
+      }
+      case 3: {
+        this.showAgregarArchivo = false;
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
   confimarPropuesta() {
     this.confirmarModalService.abriraModal('Al guardar esta información se marcara como tarea completada').subscribe(result => {
       if (result) {
         // El usuario aceptó
-        this.showEditar = false;
+        this.showCamvasPrincipal = false;
         this.toastrService.success("Se guardó correctamente la información");
   
       }
@@ -383,7 +403,7 @@ export class PropuestasComponent {
     }
   }
   guadarArchivo() {
-    this.toastrService.success('Se ha guardado exitosamente el nuevo archivo')
+    this.toastrService.success('Se ha guardado exitosamente la nueva propuesta')
     this.showAgregarArchivo = false;
   }
   

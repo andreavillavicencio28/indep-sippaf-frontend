@@ -36,25 +36,11 @@
                                         <td>{{item.nombreDocumento}}</td>
                                         <td>Electrónica</td>
                                         <td class="valoresCentrados">
-                                            <!--------
-                                            <button class="btn btn-link" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" data-bs-title="Firmar" title="Firmar"
-                                                (click)="openFirma(item.nombreDocumento)">
-                                                <i class="bi bi-laptop"></i>
-                                            </button>
-                                             ------>
                                              <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                                                 data-placement="top" title="Vista previa"
                                                 (click)="openVistaPreviaAnexos('documentos', 'verDocumento')">
                                                 <em style="color: blue;" class="bi bi-eye"></em>
                                             </button>
-                                           
-                                            <!---------
-                                            <button class="btn btn-link"
-                                                (click)="descargarDocumento(item.nombreDocumento)" title="Descargar">
-                                                <i class="bi bi-download"></i>
-                                            </button>
-                                            --------->
                                             <button class="btn btn-link"
                                                 (click)="cargarDocumento(item.nombreDocumento, 'cargarDocumento')"
                                                 title="Cargar documento">
@@ -305,12 +291,9 @@
             <div class="col-sm-12">
                 <div class="card" style="padding: 5px;">
                     <div class="card-body row" style="padding: 15px 15px;">
-                        <div class="col-sm-12 row">
-                            <div class="col-md-12" style="text-align: center;">
-                                <p class="valoresCentrados">
-                                    Oficio N°
-                                </p>
-                            </div>
+                        <div class="col-sm-12">
+                            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                                    style="width: 700px; height: 100vh;"></pdf-viewer>
                         </div>
                     </div>
                 </div>
@@ -338,13 +321,13 @@
 
 
 
-<!-- Modal firma -->
+<!-- Modal subir documento -->
 <div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirmado" ngtabindex="-1" id="offcanvasRight"
     aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h1>Documento Firmado</h1>
         <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarFirma()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+            (click)="cerrarDocFirmado()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
         <div class="row">
@@ -356,7 +339,7 @@
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
-            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+            <button type="button" class="btn btn-positivo-modal" (click)="docFirmado()">Subir &nbsp; <em
                     class="bi bi-check-lg"></em> </button> &nbsp;
         </div>
     </div>
