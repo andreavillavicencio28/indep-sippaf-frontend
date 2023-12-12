@@ -12,28 +12,28 @@
                     <div class="col-sm-3">                                      
                         <div class="row mb-12">                           
                             <div class="col-md-12">
-                                <button class="btn btn-neutral-modal">Atención de Acreditados</button>
+                                <button class="btn btn-primary" (click)="filtros('atencionAcred')">Atención de Acreditados</button>
                             </div>
                         </div>
                     </div> 
                     <div class="col-sm-3">                                      
                         <div class="row mb-12">                           
                             <div class="col-md-12">
-                                <button class="btn btn-neutral-modal">Activos Financieros</button>
+                                <button class="btn btn-primary" (click)="filtros('activosFin')">Activos Financieros</button>
                             </div>
                         </div>
                     </div>         
                     <div class="col-sm-3">                                      
                         <div class="row mb-12">                           
                             <div class="col-md-12">
-                                <button class="btn btn-neutral-modal">&nbsp;&nbsp;&nbsp;&nbsp; COPER &nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary" (click)="filtros('coper')">&nbsp;&nbsp;&nbsp;&nbsp; COPER &nbsp;&nbsp;&nbsp;&nbsp;</button>
                             </div>
                         </div>
                     </div> 
                     <div class="col-sm-3">                                      
                         <div class="row mb-12">                           
                             <div class="col-md-12">
-                                <button class="btn btn-neutral-modal">Seguimiento COPER</button>
+                                <button class="btn btn-primary" (click)="filtros('seguiCoper')">Seguimiento COPER</button>
                             </div>
                         </div>
                     </div>                                
@@ -41,8 +41,182 @@
 
                 <div class="col-12 mb-4" [class.show]="showTipoReporte">
                     <h3 class="text-center">
-                        Roles y Perfiles
+                        {{subtitulo}}
                     </h3>
+                </div>
+
+                <div class="col-sm-12" *ngIf="filtrosReportes">
+                    <div class="card-body row">
+                        <div class="col-sm-6">                                      
+                            <div class="row mb-6">
+                                <div class="col-md-5">
+                                    Fecha Inicio
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">                                      
+                            <div class="row mb-6">
+                                <div class="col-md-5">
+                                    Fecha Fin
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">                                      
+                            <div class="row mb-6">
+                                <div class="col-md-5">
+                                    ID Acreditado
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="ID Acreditado">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6" *ngIf="atencionAcred == true">                                      
+                            <div class="row mb-6">
+                                <div class="col-md-5">
+                                    Responsable de Atención:
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Responsable de Atención:">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion()" style="margin-right: 55px;">
+                                <em class="bi bi-search "> Buscar</em>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-12" *ngIf="tablaAtencionAcreditados">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th style="width: 15%;">IdAcreditado</th>
+                                    <th style="width: 15%;">Deudor</th>
+                                    <th style="width: 15%;">Número de Cliente</th>
+                                    <th style="width: 15%;">Encomienda</th>
+                                    <th style="width: 20%;">Medio Atención</th>
+                                    <th style="width: 20%;">Monto</th>
+                                    <th style="width: 30%;">Observaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of dataAcreditados">
+                                    <td>{{data.idAcreditado}}</td>
+                                    <td>{{data.deudor}}</td>
+                                    <td>{{data.numeroCliente}}</td>
+                                    <td>{{data.encomienda}}</td>
+                                    <td>{{data.medioAtencion}}</td>
+                                    <td>{{data.monto}}</td>
+                                    <td>{{data.observaciones}}</td>                                                   
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" *ngIf="tablaFinancieros">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th style="width: 15%;">Id Acreditado</th>
+                                    <th style="width: 15%;">Id Propuesta</th>
+                                    <th style="width: 15%;">Cartera</th>
+                                    <th style="width: 15%;">Fecha</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of dataFinanciero">
+                                    <td>{{data.idAcreditado}}</td>
+                                    <td>{{data.idPropuesta}}</td>
+                                    <td>{{data.cartera}}</td>
+                                    <td>{{data.fecha}}</td>                                                       
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" *ngIf="tablaCoper">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th style="width: 15%;">Id Acreditado</th>
+                                    <th style="width: 15%;">Id Propuesta</th>
+                                    <th style="width: 15%;">Numero Sesión</th>
+                                    <th style="width: 15%;">Estatus</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of dataCoper">
+                                    <td>{{data.idAcreditado}}</td>
+                                    <td>{{data.idPropuesta}}</td>
+                                    <td>{{data.numeroSesion}}</td>
+                                    <td>{{data.estatus}}</td>                                                       
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" *ngIf="tablaSeguimientoCoper">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table table-striped">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th style="width: 15%;">No. Sesión</th>
+                                    <th style="width: 15%;">Fecha Asignada</th>
+                                    <th style="width: 15%;">Fecha Presentación</th>
+                                    <th style="width: 15%;">Canal Solución</th>
+                                    <th style="width: 15%;">Fecha Vencimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of dataSeguimientoCoper">
+                                    <td>{{data.noSesion}}</td>
+                                    <td>{{data.fechaAsignada}}</td>
+                                    <td>{{data.fechaPresentacion}}</td>
+                                    <td>{{data.canalSolucion}}</td>
+                                    <td>{{data.fechaVencimiento}}</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row m-3" *ngIf="btnExport">
+                    <div class="col-3 d-grid gap-2"></div>
+                    <div class="col-3 d-grid gap-2"></div>
+                    <div class="col-3 d-grid gap-2">
+                        <button type="button" class="btn btn-outline-success" onclick="">Guardar como XLS</button>
+                    </div>
+                    <div class="col-3 d-grid gap-2">
+                        <button type="button" class="btn btn-outline-danger" onclick="">Guardar como PDF</button>
+                    </div>
                 </div>
 
             </div>   
@@ -50,32 +224,4 @@
     </div>
 </div>
 
-
-<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditPerfilRol" ngtabindex="-1"
-    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>Editar Perfil</h1>
-        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="col-sm-12">
-            <div class="row">                 
-                <div class="card-body row" style="padding: 15px 15px;">                
-                                                                     
-                </div>
-            </div>            
-        </div>
-    </div>
-
-    <div class="offcanvas-footer">
-        <div class="text-end">
-            <div class="text-end">
-                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardar()">
-                    Guardar
-                  </button>
-            </div>
-        </div>
-    </div>
-</div>
 

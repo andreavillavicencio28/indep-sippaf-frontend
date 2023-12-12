@@ -149,6 +149,10 @@
     <div class="offcanvas-footer">
         <div class="text-end">
             <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 3 && Seleccionado != 7">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
             <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;            
             <button type="button" class="btn btn-warning"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 1">Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
 
@@ -180,7 +184,7 @@
                         <option >002 Cristina Leon </option>
                     </select>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6">  
                     <label for="seccionAdd" class="control-label">Pago o Compra</label>
                     <select class="form-select" aria-label="Default select example" id="seccionAdd">
                         <option selected></option>
@@ -333,7 +337,7 @@
                             </div> 
                         </div>
 
-                        <div class="col-md-12" style="margin-top: 50px;">
+                        <div class="col-md-12" style="margin-top: 50px;" >
                         
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="P100" id="demandadoActivo">
@@ -376,3 +380,6 @@
         </div>
     </div>
 </div>
+
+
+
