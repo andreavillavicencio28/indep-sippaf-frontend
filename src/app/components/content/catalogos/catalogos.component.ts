@@ -4,8 +4,9 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CatalogosService } from 'src/app/services/catalogos/catalogos.service';
 import { ToastrService } from 'ngx-toastr';
 import { INTERNAL_CODES } from 'src/app/shared/constantes/constantes';
+import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 import { catalogoEstado } from 'src/app/models/datosCatalogo.model';
-import {listaCatalogos} from './listaCatalogos'
+import {listaCatalogos,listaRegistros} from './listaCatalogos'
 
 @Component({
   selector: 'sg-catalogos',
@@ -15,12 +16,13 @@ import {listaCatalogos} from './listaCatalogos'
 export class CatalogosComponent {
     showAgregarCatalogo: boolean = false;
     listaCatalogos=listaCatalogos;
+    showCatalogos:boolean=false;
     showCamvasPrincipal:boolean=false;
     Seleccionado:number=0;
+    catalogoSeleccionado: string = '';
+    listaRegistros=listaRegistros;
+    showEditarCatalogo:boolean=false;
 
-    
-
-  listaDatos: any[] = [];
   propiedades:any;
 
   tituloModal: string = 'Nuevo Estado';
@@ -42,192 +44,81 @@ export class CatalogosComponent {
     private modal: NgbModal,
     private config: NgbModalConfig,
     private fb: FormBuilder,
-    public toastrService: ToastrService
-    
+    public toastrService: ToastrService,
+    private confirmarModalService: ConfirmarModalService,
   ){
     config.backdrop = 'static';
     config.keyboard = false;
     this.obtenerEstados(null);
     this.Seleccionado = 1;
-    this.listaCatalogos = [
-        {
-            idCatalogo: 1,
-            descripcion:'Motivo llamada',
-            registro:
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 2,
-            descripcion:'Grupo económico',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 3,
-            descripcion:'Estatus propuesta',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 4,
-            descripcion:'Organización Social',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 5,
-            descripcion:'Número de Póliza',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 6,
-            descripcion:'Remitentes',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        },
-        {
-            idCatalogo: 7,
-            descripcion:'Unidades Administrativas',
-            registro :
-            [
-                {
-                    idRegistro:'001',
-                    descripcionReg:'Motivo 1'
-                },
-                {
-                    idRegistro:'002',
-                    descripcionReg:'Motivo 2'
-                },
-                {
-                    idRegistro:'003',
-                    descripcionReg:'Motivo 3'
-                }
-        
-            ],
-            activo: false
-        }
-
+    this.listaCatalogos =
+    [
+        { idCatalogo: 0, descripcion: 'Selecciona', activo: false , resgistro:[{reg:'1'}]},
+        { idCatalogo: 1, descripcion: 'Motivo llamada', activo: false },
+        { idCatalogo: 2, descripcion: 'Grupo económico', activo: false },
+        { idCatalogo: 3, descripcion: 'Estatus Propuesta', activo: false },
+        { idCatalogo: 4, descripcion: 'Organización Social', activo: false },
+        { idCatalogo: 5, descripcion: 'Número de Póliza', activo: false },
+        { idCatalogo: 6, descripcion: 'Remitentes', activo: false },
+        { idCatalogo: 7, descripcion: 'Unidades Administrativas', activo: false },
     ]
   }
 
-  agregarCatalogo() {
-    this.showAgregarCatalogo = true;
-  }
-  cerrarOffCanvas( numero: number) {
-    switch (numero) {
-      case 1:
-        this.showAgregarCatalogo = false;
-        break;
-    
-      default:
-        break;
-    }
-  }
-  guadarArchivo() {
-    this.toastrService.success('Se ha guardado exitosamente el nuevo archivo')
-    this.showAgregarCatalogo = false;
-  }
+
 
   abrirCamvasPrincipal(datos: any) {
     this.showCamvasPrincipal = true;
     
   }
+  agregarCatalogo() {
+    this.showAgregarCatalogo = true;
+  }
+  guadarArchivo() {
+    this.toastrService.success('Se ha guardado exitosamente el nuevo registro')
+    this.showAgregarCatalogo = false;
+  }
+  EditarCatalogo() {
+    this.showEditarCatalogo = true;
+  }
+  actualizarcatalogo() {
+    this.toastrService.success('Se ha actualizado exitosamente el registro')
+    this.showEditarCatalogo = false;
+  }
+
+  Elimimarcatalogo() {
+    this.confirmarModalService.abriraModal('¿Esta seguro de querer eliminar este registro?').subscribe(result => {
+      if (result) {
+        // El usuario aceptó
+        this.showCamvasPrincipal = false;
+        this.toastrService.success("Se ha eliminado exitosamente el registro");
+  
+      }
+
+    });
+   // this.showEditar = false;
+   // this.toastrService.success("Se guardó correctamente la prevalidación");
+  
+  }
+ 
+  cerrarOffCanvas( numero: number) {
+    switch (numero) {
+    case 1:
+        this.showAgregarCatalogo = false;
+        break;
+    case 2:
+        this.showEditarCatalogo = false;
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+
 
   
-  ngOnInit() {
-    this.crearFormularioBusqueda();
-}
+
 
 obtenerEstados(valores:any) {
     this.mostrarSpenner = true;
@@ -236,11 +127,17 @@ obtenerEstados(valores:any) {
        this.itemsPageActual = valores.itemsPage;
     }
 
+    /*******
+     *
+ngOnInit() {
+    this.crearFormularioBusqueda();
+}
+    
     this.CatalogosService.getEstados( this.noPageActual,this.itemsPageActual,'ASC').subscribe(
     (resp) => {
         if( resp.code == INTERNAL_CODES.SUCCESSFUL ){
             this.propiedades = resp.data;
-            this.listaDatos = resp.data.result;
+            this.listaRegistros = resp.data.result;
             this.toastrService.success(resp.message);
         }else{
             this.toastrService.warning(resp.message);
@@ -358,5 +255,7 @@ eliminarRegistro() {
             this.mostrarSpenner = false;
         });       
 }
+********/
 
+    }
 }
