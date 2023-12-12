@@ -14,6 +14,7 @@ import { AdministracionComponent } from "./administracion/administracion.compone
 import { HistorialComponent} from "./historial/historial.component";
 import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
 import { ReportesComponent } from './reportes/reportes.component';
+import { AlertasComponent } from "./alertas/alertas.component";
 
 
 
@@ -121,6 +122,19 @@ const routes: Routes = [
           ],
         },
         component: AdminArchivosComponent
+      },
+      {
+        path: 'alertas',
+        data: {
+          title: 'Alertas',
+          breadcrumbs: [
+            {
+              text: 'Alertas',
+              active: true
+            }
+          ],
+        },
+        component: AlertasComponent
       },
       {
         path: 'acreditados',

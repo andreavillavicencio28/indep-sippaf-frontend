@@ -21,5 +21,6 @@ export class SidebarComponent {
     { label: 'Cancelación y Consulta de propuestas', icon: 'bi bi-x-octagon', route: '/content/atenciones'},
     { label: 'Reportes', icon: 'bi bi-file-earmark-spreadsheet', route: '/content/reportes'},
     { label: 'Historial', icon: 'bi bi-clock-history', route: '/content/historial'},
+    { label: 'Administracion de Alertas', icon: 'bi bi-exclamation-octagon ', route: '/content/alertas'},
   ];
 }

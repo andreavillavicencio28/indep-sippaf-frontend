@@ -1,117 +1,161 @@
 export const dataArchivos = [
     {
         id: 1,
-        seccion: 'Persona Física',
-        subseccion: 'Documentos persona física',
-        archivo: 'Documento CURP',
+        seccion: 'Validacion',
+        archivo: 'Edo. Cuenta Certificado',
         e_firma: true,
     },
     {
         id: 2,
-        seccion: 'Persona Moral',
-        subseccion: 'Documentos socios',
-        archivo: 'Última declaración anual',
+        seccion: 'SIARAF',
+        archivo: 'Documentación Propuesta',
         e_firma: false,
     },
     {
         id: 3,
-        seccion: 'Opinión Técnica',
-        subseccion: 'Docuentos Representante Legal',
-        archivo: 'Comprobante de Domicilio',
+        seccion: 'SAEDG',
+        archivo: 'Solicitud Cédula',
         e_firma: true,
     },
     {
         id: 4,
-        seccion: 'Persona Física',
-        subseccion: 'Documentos de la Persona Física',
-        archivo: 'Documento RFC',
+        seccion: 'Juridico',
+        archivo: 'Layout Saldos',
         e_firma: true,
     },
+    {
+        id: 5,
+        seccion: 'CAPA',
+        archivo: 'Formato Propuesta',
+        e_firma: false,
+    },
+    {
+        id: 6,
+        seccion: 'SIGEBI',
+        archivo: 'Formato Propuesta',
+        e_firma: true,
+    },
+    {
+        id: 7,
+        seccion: 'Análisis',
+        archivo: 'Solicitud Saldos',
+        e_firma: false,
+    },
+    {
+        id: 8,
+        seccion: 'COPER',
+        archivo: 'Formato COPER',
+        e_firma: false,
+    },
+    {
+        id: 9,
+        seccion: 'Acuerdos',
+        archivo: 'Acuerdos COPER',
+        e_firma: false,
+    },
+    {
+        id: 10,
+        seccion: 'Archivos',
+        archivo: 'Comprobante de Pago',
+        e_firma: false,
+    },
+    
 ];
 
 export const dataSeccion = [
     {
         id: 1,
-        tx_descripcion: 'Persona Física',
-        tx_ubicaarchivo: 'PF'
+        tx_descripcion: 'Validacion',
+        tx_ubicaarchivo: 'VL'
     },
     {
         id: 2,
-        tx_descripcion: 'Persona Moral',
-        tx_ubicaarchivo: 'PM'
+        tx_descripcion: 'SIARAF',
+        tx_ubicaarchivo: 'SF'
     },
     {
         id: 3,
-        tx_descripcion: 'Opinión Técnica',
-        tx_ubicaarchivo: 'OT'
-    },
-];
-
-export const dataSubseccion = [
-    {
-        id: 1,
-        tx_descripcion: 'Documentos persona moral',
-        tx_ubicaarchivo: 'DPM'
+        tx_descripcion: 'SAEDG',
+        tx_ubicaarchivo: 'SG'
     },
     {
-        id: 2,
-        tx_descripcion: 'Documentos representante legal',
-        tx_ubicaarchivo: 'DRL'
+        id: 4,
+        tx_descripcion: 'Juridico',
+        tx_ubicaarchivo: 'JCO'
     },
     {
-        id: 3,
-        tx_descripcion: 'Documentos socios',
-        tx_ubicaarchivo: 'DS'
+        id: 5,
+        tx_descripcion: 'CAPA',
+        tx_ubicaarchivo: 'CPA'
     },
     {
-        id: 3,
-        tx_descripcion: 'Documentos de la persona física',
-        tx_ubicaarchivo: 'DPF'
+        id: 6,
+        tx_descripcion: 'SIGEBI',
+        tx_ubicaarchivo: 'SGB'
     },
-
+    {
+        id: 7,
+        tx_descripcion: 'Análisis',
+        tx_ubicaarchivo: 'ALS'
+    },
+    {
+        id: 8,
+        tx_descripcion: 'COPER',
+        tx_ubicaarchivo: 'CPR'
+    },
+    {
+        id: 9,
+        tx_descripcion: 'Acuerdos',
+        tx_ubicaarchivo: 'ACS'
+    },
+    {
+        id: 10,
+        tx_descripcion: 'Archivos',
+        tx_ubicaarchivo: 'ACH'
+    },
 ];
 
 export const dataFiles = [
     {
         id: 1,
-        tx_descripcion: 'Documento RFC',
+        tx_descripcion: 'Formato Propuesta',
     },
     {
         id: 2,
-        tx_descripcion: 'Documento CURP',
+        tx_descripcion: 'Documentación Propuesta',
     }, {
         id: 3,
-        tx_descripcion: 'Comprobante de domicilio',
+        tx_descripcion: 'Solicitud Cédula',
     }, {
         id: 4,
-        tx_descripcion: 'Identificación oficial',
+        tx_descripcion: 'Cédula Juridica',
     }, {
         id: 5,
-        tx_descripcion: 'Última declaración anual',
+        tx_descripcion: 'Solicitud Saldos',
     }, {
         id: 6,
-        tx_descripcion: 'Instrumento jurídico',
+        tx_descripcion: 'Layout Saldos',
     }, {
         id: 7,
-        tx_descripcion: 'Curriculo vítae',
+        tx_descripcion: 'Edo. Cuenta Certificado',
     }, {
         id: 8,
-        tx_descripcion: 'Acta constitutiva',
+        tx_descripcion: 'Dictamen Juridico',
     }, {
         id: 9,
-        tx_descripcion: 'Poderes del representante',
+        tx_descripcion: 'Detalle del bien',
     }, {
         id: 10,
-        tx_descripcion: 'Acreditación legal',
+        tx_descripcion: 'Formato COPER',
     }, {
         id: 11,
-        tx_descripcion: 'Oficio OT',
+        tx_descripcion: 'Nota COPER',
     }, {
         id: 12,
-        tx_descripcion: 'Nombramiento',
+        tx_descripcion: 'Acuerdos COPER',
     }, {
         id: 13,
-        tx_descripcion: 'Solicitud',
+        tx_descripcion: 'Comprobante de pago',
     },
 ]
 

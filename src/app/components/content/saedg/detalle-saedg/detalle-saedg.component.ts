@@ -36,6 +36,10 @@ export class DetalleSaedgComponent {
   documentoFileName: string = "Ubicación del documento";
   pdfSrc:string = '';
   showAgregarAnexo: boolean = false;
+  showSustituirAnexo:boolean = false;
+  anexoFileName: string = "Ubicación del anexo";
+  pdfSrcAnexo:string = '';
+  
   
 
   constructor(
@@ -56,26 +60,6 @@ export class DetalleSaedgComponent {
     this.accionDetalle = accion;
   }
 
-
-
-
-  activarInputFile(){
-    this.inputFile.nativeElement.click();
-  }
-
-  manejarCambioArchivo(event: any){
-    const archivoSeleccionado = event.target.files[0];
-
-    if (archivoSeleccionado) {
-      this.datosDocumentos.push({
-        nombreDoc: archivoSeleccionado.name,
-      });
-
-      console.log('Documento agregado:', archivoSeleccionado.name);
-      
-    }
-    this.inputFile.nativeElement.value = '';
-  }
 
   private construirUrlDelDocumento(nombreDocumento: string): string | null {
     
@@ -99,6 +83,12 @@ export class DetalleSaedgComponent {
         break;
       case 'prevAnexo':
         this.prevAnexo = false;
+        break;
+      case 'showAgregarAnexo':
+        this.showAgregarAnexo = false;
+        break;
+      case 'showSustituirAnexo':
+        this.showSustituirAnexo = false;
         break;
       default:
         break;
@@ -182,6 +172,36 @@ export class DetalleSaedgComponent {
     downloadLink.download = fileName;
     downloadLink.click();
     this.toastrService.success('Se ha descargado correctamente el Anexo.')
+  }
+
+  agregarAnexo() {
+    this.showAgregarAnexo = true;
+  }
+
+
+  guardarAnexo(cadena: string) {
+
+    if (cadena == 'guardarAnexo') {
+      this.toastrService.success('Se ha guardado exitosamente el anexo.')
+      this.showAgregarAnexo = false;
+    } else {
+      this.toastrService.success('Se ha guardado exitosamente el anexo.')
+      this.showSustituirAnexo = false;
+    }
+  }
+
+  sustituirAnexo() {
+    this.showSustituirAnexo = true;
+  }
+
+  onAnexoFileChange(event: any) {    
+    this.anexoFileName = event.target.files[0].name;
+    this.pdfSrcAnexo = "../../../../../assets/anexo.pdf";      
+    this.mostrarPdfAnexo()
+  }
+
+  mostrarPdfAnexo() {
+    this.pdfSrcAnexo = "../../../../../assets/nombre.pdf";
   }
 
 

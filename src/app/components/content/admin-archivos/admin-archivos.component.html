@@ -18,16 +18,6 @@
                         </select>
                     </div>
                     <div class="col-sm-4">
-                        <label for="subseccion" class="control-label">Subsección:</label>
-                        <select class="form-select" aria-label="Default select example" id="subseccion" [(ngModel)]="subseccion"
-                        (change)="changeSubseccion()">
-                        <option>Elige una opción</option>
-                        <option *ngFor="let item of subsecciones" [value]="item.tx_ubicaarchivo">
-                            {{ item.tx_descripcion }}
-                        </option>
-                        </select>
-                    </div>
-                    <div class="col-sm-4">
                         <label for="archivo" class="control-label">Archivo:</label>
                         <select class="form-select" aria-label="Default select example" id="archivo" [(ngModel)]="archivo"
                         (change)="changeArchivos()">
@@ -65,7 +55,6 @@
                   <tr class="table-secondary">
                     <th>No.</th>
                     <th>Sección</th>
-                    <th>Subsección</th>
                     <th>Archivo</th>
                     <th>Firma Electrónica</th>
                     <th>Acciones</th>
@@ -75,7 +64,6 @@
                   <tr *ngFor="let item of dataTablaArchivos">
                     <th>{{item.id}}</th>
                     <th>{{item.seccion}}</th>
-                    <th>{{item.subseccion}}</th>
                     <th>{{item.archivo}}</th>
                     <th>{{item.e_firma ? 'Sí' : 'No'}}</th>
                     <th>
@@ -108,17 +96,6 @@
             <select class="form-select" aria-label="Default select example" id="seccionAdd" (change)="changeSeccion()">
               <option>Elige una opción</option>
               <option *ngFor="let item of secciones" [value]="item.tx_ubicaarchivo">
-                {{ item.tx_descripcion }}
-              </option>
-            </select>
-          </div>
-          <div class="col.sm-6"></div>
-          <div class="col-sm-6">
-            <label for="subseccionAdd" class="control-label">Subsección:</label>
-            <select class="form-select" aria-label="Default select example" id="subseccionAdd"
-              (change)="changeSubseccion()">
-              <option>Elige una opción</option>
-              <option *ngFor="let item of subsecciones" [value]="item.tx_ubicaarchivo">
                 {{ item.tx_descripcion }}
               </option>
             </select>

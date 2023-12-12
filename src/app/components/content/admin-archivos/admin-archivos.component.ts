@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { dataArchivos, dataSeccion, dataSubseccion, dataFiles } from './dataDummyArchivos';
+import { dataArchivos, dataSeccion, dataFiles } from './dataDummyArchivos';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,9 +10,6 @@ import { ToastrService } from 'ngx-toastr';
 export class AdminArchivosComponent {
   seccion: string = 'Elige una opción';
   secciones = dataSeccion;
-
-  subseccion: string = 'Elige una opción';
-  subsecciones = dataSubseccion;
 
   archivo: string = 'Elige una opción';
   archivos: any = dataFiles;

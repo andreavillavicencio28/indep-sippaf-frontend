@@ -46,7 +46,9 @@
                                                         data-placement="top" title="Vista previa"
                                                         (click)="openVistaPreviaDocumento('documento', 'verDocumento')">
                                                         <em style="color: blue;" class="bi bi-eye"></em>
-                                                    </button>                                                
+                                                    </button>      
+                                                    
+                                                    
         
                                                 </td>
                                             </tr>
@@ -84,17 +86,23 @@
                                                         <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
                                                     </button>
 
+                                                    <button class="btn btn-link"
+                                                        (click)="agregarAnexo()"
+                                                        title="Cargar anexo">
+                                                        <i class="bi bi-upload"></i>
+                                                    </button>
+
+                                                    <button class="btn btn-link"
+                                                        (click)="sustituirAnexo()"
+                                                        title="Sustituir anexo">
+                                                        <i class="bi bi-arrow-down-up"></i>
+                                                    </button>
+
                                                 </td>
                                             </tr>
                                          
                                         </tbody>
                                     </table>
-                                    <div class="col-md-6" style="display: flex; flex-direction: column;">
-                                        <div class="input-group">
-                                            <button type="button" class="btn  btn-negativo-modal" (click)="activarInputFile()">Agregar</button>
-                                            <input type="file" #inputFile style="display: none;" (change)="manejarCambioArchivo($event)">
-                                        </div>
-                                    </div>
 
                                                 </div>
                                             </div>                             
@@ -183,13 +191,118 @@
                             </div>
                         </div>
 
-                        <div class="offcanvas-footer">
-                            <div class="text-end">
-
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Cargar Anexo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('showAgregarAnexo')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="anexo" class="control-label">Cargar Anexo</label>
+                        <div class="input-group">
+                            <label for="anexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input class="form-control" type="text" placeholder="Ubicación del anexo" name="anexo" id="anexo" size="25" readonly="readonly" value="{{anexoFileName}}" disabled>
+                            <label for="fileAnexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input type="file" style="display: none" id="fileAnexo" accept=".pdf" (change)="onAnexoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnAnexo" name="btnAnexo" onclick="document.getElementById('fileAnexo').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+
+                    <!--<div class="col-md-6">
+                        <label for="nombre" class="form-label">Previsualizar:</label>
+                        <div class="input-group">
+                            <button class="btn btn-link" (click)="previsualizarAnexo()" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div> 
+                    </div>-->
+
+                    <div class="col-sm-12">
+                        <pdf-viewer [src]="pdfSrcAnexo" [render-text]="true" [original-size]="false"
+                                style="width: 700px; height: 100vh;"></pdf-viewer>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardarAnexo('guardarAnexo')">
+                    Guardar
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showSustituirAnexo" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Sustituir Anexo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('showSustituirAnexo')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="anexo" class="control-label">Cargar Anexo</label>
+                        <div class="input-group">
+                            <label for="anexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input class="form-control" type="text" placeholder="Ubicación del anexo" name="anexo" id="anexo" size="25" readonly="readonly" value="{{anexoFileName}}" disabled>
+                            <label for="fileAnexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input type="file" style="display: none" id="fileAnexo" accept=".pdf" (change)="onAnexoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnAnexo" name="btnAnexo" onclick="document.getElementById('fileAnexo').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+
+                    <!--<div class="col-md-6">
+                        <label for="nombre" class="form-label">Previsualizar:</label>
+                        <div class="input-group">
+                            <button class="btn btn-link" (click)="previsualizarAnexo()" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div> 
+                    </div>-->
+
+                    <div class="col-sm-12">
+                        <pdf-viewer [src]="pdfSrcAnexo" [render-text]="true" [original-size]="false"
+                                style="width: 700px; height: 100vh;"></pdf-viewer>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardarAnexo('sustituirAnexo')">
+                    Guardar
+                  </button>
             </div>
         </div>
     </div>
