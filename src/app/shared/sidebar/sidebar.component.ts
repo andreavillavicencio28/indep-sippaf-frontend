@@ -16,5 +16,6 @@ export class SidebarComponent {
     { label: 'Archivos', icon: 'bi bi-files', route: '/content/archivos'},
     { label: 'Acreditados', icon: 'bi bi-person-workspace', route: '/content/acreditados'},
     { label: 'Reportes', icon: 'bi bi-file-earmark-spreadsheet', route: '/content/reportes'},
+    { label: 'Alertas', icon: 'bi bi-file-earmark-spreadsheet', route: '/content/alertas'},
   ];
 }
