@@ -9,18 +9,6 @@
             <div class="card-body row" style="padding: 0px 5px;">
                 <div class="col-sm-9 text-end">
                     <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
-                    (click)="reportePDF()">
-                        Generar Reporte PDF
-                    </button>
-                </div>
-                <div class="col-sm-2">
-                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
-                    (click)="reporteExcel()">
-                        Generar Reporte Excel
-                    </button>
-                </div>
-                <div class="col-sm-1">
-                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
                         (click)="agregarArchivo()">
                         <em class="bi bi-plus-lg"></em>
                     </button>
@@ -34,16 +22,20 @@
         <div class="card">
             <div class="card-body row" style="padding: 0px 5px;">
                 <div class="col-sm-3">
-                    <label for="busqueda" class="form-label">Fecha inicio-Fecha fin</label>
-                    <input type="text" class="form-control" id="fecha" placeholder="Fecha inicio-Fecha Fin">
-                </div>
+                    <label for="fInicio" class="form-label">Fecha inicio</label>
+                    <input type="date" class="form-control" id="fInicio" [(ngModel)]="fInicio" (change)="comparaFechas()">
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="fFin" class="form-label">Fecha fin</label>
+                    <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
+                  </div>
                 <div class="col-sm-3">
                     <label for="busqueda" class="form-label">Búsqueda</label>
-                    <input type="text" class="form-control" id="busqueda" placeholder="Búsqueda">
+                    <input type="text" class="form-control" id="busqueda" [(ngModel)]="busqueda"  placeholder="Búsqueda">
                 </div>
                 <div class="col-sm-2">
-                    <button class="btn btn-primary" title="fecha" style="margin-top: 32px;"
-                        (click)="cambioSeleccion(1)">
+                    <button class="btn btn-primary" title="buscar" style="margin-top: 30px;"
+                        (click)="buscarPropuesta()">
                         <em class="bi bi-search"></em>
                     </button>
                 </div>          
@@ -80,7 +72,7 @@
                         <th style="width: 40%;">Id Responsable caso</th>
                         <th style="width: 40%;">N° Volante</th>
                         <th style="width: 10%;">Estatus</th>
-                        <th style="width: 30%;">Tipo atención</th>
+                        <th style="width: 30%;">Tiempo atención</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +92,7 @@
                         <td>{{ dato.idResponsable }}</td>
                         <td>{{ dato.NumVolante }}</td>
                         <td>{{ dato.estatus ? 'Activo': 'Inactivo' }}</td>
-                        <td>{{ dato.tipoAtencion }}</td>
+                        <td id="colores" [ngStyle]="{'background-color':colorVentana(dato.tiempoAtencion)}"></td>
                     </tr>
                 </tbody>
             </table>
@@ -158,9 +150,11 @@
         <div class="text-end">
             <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar Oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
             <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;            
-            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
-            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 1">Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
+
+            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 7 && Seleccionado != 9">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
         </div>
     </div>
 </div>
@@ -220,7 +214,13 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="tipocartera" class="control-label">Tipo cartera automatico del acreditado</label>
-                    <input type="text" class="form-control" id="tipocartera" placeholder="Tipo cartera">
+                    <select class="form-select" aria-label="Default select example" id="tipoCartera">
+                        <option selected></option>
+                        <option value="1">crediticia de consumo</option>
+                        <option value="2">crediticia comercial</option>
+                        <option value="3">crediticia de vivienda</option>
+                    </select>
+                    
                 </div>
                 
                 <div class="col-sm-6">
@@ -244,8 +244,8 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="montoUSD" class="control-label">Observaciones</label>
-                    <textarea name="montoUSD" id="montoUSD" cols="35" rows="5"></textarea>
+                    <label for="comentarios" class="control-label">Comentarios</label>
+                    <input type="text" class="form-control" id="comentarios" placeholder="Comentarios">
                 </div>
                 
                 <div class="col-sm-6">
@@ -258,11 +258,13 @@
 
                 <div class="col-sm-6">
                     <label for="capturo" class="form-label">Capturó:</label>
-                    <label id="capturo" class="form-label">Andrea Villavicencio</label>
-                    <br>
+                    <input type="text" class="form-control" id="capturo" placeholder="Andrea Villavicencio" disabled> 
+                </div>
+                <div class="col-sm-6">
                     <label for="fecha" class="form-label">Fecha:</label>
-                    <label id="fecha" class="form-label">22/02/2023</label>
-                    <br>
+                    <input type="text" class="form-control" id="capturo" placeholder="22/02/2023" disabled> 
+                </div>
+                <div class="col-sm-6">
                     <label for="hora" class="form-label">Hora:</label>
                     <label id="hora" class="form-label">12:23:34</label>
                 </div>

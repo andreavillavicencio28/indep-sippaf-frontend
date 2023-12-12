@@ -43,8 +43,10 @@
                                                 <i class="bi bi-laptop"></i>
                                             </button>
                                              ------>
-                                            <button class="btn btn-link" (click)="openOficio()" title="Visualizar Documentación">
-                                                <i class="bi bi-eye"></i>
+                                             <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
+                                                data-placement="top" title="Vista previa"
+                                                (click)="openVistaPreviaAnexos('documentos', 'verDocumento')">
+                                                <em style="color: blue;" class="bi bi-eye"></em>
                                             </button>
                                            
                                             <!---------
@@ -77,6 +79,33 @@
 </div>
 
 
+<!-- Modal vista previa -->
+<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle" ngtabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Vista previa</h1>
+        <div>
+            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+        </div>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        </div>
+        <div class="row" *ngIf="tipoModal === 'cargarDocumento'">
+            <div class="col-sm-12">
+                <label for="formFile" class="form-label"><i class="bi bi-upload"></i></label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <!---Formulario-----Editar----->
 <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditar" [class.bajar]="showObs" ngtabindex="-1"
@@ -87,6 +116,10 @@
             (click)="cerrarEditar()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
+        <sg-editar-admin [id_propuesta]="id_propuesta" [propuesta]="propuesta"></sg-editar-admin>  
+
+        <!----------------------------Editar para especialista--------------------------------------->
+        <!-------------------
         <div class="col-sm-12">
             <div class="col-sm-12">
                 <div class="card" style="padding: 5px;">
@@ -216,6 +249,8 @@
                 </div>                     
             </div>
         </div>
+------------------->
+
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
@@ -225,33 +260,7 @@
     </div>
 </div>
 <div class="offcanvas-backdrop fade show" *ngIf="showDetalle"></div>
-<div class="offcanvas-backdrop fade show" *ngIf="showEditar || showObs || showGenerarOficio"></div>
-
-
-
-
-<!-- Modal vista previa -->
-<div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showDetalle" ngtabindex="-1" id="offcanvasRight"
-    aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>Vista previa</h1>
-        <div>
-            <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-                (click)="cerrarDetalle()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-        </div>
-    </div>
-    <div class="offcanvas-body">
-        <div class="row" *ngIf="tipoModal === 'verDocumento'">
-            <p>Documento</p>
-        </div>
-        <div class="row" *ngIf="tipoModal === 'cargarDocumento'">
-            <div class="col-sm-12">
-                <label for="formFile" class="form-label"><i class="bi bi-upload"></i></label>
-                <input class="form-control" type="file" id="formFile">
-            </div>
-        </div>
-    </div>
-</div>
+<div class="offcanvas-backdrop fade show" *ngIf="showEditar || showObs"></div>
 
 
 
@@ -282,6 +291,7 @@
 </div>
 
 
+
 <!---Formulario-----OFICIO----->
 <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showGenerarOficio" [class.bajar]="showObs" ngtabindex="-1"
     id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -292,10 +302,17 @@
     </div>
     <div class="offcanvas-body">
         <div class="col-sm-12">
-            <div class="offcanvas-body">
-                <div class="col-sm-12">
-                    <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
-                            style="width: 500px; height: 100vh;"></pdf-viewer>
+            <div class="col-sm-12">
+                <div class="card" style="padding: 5px;">
+                    <div class="card-body row" style="padding: 15px 15px;">
+                        <div class="col-sm-12 row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <p class="valoresCentrados">
+                                    Oficio N°
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="text-end">
@@ -313,6 +330,13 @@
         </div>
     </div>
 </div>
+<div class="offcanvas-backdrop fade show" *ngIf="showGenerarOficio"></div>
+
+
+
+
+
+
 
 <!-- Modal firma -->
 <div class="offcanvas offcanvas-end canvasTerciario" [class.show]="showFirmado" ngtabindex="-1" id="offcanvasRight"
@@ -331,25 +355,9 @@
         </div>
     </div>
     <div class="offcanvas-footer">
-    <div class="text-end">
-        <button type="button" class="btn btn-positivo-modal" (click)="documentoFirmado()">&nbsp; <em
-                class="bi bi-check-lg"></em> Subir
-        </button> &nbsp;
-    </div>
-</div>
-
-<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevAnexo" ngtabindex="-1"
-    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h1>Previsualización del Documento</h1>
-        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
-            (click)="cerrarPDF()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="col-sm-12">
-            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
-                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        <div class="text-end">
+            <button type="button" class="btn btn-positivo-modal" (click)="firmar()">Firmar &nbsp; <em
+                    class="bi bi-check-lg"></em> </button> &nbsp;
         </div>
     </div>
 </div>
-<div class="offcanvas-backdrop fade show" *ngIf="prevAnexo"></div>

@@ -40,7 +40,7 @@ import { HistorialComponent} from './historial/historial.component';
 import { DetalleRolesPerfilesComponent } from './rolesPerfiles/detalle-rolesPerfiles/detalle-rolesPerfiles.component';
 import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
 import { ReportesComponent } from './reportes/reportes.component';
-
+import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin/editar-admin.component';
 
 
 /* Components */
@@ -91,7 +91,8 @@ import { ReportesComponent } from './reportes/reportes.component';
     HistorialComponent,
     DetalleRolesPerfilesComponent,
     RolesPerfilesComponent,
-    ReportesComponent
+    ReportesComponent,
+    EditarAdminComponent
   ],
   exports: [
     WizardComponent,

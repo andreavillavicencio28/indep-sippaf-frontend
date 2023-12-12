@@ -14,13 +14,14 @@ export const datosPropuesta = {
     propuestaDACION:'1,000',
     pagos:'5',
     plazaSoli:'15',
+    comentarios:'Le hace falta documentacion',
     capturista:'Maria Rosales',
     fechaCaptura:'01/05/2022',
     idResponsable:'002',
     NumVolante:'001',
     estatus: 'Activo',
     tipoAtencion:'General',
-    tipoCartera:'Personal'
+    tipoCartera:'crediticia comercial'
 }
 
 export const documentos = [
