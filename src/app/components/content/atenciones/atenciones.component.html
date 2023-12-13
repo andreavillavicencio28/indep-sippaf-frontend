@@ -3,34 +3,37 @@
         <h1>Atención al Acreditado</h1>
         <hr class="red">
     </div>
+     <!--Boton agregar acreditado-->
+     <div class="col-sm-8">
+    </div>
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-1 pad" style="padding-bottom: 10px ">
+        <button type="button" class="form-control" (click)="agregarAtencion()" >
+            <i class="bi bi-plus-circle"></i>
+        </button>
+    </div>
+    <!--Filtro-->
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body row">
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" id="busqueda" placeholder="Fecha inicial / Fecha final">
+                    <label class="form-label">Fecha inicio</label>
+                    <input type="date" class="form-control" id="fInicio" [(ngModel)]="fInicio" (change)="comparaFechas()">
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Fecha fin</label>
+                    <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
                 </div>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)"  style="margin-top: 32px;">
                             <em class="bi bi-search"></em>
                         </button>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-1 pad" style="padding-bottom: 10px ">
-                    <button type="button" class="form-control" (click)="agregarAtencion()">
-                        <i class="bi bi-plus-circle"></i>
-                    </button>
-                </div>
-                <!--<div class="col-sm-2 text-end">
-                    <button class="btn btn-light" title="Buscar" style="margin-top: 32px;" (click)="cambioTipoVista()"
-                        [title]=" tipoVista ? 'Cambiar a vista terjetas' : 'Cambiar a vista de lista' ">
-                        <em style="font-size: 20px;" [ngClass]="tipoVista ? 'bi bi-list-task' : 'bi bi-card-text'"></em>
-                    </button>
-                </div>-->
             </div>
         </div>
     </div>

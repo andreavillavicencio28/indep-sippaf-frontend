@@ -31,6 +31,8 @@ export class AtencionesComponent {
   tipopropuestas=dataTipopropuestas;
   dataTablaArchivos = dataArchivos;
   pdfSrc: string = '';
+  fInicio: string='';
+  fFin:string='';
 
   addSeccion: string = '';
   mostrarTabla: boolean = false;
@@ -173,5 +175,19 @@ export class AtencionesComponent {
     downloadLink.href = this.pdfSrc;
     downloadLink.download = fileName;
     downloadLink.click();
+  }
+
+  comparaFechas() {
+    const fechaInicioDate = new Date(this.fInicio);
+    const fechaFinDate = new Date(this.fFin);
+
+    if (fechaInicioDate > fechaFinDate) {
+      this.toastrService.error('La fecha de inicio no puede ser mayor a la fecha final');
+      this.fInicio='';
+      this.fFin='';
+    }
+    if(fechaInicioDate < fechaFinDate){
+      this.cambioSeleccion(1);      
+    }
   }
 }

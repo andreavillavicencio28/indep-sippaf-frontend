@@ -16,6 +16,8 @@ export class DetalleCoperComponent {
   showGenerarOficio: boolean = false;
    showObs: boolean = false;
   showAgregarDocumento:  boolean = false;
+  showAgregarNota:  boolean = false;
+  showAgregarFormato:  boolean = false;
   showAgregarAnexo: boolean = false;
   nombreDocumento: string = '';
   documentoFileName: string = "Ubicación del documento";
@@ -24,6 +26,8 @@ export class DetalleCoperComponent {
   dataAnexos: any[] = [];
   dataDocumentos: any[] = [];
   prevAnexo: boolean = false;
+  prevNota: boolean=false;
+  prevFormato: boolean=false;
   notificacionPrim: boolean = false;
   notificacionSeg: boolean = false;
   notificacionTerc: boolean = false;
@@ -72,18 +76,30 @@ export class DetalleCoperComponent {
         break;
       case 'documento':
         this.showAgregarDocumento = false;
-        break;    
+        break;
+      case 'nota':
+        this.showAgregarNota = false;
+        break;
+      case 'formato':
+          this.showAgregarFormato = false;
+        break;     
       case 'prevDocumento':
         this.prevDocumento = false;
         break;
       case 'prevAnexo':
         this.prevAnexo = false;
         break;
-        case 'showAgregarAnexo':
-          this.showAgregarAnexo = false;
-          break;
-        default:
+      case 'showAgregarAnexo':
+        this.showAgregarAnexo = false;
         break;
+      case 'prevNota':
+        this.prevNota = false;
+        break;
+      case 'prevFormato':
+        this.prevFormato = false;
+      break;
+      default:
+      break;
     }
   }
 
@@ -127,7 +143,7 @@ export class DetalleCoperComponent {
     }
   }
   abrirPdf(){
-    this.prevAnexo = true
+    this.prevAnexo = true;
   }
   descargarAnexo() {
     this.toastrService.success('Se ha descargado correctamente el comprobante de pago.')
@@ -175,7 +191,7 @@ export class DetalleCoperComponent {
   agregarAnexo() {
     this.showAgregarAnexo = true;
   }
-
+  
   descargasArchivos(tipoArchivo: string = '') {
     if (tipoArchivo == 'documento') {
       this.toastrService.success(`Se ha descargado correctamente el ${tipoArchivo}.`)
@@ -202,5 +218,55 @@ export class DetalleCoperComponent {
   }
   onAnexoFileChange(event: any) {
     this.anexoFileName = event.target.files[0].name;
+  }
+
+  //Notas
+
+  guardarNota(){
+    this.toastrService.success('Nota guardada exitosamente')
+    this.showAgregarNota = false;
+  }
+
+  openVistaPreviaNota(documentoNombre: string = '',  tipo: string) {
+    console.log(documentoNombre);
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('nota')) {
+      this.pdfSrc = "../../../../../assets/ejemplo.pdf";
+      this.abrirPdf();
+    }
+  }
+
+  agregarNota() {
+    this.showAgregarNota = true;
+  }
+
+  previsualizarNota() {
+    this.prevNota = true;
+  }
+
+
+
+  //Formatos
+
+  guardarFormato(){
+    this.toastrService.success('Formato guardado exitosamente')
+    this.showAgregarFormato = false;
+  }
+
+  openVistaPreviaFormato(documentoNombre: string = '',  tipo: string) {
+    console.log(documentoNombre);
+    this.documentoNombre = documentoNombre;
+    if (documentoNombre.includes('formato')) {
+      this.pdfSrc = "../../../../../assets/ejemplo.pdf";
+      this.abrirPdf();
+    }
+  }
+
+  agregarFormato() {
+    this.showAgregarFormato = true;
+  }
+
+  previsualizarFormato() {
+    this.prevFormato = true;
   }
 }

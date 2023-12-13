@@ -62,12 +62,12 @@
                 <td>
                     <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                         data-placement="top" title="Vista previa"
-                        (click)="openVistaPreviaAnexo('anexo', 'verDocumento')">
+                        (click)="openVistaPreviaNota('nota', 'verDocumento')">
                         <em style="color: blue;" class="bi bi-eye"></em>
                     </button>
                     <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                         data-placement="top" title="Descargar"
-                        (click)="descargarComprobante()">
+                        (click)="descargasArchivos('nota')">
                         <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
                     </button>
                 </td>
@@ -88,30 +88,31 @@
                     <td>
                         <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                             data-placement="top" title="Vista previa"
-                            (click)="openVistaPreviaAnexo('anexo', 'verDocumento')">
+                            (click)="openVistaPreviaFormato('formato', 'verDocumento')">
                             <em style="color: blue;" class="bi bi-eye"></em>
                         </button>
                         <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                             data-placement="top" title="Descargar"
-                            (click)="descargarComprobante()">
+                            (click)="descargasArchivos('formato')">
                             <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
                         </button>
                     </td>
                     </tr>
                 </tbody>
                 </table>
-            <div class="offcanvas-footer">
+            <!--<div class="offcanvas-footer">
                 <div class="row">
                     <div class="col-sm-12 text-end">
                         <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     
 </div>
 
+<!--boton agregar-->
 <div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarDocumento" ngtabindex="-1"
     id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -153,16 +154,16 @@
                                         <td>
                                             <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                                                 data-placement="top" title="Vista previa"
-                                                (click)="openVistaPreviaDocumento('documento', 'verDocumento')">
+                                                (click)="openVistaPreviaNota('nota', 'verDocumento')">
                                                 <em style="color: blue;" class="bi bi-eye"></em>
                                             </button>
                                             <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                                                 data-placement="top" title="Descargar"
-                                                (click)="descargasArchivos('documento')">
+                                                (click)="descargasArchivos('nota')">
                                                 <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
                                             </button>
                                             <button class="btn btn-link"
-                                                (click)="agregarDocumento()"
+                                                (click)="agregarNota()"
                                                 title="Cargar documento">
                                                 <i class="bi bi-upload"></i>
                                             </button>
@@ -170,6 +171,13 @@
                                         </tr>
                                     </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div class="offcanvas-footer">
+                                <div class="row">
+                                    <div class="col-sm-12 text-end">
+                                        <button type="button" class="btn btn-warning" (click)="guardarDocumento()">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+                                    </div>
                                 </div>
                             </div>                   
                         </div>
@@ -191,16 +199,16 @@
                                         <td>
                                             <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                                                 data-placement="top" title="Vista previa"
-                                                (click)="openVistaPreviaAnexo('anexo', 'verAnexo')">
+                                                (click)="openVistaPreviaFormato('formato', 'verAnexo')">
                                                 <em style="color: blue;" class="bi bi-eye"></em>
                                             </button>
                                             <button type="button" class="btn btn-link2" style="padding: 3px;" data-toggle="tooltip"
                                                 data-placement="top" title="Descargar"
-                                                (click)="descargasArchivos('anexo')">
+                                                (click)="descargasArchivos('formato')">
                                                 <em style="color: blue;" class="bi bi-box-arrow-in-down"></em>
                                             </button>
                                             <button class="btn btn-link"
-                                                (click)="agregarAnexo()"
+                                                (click)="agregarFormato()"
                                                 title="Cargar anexo">
                                                 <i class="bi bi-upload"></i>
                                             </button>
@@ -209,18 +217,17 @@
                                     </tbody>
                                     </table>
                                 </div>
-                            </div>                   
+                            </div>  
+                            <div class="offcanvas-footer">
+                                <div class="row">
+                                    <div class="col-sm-12 text-end">
+                                        <button type="button" class="btn btn-warning" (click)="guardarDocumento()">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+                                    </div>
+                                </div>
+                            </div>                 
                         </div>
-        
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="offcanvas-footer">
-        <div class="row">
-            <div class="col-sm-12 text-end">
-                <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
             </div>
         </div>
     </div>
@@ -232,6 +239,129 @@
         <h1>Archivo</h1>
         <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
             (click)="cerrarCanvas('prevAnexo')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        </div>
+    </div>
+</div>
+
+<!--AgregarNota-->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarNota" ngtabindex="-2"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Agregar Documento</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('nota')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="nota" class="control-label">Cargar nota</label>
+                        <div class="input-group">
+                            <label for="anexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input class="form-control" type="text" placeholder="Ubicación de la nota" name="anexo" id="anexo" size="25" readonly="readonly" value="{{anexoFileName}}" disabled>
+                            <label for="fileAnexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input type="file" style="display: none" id="fileAnexo" accept=".pdf" (change)="onAnexoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnAnexo" name="btnAnexo" onclick="document.getElementById('fileAnexo').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Previsualizar:</label>
+                        <div class="input-group">
+                            <button class="btn btn-link" (click)="previsualizarNota()" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="row">
+            <div class="col-sm-12 text-end">
+                <button type="button" class="btn btn-warning" (click)="guardarNota()">Cargar&nbsp;<em class="bi bi-arrow-bar-up"></em></button>&nbsp;  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevNota" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Archivo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('prevNota')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false"
+                    style="width: 700px; height: 100vh;"></pdf-viewer>
+        </div>
+    </div>
+</div>
+
+<!--AgregarFormato-->
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showAgregarFormato" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Agregar Documento</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('formato')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-6">
+                        <label for="nota" class="control-label">Cargar nota</label>
+                        <div class="input-group">
+                            <label for="anexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input class="form-control" type="text" placeholder="Ubicación de la nota" name="anexo" id="anexo" size="25" readonly="readonly" value="{{anexoFileName}}" disabled>
+                            <label for="fileAnexo" class="control-label" style="display: none" >Cargar Anexo</label>
+                            <input type="file" style="display: none" id="fileAnexo" accept=".pdf" (change)="onAnexoFileChange($event)" formControlName="key">
+                            <span class="input-group-btn" style="vertical-align: bottom">
+                            <button type="button" class="btn btn-secundary" id="btnAnexo" name="btnAnexo" onclick="document.getElementById('fileAnexo').click();">Buscar</button>
+                            </span>
+                        </div> 
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Previsualizar:</label>
+                        <div class="input-group">
+                            <button class="btn btn-link" (click)="previsualizarFormato()" title="Ver">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-footer">
+        <div class="row">
+            <div class="col-sm-12 text-end">
+                <button type="button" class="btn btn-warning" (click)="guardarFormato()">Cargar&nbsp;<em class="bi bi-arrow-bar-up"></em></button>&nbsp;  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="prevFormato" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Archivo</h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas('prevFormato')"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
         <div class="col-sm-12">

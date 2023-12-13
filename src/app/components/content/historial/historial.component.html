@@ -23,7 +23,7 @@
                             Fecha Inicio:
                         </div>
                         <div class="col-md-6">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" id="fInicio" [(ngModel)]="fInicio" (change)="comparaFechas()">
                         </div>
                     </div>
                     <br>
@@ -42,7 +42,7 @@
                             Fecha Fin:
                         </div>
                         <div class="col-md-6">
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
                         </div>
                     </div>
                     <br>
