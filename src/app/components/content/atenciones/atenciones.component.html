@@ -28,6 +28,10 @@
                     <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
                 </div>
                 <div class="col-sm-2">
+                    <label class="form-label">Busqueda</label>
+                    <input type="text" class="form-control" placeholder="ID Acreditado">
+                </div>
+                <div class="col-sm-2">
                     <div class="input-group">
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)"  style="margin-top: 32px;">
                             <em class="bi bi-search"></em>
