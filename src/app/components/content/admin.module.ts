@@ -41,7 +41,9 @@ import { DetalleRolesPerfilesComponent } from './rolesPerfiles/detalle-rolesPerf
 import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin/editar-admin.component';
-import { AlertasComponent } from "./alertas/alertas.component"
+import { AlertasComponent } from "./alertas/alertas.component";
+import { AnalisisComponent } from './analisis/analisis.component';
+import { DetalleAnalisisComponent } from './analisis/detalle-siaraf/detalle-analisis.component';
 
 
 /* Components */
@@ -94,7 +96,9 @@ import { AlertasComponent } from "./alertas/alertas.component"
     RolesPerfilesComponent,
     ReportesComponent,
     EditarAdminComponent,
-    AlertasComponent
+    AlertasComponent,
+    AnalisisComponent,
+    DetalleAnalisisComponent
   ],
   exports: [
     WizardComponent,
