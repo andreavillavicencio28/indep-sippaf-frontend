@@ -22,7 +22,8 @@ export class AcreditadosComponent {
   showAgregarAcreditado: boolean = false;
   ///listadoSolicitudes: datosEtapasSolicitud[];
   listaDatos: any[] = [];
-
+  fInicio: string='';
+  fFin:string='';
   datosAcreditado = datosAcreditado;
   documentos = documentos;
 
@@ -182,5 +183,20 @@ export class AcreditadosComponent {
     downloadLink.click();
   }
 
+  comparaFechas() {
+    
+    const fechaInicioDate = new Date(this.fInicio);
+    const fechaFinDate = new Date(this.fFin);
+    if (fechaInicioDate > fechaFinDate) {
+      this.toastrService.error('La fecha de inicio no puede ser mayor a la fecha final');
+      this.fInicio='';
+      this.fFin='';
+    }
+    if(fechaInicioDate < fechaFinDate){
+      this.cambioSeleccion(1);      
+    }
+  }
+
+  
 }
 

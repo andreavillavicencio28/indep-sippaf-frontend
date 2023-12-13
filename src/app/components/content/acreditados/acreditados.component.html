@@ -3,28 +3,35 @@
         <h1>Acreditados</h1>
         <hr class="red">
     </div>
+    <!--Boton agregar acreditado-->
     <div class="col-sm-8">
-
     </div>
     <div class="col-sm-2">
-       
     </div>
-    <div class="col-sm-1 pad" style="padding-bottom: 10px ">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-1 pad " style="padding-bottom: 10 px ">
         <button type="button" class="form-control" (click)="agregarAcreditado()">
             <i class="bi bi-plus-circle"></i>
         </button>
     </div>
-
+ 
+    <!--Filtro Acreditado-->
     <div class="col-sm-12">
         <div class="card">
-
             <div class="card-body row">
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" id="busqueda" placeholder="Fecha inicial / Fecha final">
+                <div class="col-sm-2">
+                    <label class="form-label">Fecha inicio</label>
+                    <input type="date" class="form-control" id="fInicio" [(ngModel)]="fInicio" (change)="comparaFechas()">
                 </div>
                 <div class="col-sm-2">
+                    <label class="form-label">Fecha fin</label>
+                    <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
+                </div>
+                <div class="col-sm-2">
+                    <label class="form-label">Tipo Mandato</label>
                     <div class="input-group">
-                        <label class="form-label" id="busqueda" class="form-control">Tipo Mandato</label>
+                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayMandato()">
                             <em class="bi bi-chevron-compact-down"></em>
                         </button>
@@ -39,8 +46,9 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
+                    <label class="form-label">Tipo Cartera</label>
                     <div class="input-group">
-                        <label class="form-label" id="busqueda" class="form-control">Tipo Cartera</label>
+                        <label class="form-label" id="busqueda" class="form-control">Selecciona</label>
                         <button class="btn btn-outline btn-primary" title="Buscar" (click)="toggleDisplayCartera()">
                             <em class="bi bi-chevron-compact-down"></em>
                         </button>
@@ -62,7 +70,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="input-group">
-                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)">
+                        <button class="btn btn-outline btn-primary" title="Buscar" (click)="cambioSeleccion(1)"  style="margin-top: 32px;">
                             <em class="bi bi-search"></em>
                         </button>
                     </div>
@@ -121,7 +129,6 @@
             (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
     <div class="offcanvas-body">
-
         <div class="card" style="padding: 15px;">
             <div class="row">
                 <div class="col-md-6 mt-1">

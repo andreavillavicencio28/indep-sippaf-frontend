@@ -20,7 +20,9 @@ export class AtencionesComponent {
   tituloSeleccionado: string = '';
   showAgregarAtencion: boolean = false;
   idacreditados =dataIDAcreditados;
+  atenciones=datosAtencion;
   listaDatos: any[] = [];
+  listaDetalle: any[] = [];
   encomiendas = dataEncomienda;
   seccion: string = 'Elige una opción';
   acreditados = dataAcreditados;
@@ -31,6 +33,8 @@ export class AtencionesComponent {
   tipopropuestas=dataTipopropuestas;
   dataTablaArchivos = dataArchivos;
   pdfSrc: string = '';
+  fInicio: string='';
+  fFin:string='';
 
   addSeccion: string = '';
   mostrarTabla: boolean = false;
@@ -45,7 +49,7 @@ export class AtencionesComponent {
 
   /*datosAtencion = datosAtencion;
   documentos = documentos;*/
-
+  accionDetalle: number = 1; // accion de detalle
   showCamvasPrincipal: boolean = false;
   datosNombramiento: any;
   tipoAutorizacion: string = '';
@@ -57,6 +61,9 @@ export class AtencionesComponent {
     this.Seleccionado = 1;
   }
 
+  cambioAccionDetalle(accion: number) {
+    this.accionDetalle = accion;
+  }
 
   isDisplay = true;
   toggleDisplayMandato(){
@@ -105,7 +112,24 @@ export class AtencionesComponent {
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
-
+  busquedaAtencion(num: number){
+    this.Seleccionado = num;
+    this.listaDetalle = [{
+      fecha: '01/05/2022',
+      elaboro: 'Cristina Leon',
+      noCliente: '11111',
+      acreditado: 'Juan Pérez',
+      encomienda: 'BANCOMEXT',
+      direccion: 'Chalco',
+      estadoymuni:'Edo. Mex, chalco',
+      telefono:'5584418748',
+      correo:'andrea@gmail.com',
+      asunto:'atencion de acreditado',
+      medioatencion:'email',
+      montopropuesta:'10000',
+      tipopropuesta:'prueba',
+    }];
+  }
 
   cambioSeleccion(num: number) {
     this.Seleccionado = num;
@@ -173,5 +197,19 @@ export class AtencionesComponent {
     downloadLink.href = this.pdfSrc;
     downloadLink.download = fileName;
     downloadLink.click();
+  }
+
+  comparaFechas() {
+    const fechaInicioDate = new Date(this.fInicio);
+    const fechaFinDate = new Date(this.fFin);
+
+    if (fechaInicioDate > fechaFinDate) {
+      this.toastrService.error('La fecha de inicio no puede ser mayor a la fecha final');
+      this.fInicio='';
+      this.fFin='';
+    }
+    if(fechaInicioDate < fechaFinDate){
+      this.cambioSeleccion(1);      
+    }
   }
 }
