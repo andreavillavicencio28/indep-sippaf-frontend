@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-12 mb-14">
+                    <h2 class="text-center">Administración de Alertas</h2>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <table class="table tabla-striped">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th>Estatus</th>
+                                        <th>Nombre</th>
+                                        <th>Tiempo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let dato of datosAlertas">
+                                        <td>{{ dato.estatus}}</td>
+                                        <td>{{ dato.nombre }}</td>
+                                        <td>{{ dato.tiempo }}</td>
+                                        <td>
+                                            <div class="text-end">
+                                                <button type="button" class="btn btn-neutral-modal" (click)="editarAlerta(dato.name)">Editar</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showEditarAlerta" ngtabindex="-1"
+    id="offcanvasDocumento" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h1>Editar Alerta </h1>
+        <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+            (click)="cerrarCanvas()"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-sm-12">
+            <div class="row">                 
+                <div class="card-body row" style="padding: 15px 15px;">                
+                    <div class="col-md-12" >
+                        Seleccione una nueva opcion para <br />
+                        <!--<strong>{{nombrePerfil}}</strong>-->
+                        <strong> Nueva Asignacion </strong>
+                    </div>
+                    <br /><br /><br /><br />
+                    <div class="col-md-12">
+                        <select class="form-select" aria-label="Default select example" id="subseccionAdd"
+                        (change)="changeSubseccion()">
+                        <option>Elige una opción</option>
+
+                        <option *ngFor="let item of dataAlertas" [value]="item.id">
+                            {{ item.name }}
+                        </option>
+                    </select>
+                    </div>    
+                    <br /><br /><br />
+                    <div class="col-md-12">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="chkEstatus" onchange="cambiaEstatus()" checked="">
+                            <label class="form-check-label" for="chkEstatus" id="lblEstatus">Activo</label>
+                        </div>        
+                    </div>                                                         
+                </div>
+            </div>            
+        </div>
+    </div>
+
+    <div class="offcanvas-footer">
+        <div class="text-end">
+            <div class="text-end">
+                <button type="button" class="btn btn-positivo-modal boton-derecho" (click)="guardar()">
+                    Guardar
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,6 @@ export class DetalleSiarafComponent {
   @Input() solicitante = '';
 
   
-  datosSiraf: any[] = [];
 
 
 

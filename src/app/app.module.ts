@@ -18,7 +18,7 @@ import { InterceptorService } from './services/interceptors/interceptor.service'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, 
     NgbModule,
     NgbProgressbarModule,
     BrowserAnimationsModule,

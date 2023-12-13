@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { INTERNAL_CODES } from 'src/app/shared/constantes/constantes';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 import { catalogoEstado } from 'src/app/models/datosCatalogo.model';
-import {listaCatalogos,listaRegistros} from './listaCatalogos'
+//import {listaCatalogos} from './listaCatalogos'
 
 @Component({
   selector: 'sg-catalogos',
@@ -15,12 +15,12 @@ import {listaCatalogos,listaRegistros} from './listaCatalogos'
 })
 export class CatalogosComponent {
     showAgregarCatalogo: boolean = false;
-    listaCatalogos=listaCatalogos;
+    listaCatalogos:any[]=[];
     showCatalogos:boolean=false;
     showCamvasPrincipal:boolean=false;
     Seleccionado:number=0;
     catalogoSeleccionado: string = '';
-    listaRegistros=listaRegistros;
+    listaRegistros:any[] = [];
     showEditarCatalogo:boolean=false;
 
   propiedades:any;
@@ -50,7 +50,7 @@ export class CatalogosComponent {
     config.backdrop = 'static';
     config.keyboard = false;
 
-    this.Seleccionado = 1;
+    this.Seleccionado = 0;
     this.listaCatalogos =
     [
         { idCatalogo: 0, descripcion: 'Selecciona', activo: false},
@@ -113,11 +113,130 @@ export class CatalogosComponent {
         break;
     }
   }
-
-
-
-
+  cambioSeleccion(num:number){
+    this.Seleccionado = num;
+    this.listaCatalogos.forEach(solicitud => {
+      solicitud.activo = false;
+    });
+    this.listaCatalogos.forEach(solicitud => {
+      if (solicitud.idCatalogo == num) {
+        solicitud.activo = true;
+      }
+    });
   
-
+ 
+    if(this.Seleccionado==1){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Motivo llamada 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Motivo llamada 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Motivo llamada 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==2){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Grupo económico 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Grupo económico 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Grupo económico 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==3){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Estatus Propuesta 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Estatus Propuesta 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Estatus Propuesta 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==4){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Organización Social 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Organización Social 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Organización Social 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==5){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Número de Póliza 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Número de Póliza 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Número de Póliza 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==6){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Remitentes 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Remitentes 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Remitentes 3'
+      }
+    ];
+    }
+    if(this.Seleccionado==7){
+      this.listaRegistros = [
+        {
+          idRegistro:'001',
+          descripcionReg:'Unidades Administrativas 1'
+      },
+      {
+          idRegistro:'002',
+          descripcionReg:'Unidades Administrativas 2'
+      },
+      {
+          idRegistro:'003',
+          descripcionReg:'Unidades Administrativas 3'
+      }
+    ];
+    }
+  }
 
 }
