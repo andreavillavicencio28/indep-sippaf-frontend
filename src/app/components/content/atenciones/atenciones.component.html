@@ -105,6 +105,10 @@
     <div class="offcanvas-body">
         <div class="card" style="padding: 15px;">
             <div class="col-12 mb-4">
+                <li class="nav-item">
+                    <a class="nav-link" [class.active]="accionDetalle == 1"
+                        >Detalle</a>
+                </li>
                 <h3 class="text-center">
                     Datos del acreditado
                 </h3>
@@ -138,14 +142,15 @@
                     <div class="col-sm-12">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Buscar..." id="busqueda">
-                            <button class="btn btn-outline btn-primary" title="Buscar" >
+                            <button class="btn btn-outline btn-primary" title="Buscar" (click)="busquedaAtencion(1)">
                                 <em class="bi bi-search"></em>
                             </button>
                         </div>
                     </div> 
                     <label class="form-label">Nombre del deudor, acreditado o tercero:</label>
                     <div class="input-group col-md-3">
-                        <input type="text" class="form-control" placeholder="" disabled>
+                        <input type="text" class="form-control"  disabled>
+                        <!--<output type="text" class="form-control" disabled>{{ atenciones.noCliente}} </output>-->
                     </div>
                     <label class="form-label">No.Cliente:</label>
                     <div class="input-group col-md-3">

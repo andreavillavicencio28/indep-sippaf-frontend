@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CONSTANTES } from 'src/app/shared/constantes/constantes';
 import { ConfirmarModalService } from 'src/app/services/confirmar-modal/confirmar-modal.service';
 import { datosPropuesta, documentos } from '../detalle-solicitud/datosPropuesta'
+import { dataPerfil } from '../../rolesPerfiles/dataPerfiles';
 
 @Component({
   selector: 'sg-validacionPro',
@@ -29,6 +30,8 @@ export class ValidacionProComponent {
   showEditar: boolean = false;
   showObs: boolean = false;
   tituloObs: string = '';
+  dataPerfil=dataPerfil;
+  selectPerfil:number=0;
   showDetalle: boolean = false;
   showFirmado: boolean = false;
   showCargaDocumento:boolean = false;
@@ -190,13 +193,13 @@ export class ValidacionProComponent {
     this.showFirmado = true;
   }
 
-  cerrarFirma() {
+  cerrarDocFirmado() {
     this.showFirmado = false;
   }
 
-  firmar() { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
+  docFirmado() { // VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
     let titulomsm = `Se firmó correctamente ${this.documentoNombre}`;
-    this.cerrarFirma();
+    this.cerrarDocFirmado();
     this.toastrService.success(titulomsm);
     console.log('firmar');
 
@@ -321,19 +324,13 @@ export class ValidacionProComponent {
  
  
   cerrarOficio() {
-    //this.confirmarModalService.abriraModal('¿Seguro quieres salir?').subscribe(result => {
-    //  if (result) {
-        // El usuario aceptó
         this.showGenerarOficio = false;
-    //  }
-
-   // });
   }
 
 
   openVistaPreviaOficio(documentoNombre: string = '',  tipo: string) {
     this.documentoNombre = documentoNombre;
-    if (documentoNombre.includes('documentos')) {
+    if (documentoNombre.includes('oficio')) {
       this.pdfSrc = "../../../../assets/ejemplo.pdf";
       this.openOficio();
     }
@@ -343,6 +340,7 @@ export class ValidacionProComponent {
     // this.documentoNombre = nombre;
      this.showGenerarOficio = true;
    }
+   
 
   
    openVistaPreviaAnexos(documentoNombre: string = '',  tipo: string) {
