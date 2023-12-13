@@ -13,12 +13,13 @@
       <div class="col-md-4">
         <label class="control-label">Nombre&nbsp;Catálogo</label>
       </div>
-      <div class="col-sm-3">
-        <select>
-          <option *ngFor="let dato of listaCatalogos" [value]="dato" >
-            {{dato.descripcion}}
+      <div>
+        <select [(ngModel)]="Seleccionado" (change)="cambioSeleccion(Seleccionado)">
+          <option [value]="dato.idCatalogo" *ngFor="let dato of listaCatalogos">
+           {{dato.descripcion}}
           </option>
         </select>
+       
       </div>
     </div>
   <div class="col-sm-12">
@@ -35,7 +36,7 @@
     <div class="col-sm-12 scroll-tabla" data-testid="edosTable">
       <table class="table table-hover">
         <thead>
-          <tr  class="table-secondary">
+          <tr class="table-secondary">
             <th>No.</th>
             <th>Descripción</th>
             <th>Acciones</th>
