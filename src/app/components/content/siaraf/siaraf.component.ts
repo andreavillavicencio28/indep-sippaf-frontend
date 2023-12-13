@@ -33,8 +33,7 @@ export class SiarafComponent {
     private fb: FormBuilder,
     public toastrService: ToastrService
   ) {
-    this.crearFormularioConFirma();
-    this.FormularioConfirma.controls['rfc'].disable();
+    
   }
 
   
@@ -66,49 +65,7 @@ export class SiarafComponent {
     this.showCargaDocumento = true;
   }
 
-  eliminarDocumento(nombreDoc: string = '') {
-    //VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
-    this.documentoNombre = nombreDoc;
-    let mensaje = `¿Estas seguro que quieres eliminar el documento ${this.documentoNombre}?`;
-    let titulomsm = `Se eliminó correctamente el ${this.documentoNombre}`;
-    this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
-      if (result) {
-        // El usuario aceptó
-        //  this.cerrarCamvasObs();
-        //  this.respuestaCofirmarModal.emit(true);
-        this.toastrService.success(titulomsm);
-      } else {
-        // El usuario canceló
-        //this.valorRespuestaComfirmarModal.emit(false);
-      }
-
-    });
-
-  }
-
-  crearFormularioConFirma() {
-    this.FormularioConfirma = this.fb.group({
-      key: [
-        '',
-        [Validators.required]
-      ],
-      cer: [
-        '',
-        [Validators.required]
-      ],
-      contra: [
-        '',
-        [Validators.required]
-      ],
-      rfc: [
-        '',
-        [
-          Validators.required, Validators.pattern(CONSTANTES.EXP_RFC)
-        ]
-      ]
-    });
-  }
-
+  
 
 
 

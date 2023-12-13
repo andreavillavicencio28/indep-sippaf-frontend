@@ -41,6 +41,7 @@ import { DetalleRolesPerfilesComponent } from './rolesPerfiles/detalle-rolesPerf
 import { RolesPerfilesComponent } from './rolesPerfiles/rolesPerfiles.component';
 import { ReportesComponent } from './reportes/reportes.component';
 import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin/editar-admin.component';
+import { AlertasComponent } from "./alertas/alertas.component"
 
 
 /* Components */
@@ -92,7 +93,8 @@ import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin
     DetalleRolesPerfilesComponent,
     RolesPerfilesComponent,
     ReportesComponent,
-    EditarAdminComponent
+    EditarAdminComponent,
+    AlertasComponent
   ],
   exports: [
     WizardComponent,

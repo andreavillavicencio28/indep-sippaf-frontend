@@ -1,12 +1,4 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'sg-admin-alertas',
-  templateUrl: './admin-alertas.component.html',
-  styleUrls: ['./admin-alertas.component.scss'],
-})
-export class AdminAlertasComponent {
-  datosAlertas = [
+export const datosAlertas = [
     {
       id: 1,
       nombre: 'Nueva Asignación',
@@ -30,11 +22,5 @@ export class AdminAlertasComponent {
       nombre: 'Aviso 60 días',
       tiempo: '90 días',
       estatus: 'Activo',
-    },
+    }
   ];
-
-  editarAlerta(nombre: string) {
-    console.log(`Editar alerta: ${nombre}`);
-    // Puedes agregar lógica adicional según tus necesidades
-  }
-}
