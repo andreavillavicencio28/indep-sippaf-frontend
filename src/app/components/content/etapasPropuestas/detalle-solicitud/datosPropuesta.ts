@@ -15,7 +15,7 @@ export const datosPropuesta = {
     pagos:'5',
     plazaSoli:'15',
     comentarios:'Le hace falta documentacion',
-    capturista:'Maria Rosales',
+    capturista:'María Rosales',
     fechaCaptura:'01/05/2022',
     idResponsable:'002',
     NumVolante:'001',
@@ -29,7 +29,7 @@ export const documentos = [
         file_name: 'RFC',
     },
     {
-        file_name: 'Clave Única del Registro de Población (CURP)',
+        file_name: 'Clave única del registro de población (CURP)',
     }, {
         file_name: 'Comprobante de domicilio',
     }, {

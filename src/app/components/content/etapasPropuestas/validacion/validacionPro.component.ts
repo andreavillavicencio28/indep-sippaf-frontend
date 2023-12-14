@@ -158,7 +158,7 @@ export class ValidacionProComponent {
      // if (result) {
         // El usuario aceptó
         this.showEditar = false;
-        this.toastrService.success("Se guardó correctamente la información");
+        this.toastrService.success("Se guardó correctamente la información.");
   
   //    }
 
@@ -168,15 +168,15 @@ export class ValidacionProComponent {
   documentosCarga = [
     {
       id: 1,
-      nombreDocumento: 'Acta de Hechos',
+      nombreDocumento: 'Acta de hechos',
     },
     {
       id: 2,
-      nombreDocumento: 'Archivo Notificación',
+      nombreDocumento: 'Archivo notificación',
     },
     {
       id: 3,
-      nombreDocumento: 'Acta de Transferencia',
+      nombreDocumento: 'Acta de transferencia',
     },
     {
       id: 4,
@@ -216,7 +216,7 @@ export class ValidacionProComponent {
   }
 
   uploadDocumento() {
-    this.toastrService.success(`Anexo y/o documentación guardada correctamente`);
+    this.toastrService.success(`Anexo y/o documentación guardada correctamente.`);
     this.showCargaDocumento = false;
 
   }
@@ -227,7 +227,7 @@ export class ValidacionProComponent {
     let mensaje = `¿Estas seguro que quieres descargar el documento ${this.documentoNombre
       }?`;
     let titulomsm = `Se descargó correctamente la ${this.documentoNombre
-      }`;
+      }.`;
     this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
       if (result) {
         // El usuario aceptó
@@ -247,7 +247,7 @@ export class ValidacionProComponent {
     let mensaje = `¿Estas seguro que quieres descargar el documento ${this.documentoNombre
       }?`;
     let titulomsm = `Se descargó correctamente la ${this.documentoNombre
-      }`;
+      }.`;
     this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
       if (result) {
         // El usuario aceptó
@@ -276,7 +276,7 @@ export class ValidacionProComponent {
     //VALIDAR CAMPO OBSERVACIONES NO ESTE VACIO
     this.documentoNombre = nombreDoc;
     let mensaje = `¿Estas seguro que quieres eliminar el documento ${this.documentoNombre}?`;
-    let titulomsm = `Se eliminó correctamente el ${this.documentoNombre}`;
+    let titulomsm = `Se eliminó correctamente el ${this.documentoNombre}.`;
     this.confirmarModalService.abriraModal(mensaje).subscribe(result => {
       if (result) {
         // El usuario aceptó
