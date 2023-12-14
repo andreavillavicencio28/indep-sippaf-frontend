@@ -1,7 +1,7 @@
 export const dataCartera = [
     {
         id: 1,
-        name: "Control y Resguardo",
+        name: "Control y resguardo",
         montoPendiente: 123.00
     },
     {
@@ -9,24 +9,29 @@ export const dataCartera = [
         name: "Objetivo",
         montoPendiente: 654.00
     },
-    {
+    /*{
         id: 3,
-        name: "Control y Resguardo",
+        name: "Control y resguardo",
         montoPendiente: 987.00
-    }
+    }*/
 ];
 
 export const tiposDemandado = [
     {
         id: 1,
-        name: 'No Demandado'
+        name: 'No demandado',
+        montoPendiente: 520
     },
     {
         id: 2,
-        name: 'Demandado - Inactivo'
+        name: 'Demandado - Inactivo',
+        montoPendiente: 120
     },
     {
         id: 3,
-        name: 'Demandado - Activo'
+        name: 'Demandado - Activo',
+        montoPendiente: 310
     }
 ]
+
+export const VALOR = 100;

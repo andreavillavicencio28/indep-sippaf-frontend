@@ -120,7 +120,7 @@
     </div>
     <div class="offcanvas-footer">
         <div class="text-end">
-            <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar oficio&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-positivo-modal"  (click)="openOficio()" *ngIf="Seleccionado == 1">Generar oficio&nbsp;<em class="bi bi-filter-square"></em> </button> &nbsp;&nbsp;
 
             <button type="button" class="btn btn-neutral-modal"  (click)="editar()" *ngIf="Seleccionado == 1">Editar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
 
@@ -128,13 +128,21 @@
 
             <button type="button" class="btn btn-warning"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 1">Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
 
-            <button type="button" class="btn btn-success"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 2">Confirmar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-success" (click)="respuestaCofirmarModal(true)" *ngIf=" Seleccionado == 2">Completar Tarea&nbsp;<em class="bi bi-check-circle"></em></button>&nbsp;
 
-            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp; 
+            <button type="button" class="btn btn-warning"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 2"> Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
 
-            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf=" Seleccionado != 1 && Seleccionado != 7">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+            <button type="button" class="btn btn-success" (click)="respuestaCofirmarModal(true)" *ngIf=" Seleccionado == 3">Completar Tarea&nbsp;<em class="bi bi-check-circle"></em></button>&nbsp;
+
+            <button type="button" class="btn btn-warning"  (click)="confimarPropuesta()" *ngIf="Seleccionado == 3">Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
+
+            <button type="button" class="btn btn-success"  (click)="completar('detalle')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Completar&nbsp;<em class="bi bi-check-circle"></em> </button> &nbsp;&nbsp; 
+
+            <button type="button" class="btn btn-warning" (click)="respuestaCofirmarModal(true)" *ngIf=" Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3  && Seleccionado != 7">Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
             
-            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;         
+            <button type="button" class="btn btn-neutral-modal"  (click)="capturar('abrir')" *ngIf="Seleccionado != 1 && Seleccionado != 2 && Seleccionado != 3 && Seleccionado != 6 && Seleccionado != 7 && Seleccionado != 8 && Seleccionado != 9">Capturar&nbsp;<em class="bi bi-pencil"></em> </button> &nbsp;&nbsp;
+            
+            
         </div>
     </div>
 </div>
@@ -301,7 +309,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="otro" class="control-label">Cargar Otro</label>
+                            <label for="otro" class="control-label">Cargar otro</label>
                             <div class="input-group">
                                 <label for="otro" class="control-label" style="display: none" >Cargar otro</label>
                                 <input class="form-control" type="text" placeholder="Ubicación de otro" name="otro" id="otro" size="25" readonly="readonly" value="{{otroFileName}}" disabled>
