@@ -1,7 +1,7 @@
 export const dataArchivos = [
     {
         id: 1,
-        seccion: 'Validacion',
+        seccion: 'Validación',
         archivo: 'Estado de Cuenta Certificado',
         e_firma: true,
     },
