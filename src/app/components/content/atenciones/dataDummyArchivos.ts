@@ -150,7 +150,7 @@ export const dataMedios = [
     },
     {
         id: 2,
-        tx_descripcion: 'Telefono',
+        tx_descripcion: 'Teléfono',
         tx_ubicaarchivo: 'T'
     },
 ];

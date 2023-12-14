@@ -14,7 +14,7 @@ export const datosPropuesta = {
     propuestaDACION:'1,000',
     pagos:'5',
     plazaSoli:'15',
-    comentarios:'Le hace falta documentacion',
+    comentarios:'Le hace falta documentación',
     capturista:'María Rosales',
     fechaCaptura:'01/05/2022',
     idResponsable:'002',
