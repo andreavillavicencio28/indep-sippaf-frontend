@@ -18,7 +18,7 @@ export class ValorCoperComponent {
     this.showValidarContrasena = true  
   }
 
-  guardar() {
+  validar() {
     this.toastrService.success('Valor Actualizado');
     this.cerrarCanvas();
   }
