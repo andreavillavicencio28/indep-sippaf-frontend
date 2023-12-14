@@ -46,7 +46,7 @@ export class SiarafComponent {
       nombreDoc: 'CURP'
     },
     {
-      nombreDoc: 'Identificacion Oficial'
+      nombreDoc: 'Identificación Oficial'
     }
   ];
 

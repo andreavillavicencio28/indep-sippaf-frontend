@@ -65,7 +65,7 @@ export const dataArchivos = [
 export const dataSeccion = [
     {
         id: 1,
-        tx_descripcion: 'Validacion',
+        tx_descripcion: 'Validación',
         tx_ubicaarchivo: 'VL'
     },
     {
