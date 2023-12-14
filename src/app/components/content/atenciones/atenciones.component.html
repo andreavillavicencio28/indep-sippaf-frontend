@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <h1>Atención al Acreditado</h1>
+        <h1>Atención al acreditado</h1>
         <hr class="red">
     </div>
      <!--Boton agregar acreditado-->
@@ -54,7 +54,8 @@
                         <th style="width: 10%;">Acreditado</th>
                         <th style="width: 10%;">Encomienda</th>
                         <th style="width: 10%;">Dirección</th>
-                        <th style="width: 10%;">Estado/Municipio</th>
+                        <th style="width: 10%;">Estado</th>
+                        <th style="width: 10%;">Municipio</th>
                         <th style="width: 10%;">Teléfono</th>
                         <th style="width: 10%;">Correo electrónico</th>
                         <th style="width: 10%;">Asunto</th>
@@ -72,6 +73,7 @@
                         <td>{{ dato.encomienda }}</td>
                         <td>{{ dato.direccion}}</td>
                         <td>{{ dato.estadoymuni}}</td>
+                        <td>{{ dato.muni}}</td>
                         <td>{{ dato.telefono}}</td>
                         <td>{{ dato.correo}}</td>
                         <td>{{ dato.asunto}}</td>
@@ -138,7 +140,7 @@
          
             <div class="row">
                 <div class="col-md-12">                    
-                    <label for="subseccionAdd" class="control-label">ID del Acreditado:</label>
+                    <label for="subseccionAdd" class="control-label">Id acreditado:</label>
                     <div class="col-sm-12">
                         <div class="input-group">
                             <input type="text" class="form-control" id="ida" [(ngModel)]="ida" placeholder="Búscar..." id="busqueda">
@@ -233,8 +235,7 @@
                             Cancelar
                         </button>
                         <button type="button" class="btn btn-warning boton-derecho" (click)="guadarAtencion()">
-                            Guardar
-                        </button>
+                            Guardar&nbsp;<em class="bi bi-save"></em> </button> &nbsp;&nbsp;
                     </div>
                 </div>
             </div>

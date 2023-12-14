@@ -141,8 +141,8 @@ export class AtencionesComponent {
       this.acre='Juan Pérez';
       this.encomienda= 'BANCOMEXT';
       this.direccion= 'Chalco';
-      this.estadoymuni='Edo. Mex';
-      this.muni='chalco';
+      this.estadoymuni='Estado de México';
+      this.muni='Chalco';
       this.ntel='4435678765';
       this.correo='andrea@gmail.com'; 
       this.ninteres='Juan Pérez López'
@@ -159,10 +159,11 @@ export class AtencionesComponent {
       acreditado: 'Juan Pérez',
       encomienda: 'BANCOMEXT',
       direccion: 'Chalco',
-      estadoymuni:'Edo. Mex, chalco',
+      estadoymuni:'Estado de México',
+      muni:'Chalco',
       telefono:'5584418748',
       correo:'andrea@gmail.com',
-      asunto:'atencion de acreditado',
+      asunto:'atención de acreditado',
       medioatencion:'email',
       montopropuesta:'10000',
       tipopropuesta:'prueba',
@@ -174,10 +175,11 @@ export class AtencionesComponent {
       acreditado: 'Cristina León',
       encomienda: 'BANCOMEXT',
       direccion: 'Chalco',
-      estadoymuni:'Edo. Mex, chalco',
+      estadoymuni:'Estado de México',
+      muni:'Chalco',
       telefono:'5584418748',
       correo:'andrea@gmail.com',
-      asunto:'atencion de acreditado',
+      asunto:'atención de acreditado',
       medioatencion:'email',
       montopropuesta:'10000',
       tipopropuesta:'prueba',
