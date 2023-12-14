@@ -9,7 +9,7 @@
                 </div>
             
                 <div class="col-md-4">
-                    Valor del COPER
+                    Valor del COPER:
                 </div>
 
                 <div class="col-md-4">
@@ -17,10 +17,50 @@
                 </div>
 
                 <div class="col-sm-12 text-end">
-                    <button type="button" class="btn btn-warning" >Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
+                    <button type="button" class="btn btn-warning" (click)="validarContrasena()" >Guardar&nbsp;<em class="bi bi-save"></em></button>&nbsp;  
                 </div>
 
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end canvasSecundario" [class.show]="showValidarContrasena" ngtabindex="-1"
+    id="offcanvasValidar" aria-label="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h1>Valida tú Contraseña</h1>
+            <button class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
+                (click)="cerrarCanvas()">Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
+        </div>
+
+        <div class="offcanvas-body">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="card-body row">
+                        <div class="col-md-12">
+                            <h4 class="text-center">Ingresa tú contraseña para continuar</h4>
+
+
+                            <div class="row mb-2">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <input type="password" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="text-end">
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-positivo-modal bonton-central" (click)="guardar()">
+                                        Validar
+                                      </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
 </div>
