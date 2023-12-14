@@ -288,11 +288,11 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="cedula" class="control-label">Cargar Cedula</label>
+                            <label for="cedula" class="control-label">Cargar cédula</label>
                             <div class="input-group">
-                                <label for="cedula" class="control-label" style="display: none" >Cargar Cedula</label>
+                                <label for="cedula" class="control-label" style="display: none" >Cargar cédula</label>
                                 <input class="form-control" type="text" placeholder="Ubicación de la cédula" name="cedula" id="cedula" size="25" readonly="readonly" value="{{cedulaFileName}}" disabled>
-                                <label for="fileCedula" class="control-label" style="display: none" >Cargar Cedula</label>
+                                <label for="fileCedula" class="control-label" style="display: none" >Cargar cédula</label>
                                 <input type="file" style="display: none" id="fileCedula" accept=".pdf" (change)="onCedulaFileChange($event)" formControlName="key">
                                 <span class="input-group-btn" style="vertical-align: bottom">
                                 <button type="button" class="btn btn-secundary" id="btnCedula" name="btnCedula" onclick="document.getElementById('fileCedula').click();">Buscar</button>
@@ -301,7 +301,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <label for="otro" class="control-label">Cargar Otro</label>
+                            <label for="otro" class="control-label">Cargar otro</label>
                             <div class="input-group">
                                 <label for="otro" class="control-label" style="display: none" >Cargar otro</label>
                                 <input class="form-control" type="text" placeholder="Ubicación de otro" name="otro" id="otro" size="25" readonly="readonly" value="{{otroFileName}}" disabled>

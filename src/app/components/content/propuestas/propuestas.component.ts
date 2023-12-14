@@ -65,7 +65,7 @@ export class PropuestasComponent {
       { indice: 1, titulo: 'Validación', activo: false, title: '', noReg: 14 },
       { indice: 2, titulo: 'SIARAF', activo: false, title: '', noReg: 30 },
       { indice: 3, titulo: 'SAEDG', activo: false, title: '', noReg: 0 },
-      { indice: 4, titulo: 'Juridico', activo: false, title: '', noReg: 15 },
+      { indice: 4, titulo: 'Jurídico', activo: false, title: '', noReg: 15 },
       { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
       { indice: 6, titulo: 'SIGEBI', activo: false, title: '', noReg: 0 },
       { indice: 7, titulo: 'Análisis', activo: false, title: '', noReg: 5 },
@@ -120,7 +120,7 @@ export class PropuestasComponent {
   // SI AL FINAL CONFIRMA  EL ULTIMO MODAL ENTONCES CERRAMOS TODO, INCLUIDO EL CAMVAS ACTUAL Y ACTUALIZAMOS  LOS DATOS DEL ESTATUS DONDE ESTEMOS
   respuestaCofirmarModal(respuesta: boolean) {
     if (respuesta) this.cerrarCamvasPrincipal();
-    this.toastrService.success('Se ha guardado exitosamente el resgistro.')    
+    this.toastrService.success('Se ha guardado exitosamente el registro.')    
   }
 
   //######################## FIN  FUNCIONES  OBLIGATORIAS ###################################
@@ -152,7 +152,7 @@ export class PropuestasComponent {
         break;
       }
       case 4: {
-        this.tituloSeleccionado = 'Juridico';
+        this.tituloSeleccionado = 'Jurídico';
         break;
       }
       case 5: {

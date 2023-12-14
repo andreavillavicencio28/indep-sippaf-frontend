@@ -41,16 +41,16 @@
     </div>
 
     <div class="card">
-        <div class="card-body row">
+        <div class="card-body row" *ngIf="inputMontoPendiente">
             <div class="col-sm-12">                                      
                 <div class="row mb-6">
                     <div class="col-md-6">
-                        Monto Pendiente:
+                        Monto pendiente:
                     </div>
                     <div class="col-md-6">                    
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [value]="montoPendiente">
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [value]="montoPendiente" disabled>
                             <span class="input-group-text">.00</span>
                           </div>          
                     </div>
@@ -67,7 +67,7 @@
                     <div class="col-md-6">                    
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="gastos">
                             <span class="input-group-text">.00</span>
                           </div>          
                     </div>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-6" >
                         <div class="d-grid gap-2 col-12 mx-auto">
-                            <button class="btn btn-outline-primary boton-derecho" (click)="calcular()">Calcular</button>
+                            <button class="btn btn-outline-primary boton-derecho" (click)="calcular(montoPendiente, gastos)">Calcular</button>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                 <h5 class="card-title">{{resultadoCalculo}}</h5>                 
             </div>
             <div class="card-footer text-muted">
-                <button type="button" class="btn btn-primary" (click)="agenda()">ir a Agenda</button>
+                
             </div>
             </div>
         </div>
