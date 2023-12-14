@@ -28,8 +28,8 @@
                     <input type="date" class="form-control" id="fFin" [(ngModel)]="fFin"  (change)="comparaFechas()">
                 </div>
                 <div class="col-sm-2">
-                    <label class="form-label">Busqueda</label>
-                    <input type="text" class="form-control" placeholder="ID Acreditado">
+                    <label class="form-label">Búsqueda</label>
+                    <input type="text" class="form-control" placeholder="Id acreditado">
                 </div>
                 <div class="col-sm-2">
                     <div class="input-group">
@@ -50,11 +50,11 @@
                     <tr class="table-secondary">
                         <th style="width: 10%;">Fecha</th>
                         <th style="width: 10%;">Elaboró</th>
-                        <th style="width: 10%;">No. Cliente</th>
+                        <th style="width: 10%;">Número de cliente</th>
                         <th style="width: 10%;">Acreditado</th>
-                        <th style="width: 10%;">encomienda</th>
+                        <th style="width: 10%;">Encomienda</th>
                         <th style="width: 10%;">Dirección</th>
-                        <th style="width: 10%;">Estado y Municipio</th>
+                        <th style="width: 10%;">Estado/Municipio</th>
                         <th style="width: 10%;">Teléfono</th>
                         <th style="width: 10%;">Correo electrónico</th>
                         <th style="width: 10%;">Asunto</th>
@@ -102,7 +102,7 @@
 <div class="offcanvas offcanvas-end canvasPrimario" [class.show]="showAgregarAtencion" [class.offcanvas-bajar]=""
     ngtabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-        <h1>Registro de Atención</h1>
+        <h1>Registro de atención</h1>
         <button type="button" class="btn btn-negativo-modal" data-bs-dismiss="offcanvas" aria-label="Close"
             (click)="cerrarOffCanvas(1)"> Cerrar&nbsp;<em class="bi bi-x-octagon"></em></button>
     </div>
@@ -141,7 +141,7 @@
                     <label for="subseccionAdd" class="control-label">ID del Acreditado:</label>
                     <div class="col-sm-12">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="ida" [(ngModel)]="ida" placeholder="Buscar..." id="busqueda">
+                            <input type="text" class="form-control" id="ida" [(ngModel)]="ida" placeholder="Búscar..." id="busqueda">
                             <button class="btn btn-outline btn-primary" title="Buscar" (click)="busquedaAtencion()">
                                 <em class="bi bi-search"></em>
                             </button>
@@ -153,7 +153,7 @@
                         <input type="text" class="form-control" id="acre" [(ngModel)]="acre" disabled>
                     </div>
                 
-                    <label class="form-label">No.Cliente:</label>
+                    <label class="form-label">Número de cliente:</label>
                     <div class="input-group col-md-3">
                         <input type="text" class="form-control" id="ncli" [(ngModel)]="ncli" disabled>
                     </div>
@@ -173,7 +173,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="muni" [(ngModel)]="muni" placeholder="" disabled>
                     </div>
-                    <label class="form-label">Numero de Teléfono:</label>
+                    <label class="form-label">Numero de teléfono:</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="ntel" [(ngModel)]="ntel" placeholder="" disabled>
                     </div>

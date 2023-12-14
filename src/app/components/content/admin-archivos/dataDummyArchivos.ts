@@ -2,7 +2,7 @@ export const dataArchivos = [
     {
         id: 1,
         seccion: 'Validacion',
-        archivo: 'Edo. Cuenta Certificado',
+        archivo: 'Estado de Cuenta Certificado',
         e_firma: true,
     },
     {
@@ -137,7 +137,7 @@ export const dataFiles = [
         tx_descripcion: 'Layout Saldos',
     }, {
         id: 7,
-        tx_descripcion: 'Edo. Cuenta Certificado',
+        tx_descripcion: 'Estado de Cuenta Certificado',
     }, {
         id: 8,
         tx_descripcion: 'Dictamen Juridico',
