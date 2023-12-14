@@ -44,6 +44,7 @@ import { EditarAdminComponent } from './etapasPropuestas/validacion/editar-admin
 import { AlertasComponent } from "./alertas/alertas.component";
 import { AnalisisComponent } from './analisis/analisis.component';
 import { DetalleAnalisisComponent } from './analisis/detalle-siaraf/detalle-analisis.component';
+import { ValorCoperComponent } from "./valor-coper/valor-coper.component";
 
 
 /* Components */
@@ -98,7 +99,8 @@ import { DetalleAnalisisComponent } from './analisis/detalle-siaraf/detalle-anal
     EditarAdminComponent,
     AlertasComponent,
     AnalisisComponent,
-    DetalleAnalisisComponent
+    DetalleAnalisisComponent,
+    ValorCoperComponent
   ],
   exports: [
     WizardComponent,

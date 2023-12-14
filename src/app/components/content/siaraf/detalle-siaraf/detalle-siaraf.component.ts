@@ -24,7 +24,7 @@ export class DetalleSiarafComponent {
 
   datosSiaraf: any[] = [
     {
-      cliente: 'Martin Reyes',
+      cliente: 'Martín Reyes',
       sucursal: 'CDMX',
       fecha: '05/08/2022',
       capV: 'SI',
@@ -38,7 +38,7 @@ export class DetalleSiarafComponent {
       saldo: '$85,578.04'
     },
     {
-      cliente: 'Angel Costilla',
+      cliente: 'Ángel Costilla',
       sucursal: 'San Pedro',
       fecha: '15/08/2021',
       capV: 'NO',

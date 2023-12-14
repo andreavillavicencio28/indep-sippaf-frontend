@@ -22,7 +22,7 @@ export class DetalleSaedgComponent {
       nombreDoc: 'CURP'
     },
     {
-      nombreDoc: 'Identificacion Oficial'
+      nombreDoc: 'Identificación Oficial'
     }
   ];
 

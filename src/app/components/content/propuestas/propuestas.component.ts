@@ -68,7 +68,7 @@ export class PropuestasComponent {
       { indice: 4, titulo: 'Jurídico', activo: false, title: '', noReg: 15 },
       { indice: 5, titulo: 'CAPA', activo: false, title: '', noReg: 1 },
       { indice: 6, titulo: 'SIGEBI', activo: false, title: '', noReg: 0 },
-      { indice: 7, titulo: 'Analisis', activo: false, title: '', noReg: 5 },
+      { indice: 7, titulo: 'Análisis', activo: false, title: '', noReg: 5 },
       { indice: 8, titulo: 'COPER', activo: false, title: '', noReg: 15 },
       { indice: 9, titulo: 'Acuerdos', activo: false, title: '', noReg: 3 }
     ]
@@ -164,7 +164,7 @@ export class PropuestasComponent {
         break;
       }
       case 7: {
-        this.tituloSeleccionado = 'Analisis';
+        this.tituloSeleccionado = 'Análisis';
         break;
       }
       case 8: {
