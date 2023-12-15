@@ -73,16 +73,16 @@ export class DetalleSaedgComponent {
       case 'documento':
         this.Showagregardocumento = false;
         break;    
-      case 'prevDocumento':
+      case 'Prevdocumento':
         this.Prevdocumento = false;
         break;
-      case 'prevAnexo':
+      case 'Prevanexo':
         this.Prevanexo = false;
         break;
-      case 'showAgregarAnexo':
+      case 'Showagregaranexo':
         this.Showagregaranexo = false;
         break;
-      case 'showSustituirAnexo':
+      case 'Showsustituiranexo':
         this.Showsustituiranexo = false;
         break;
       default:
